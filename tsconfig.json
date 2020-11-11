@@ -16,7 +16,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "skipLibCheck": false
+    // Must be "true" https://github.com/vercel/next.js/issues/16219
+    "skipLibCheck": true
   },
   "include": [
     "next-env.d.ts",
