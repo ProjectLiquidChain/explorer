@@ -1,3 +1,4 @@
+import { ServerCall, serverCall } from "./server/server";
 import { Receipt, Transaction } from "./transaction";
 
 export interface Block {
@@ -11,3 +12,11 @@ export interface Block {
 	transactionRoot: Transaction["hash"];
 	receiptRoot: string; // @TODO: What is this type?
 }
+
+export const getLatestBlock: ServerCall<undefined, { block: Block }> = (p) =>
+	serverCall("chain.GetLatestBlock", p);
+
+export const getBlockByHeight: ServerCall<
+	{ height: Block["height"] },
+	{ block: Block }
+> = (p) => serverCall("chain.GetBlockByHeight", p);

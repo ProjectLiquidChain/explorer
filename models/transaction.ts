@@ -1,3 +1,4 @@
+import { serverCall, ServerCall } from "./server/server";
 import { ContractAccount, UserAccount } from "./account";
 import { Block } from "./block";
 
@@ -35,3 +36,8 @@ export interface Receipt {
 	events: Call[];
 	postState: string;
 }
+
+export const getTransaction: ServerCall<
+	{ hash: Transaction["hash"] },
+	{ transaction: Transaction; receipt: Receipt }
+> = (p) => serverCall("chain.GetTransaction", p);
