@@ -3,7 +3,8 @@
     "target": "es5",
     "baseUrl": ".",
     "paths": {
-      "@/models/*": ["models/*"]
+      "@/models/*": ["models/*"],
+      "@/utils": ["utils/utils.ts"]
     },
     "lib": [
       "dom",
