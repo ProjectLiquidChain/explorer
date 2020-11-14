@@ -40,6 +40,9 @@ export interface Contract {
 }
 
 export const getContract: ServerCall<
-	{ address: ContractAccount["address"] },
-	{ contract: Contract }
-> = (p) => serverCall("chain.GetContract", p);
+	ContractAccount["address"],
+	Contract
+> = async (address) => {
+	const result = await serverCall("chain.GetContract", { address });
+	return result.contract;
+};
