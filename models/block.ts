@@ -14,10 +14,14 @@ export interface Block {
 	receiptRoot: Hash;
 }
 
-export const getLatestBlock: ServerCall<undefined, { block: Block }> = (p) =>
-	serverCall("chain.GetLatestBlock", p);
+export const getLatestBlock: ServerCall<undefined, Block> = async () => {
+	const result = await serverCall("chain.GetLatestBlock", undefined);
+	return result.block;
+};
 
-export const getBlockByHeight: ServerCall<
-	{ height: Block["height"] },
-	{ block: Block }
-> = (p) => serverCall("chain.GetBlockByHeight", p);
+export const getBlockByHeight: ServerCall<Block["height"], Block> = async (
+	height
+) => {
+	const result = await serverCall("chain.GetBlockByHeight", { height });
+	return result.block;
+};
