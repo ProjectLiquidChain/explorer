@@ -1,7 +1,7 @@
-import { serverCall, ServerCall } from "./server/server";
 import { ContractAccount, UserAccount } from "./account";
-import { Block } from "./block";
 import { Hash } from "./basic";
+import { Block } from "./block";
+import { serverCall, ServerCall } from "./server/server";
 
 interface Argument {
 	type: string;
@@ -39,6 +39,8 @@ export interface Receipt {
 }
 
 export const getTransaction: ServerCall<
-	{ hash: Transaction["hash"] },
+	Transaction["hash"],
 	{ transaction: Transaction; receipt: Receipt }
-> = (p) => serverCall("chain.GetTransaction", p);
+> = (hash) => {
+	return serverCall("chain.GetTransaction", { hash });
+};
