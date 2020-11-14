@@ -1,7 +1,7 @@
 import { Address, Hash } from "./basic";
 import { serverCall, ServerCall } from "./server/server";
 
-interface Account {
+export interface Account {
 	address: Address; // Key
 	nonce: number;
 	storageHash: Hash;
@@ -15,16 +15,17 @@ export interface ContractAccount extends Account {
 export interface UserAccount extends Account {}
 
 export const getAccount: ServerCall<
-	{ address: Account["address"] },
-	{ account: null | ContractAccount | UserAccount }
-> = async (params) => {
-	const account = await serverCall("chain.GetAccount", params);
-	account.address = params.address;
+	Account["address"],
+	null | ContractAccount | UserAccount
+> = async (address) => {
+	const result = await serverCall("chain.GetAccount", { address });
+	const account = result.account;
+	account.address = address;
 	return account;
 };
 
 export const isUserAccount = (acc: Account): acc is UserAccount => {
-	return (acc as ContractAccount).contractHash === "0".repeat(32);
+	return (acc as ContractAccount).contractHash === "0".repeat(64);
 };
 
 export const isContractAccount = (acc: Account): acc is ContractAccount => {
