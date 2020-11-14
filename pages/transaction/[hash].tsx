@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 	context
 ) => {
 	const { hash } = context.query;
-	if (typeof hash !== "string") throw Error("Address is not defined");
+	if (typeof hash !== "string") throw Error("Hash is not defined");
 	const { transaction, receipt } = await getTransaction(hash);
 	return { props: { transaction, receipt } };
 };
