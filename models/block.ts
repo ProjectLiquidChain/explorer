@@ -1,16 +1,17 @@
+import { Hash } from "./basic";
 import { ServerCall, serverCall } from "./server/server";
 import { Receipt, Transaction } from "./transaction";
 
 export interface Block {
 	height: number; // Key
-	hash: string;
+	hash: Hash;
 	transactions: Transaction[];
 	receipts: Receipt[];
 	time: number;
 	parent: Block["hash"];
-	stateRoot: Block["hash"];
-	transactionRoot: Transaction["hash"];
-	receiptRoot: string; // @TODO: What is this type?
+	stateRoot: Hash;
+	transactionRoot: Hash;
+	receiptRoot: Hash;
 }
 
 export const getLatestBlock: ServerCall<undefined, { block: Block }> = (p) =>

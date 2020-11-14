@@ -1,6 +1,7 @@
 import { serverCall, ServerCall } from "./server/server";
 import { ContractAccount, UserAccount } from "./account";
 import { Block } from "./block";
+import { Hash } from "./basic";
 
 interface Argument {
 	type: string;
@@ -34,7 +35,7 @@ export interface Receipt {
 	gasUsed: number;
 	code: number;
 	events: Call[];
-	postState: string;
+	postState: Hash;
 }
 
 export const getTransaction: ServerCall<

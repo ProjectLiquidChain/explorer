@@ -1,9 +1,10 @@
+import { Address, Hash } from "./basic";
 import { serverCall, ServerCall } from "./server/server";
 
 interface Account {
-	address: string; // Key
+	address: Address; // Key
 	nonce: number;
-	storageHash: string;
+	storageHash: Hash;
 	creator: Account["address"];
 }
 
@@ -20,4 +21,12 @@ export const getAccount: ServerCall<
 	const account = await serverCall("chain.GetAccount", params);
 	account.address = params.address;
 	return account;
+};
+
+export const isUserAccount = (acc: Account): acc is UserAccount => {
+	return (acc as ContractAccount).contractHash === "0".repeat(32);
+};
+
+export const isContractAccount = (acc: Account): acc is ContractAccount => {
+	return isUserAccount(acc) === false;
 };
