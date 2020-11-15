@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/models/*": ["models/*"],
-      "@/utils": ["utils/utils.ts"]
+      "@/components/*": ["components/*"],
+      "@/utilities": ["utilities/utilities.ts"]
     },
     "lib": [
       "dom",

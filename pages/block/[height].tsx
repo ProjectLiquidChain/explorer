@@ -1,3 +1,4 @@
+import { Page } from "@/components/page/page";
 import { Block, getBlockByHeight } from "@/models/block";
 import { GetServerSideProps } from "next";
 
@@ -5,13 +6,7 @@ interface Props {
 	block: Block;
 }
 
-const BlockPage = (props: Props) => {
-	return (
-		<div style={{ whiteSpace: "pre" }}>
-			{JSON.stringify(props.block, undefined, 2)}
-		</div>
-	);
-};
+const BlockPage = (props: Props) => <Page>{props.block.height}</Page>;
 
 export const getServerSideProps: GetServerSideProps<Props> = async (
 	context
