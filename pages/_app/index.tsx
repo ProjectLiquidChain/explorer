@@ -1,8 +1,6 @@
+import "@moai/core";
 import { AppProps } from "next/app";
-import "../styles/globals.css";
-import { scrollbar } from "@moai/core";
-
-console.log(scrollbar.custom);
+import "./_app.scss";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	return <Component {...pageProps} />;
