@@ -10,6 +10,7 @@ const TransactionPage = (props: Props) => {
 	return (
 		<div style={{ whiteSpace: "pre" }}>
 			{JSON.stringify(props.transaction, undefined, 2)}
+			{JSON.stringify(props.receipt, undefined, 2)}
 		</div>
 	);
 };
