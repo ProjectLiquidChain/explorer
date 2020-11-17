@@ -1,4 +1,5 @@
-import { DivPx, text } from "@moai/core";
+import { Button, DivPx, text } from "@moai/core";
+import { icons } from "@moai/icon";
 import s from "./info.module.css";
 
 interface Props {
@@ -10,7 +11,10 @@ interface Props {
 export const Info = (props: Props) => (
 	<div className={s.container}>
 		<dt className={[text.strong].join(" ")}>{props.label}</dt>
-		<DivPx size={8} />
+		<DivPx size={4} />
 		<dd>{props.children}</dd>
+		<div className={s.button}>
+			<Button icon={icons.chevronUp} />
+		</div>
 	</div>
 );

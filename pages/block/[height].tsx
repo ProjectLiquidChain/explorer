@@ -1,7 +1,9 @@
 import { Hash } from "@/components/hash/hash";
 import { Info } from "@/components/info/info";
+import { Number } from "@/components/number/number";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
+import { Time } from "@/components/time/time";
 import { Block, getBlockByHeight } from "@/models/block";
 import { background, Border } from "@moai/core";
 import { GetServerSideProps } from "next";
@@ -18,21 +20,28 @@ const BlockBody = ({ block }: Props): JSX.Element => (
 	<div>
 		<BlockHeader height={block.height} />
 		<Border color="weak" />
-		<div className={[s.overview, background.primary].join(" ")}>
+		<dl className={[s.overview, background.primary].join(" ")}>
 			<Info
 				label="Height"
-				children={block.height}
 				help="Also known as Block Number. The block height, which indicates the length of the blockchain, increases after the addition of the new block."
-			/>
-			<Info
-				label="Timestamp"
-				children={block.time}
-				help="The date and time at which a block is proposed."
-			/>
-			<Info label="Parent block">
+			>
+				<Number format="integer" value={block.height} />
+			</Info>
+			<Info label="Time" help="The date and time at which a block is proposed.">
+				<Time value={block.time * 1000} format="relative" />
+				<span> — </span>
+				<Time value={block.time * 1000} format="long" />
+			</Info>
+			<Info label="Hash">
+				<Hash value={block.hash} />
+			</Info>
+			<Info label="Parent">
 				<Hash value={block.parent} />
 			</Info>
-		</div>
+			<Info label="State root">
+				<Hash value={block.stateRoot} />
+			</Info>
+		</dl>
 	</div>
 );
 

@@ -1,3 +1,4 @@
+import { Number } from "@/components/number/number";
 import { Block } from "@/models/block";
 import { Button, ButtonGroup, DivGrow, DivPx, text } from "@moai/core";
 import { icons } from "@moai/icon";
@@ -24,7 +25,9 @@ export const BlockHeader = ({ height }: Props) => (
 		<div>
 			<div className={[].join(" ")}>Block</div>
 			<DivPx size={8} />
-			<h1 className={[s.title, text.strong].join(" ")}>{height}</h1>
+			<h1 className={[s.title, text.strong].join(" ")}>
+				<Number format="integer" value={height} />
+			</h1>
 		</div>
 		<DivGrow />
 		<Navigation height={height} />
