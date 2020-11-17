@@ -1,9 +1,12 @@
+import { Hash } from "@/components/hash/hash";
+import { Info } from "@/components/info/info";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { Block, getBlockByHeight } from "@/models/block";
-import { background, Border, boxShadow, Input } from "@moai/core";
+import { background, Border } from "@moai/core";
 import { GetServerSideProps } from "next";
 import { BlockHeader } from "./header/header";
+import s from "./height.module.css";
 
 interface Props {
 	block: Block;
@@ -11,12 +14,24 @@ interface Props {
 
 type PageProps = PageErrorProps<Props>;
 
-const BlockBody = (props: Props): JSX.Element => (
+const BlockBody = ({ block }: Props): JSX.Element => (
 	<div>
-		<BlockHeader height={props.block.height} />
+		<BlockHeader height={block.height} />
 		<Border color="weak" />
-		<div className={[background.primary, boxShadow.strong].join(" ")}>
-			Primary
+		<div className={[s.overview, background.primary].join(" ")}>
+			<Info
+				label="Height"
+				children={block.height}
+				help="Also known as Block Number. The block height, which indicates the length of the blockchain, increases after the addition of the new block."
+			/>
+			<Info
+				label="Timestamp"
+				children={block.time}
+				help="The date and time at which a block is proposed."
+			/>
+			<Info label="Parent block">
+				<Hash value={block.parent} />
+			</Info>
 		</div>
 	</div>
 );

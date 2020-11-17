@@ -5,7 +5,7 @@
     "paths": {
       "@/models/*": ["models/*"],
       "@/components/*": ["components/*"],
-      "@/utilities": ["utilities/utilities.ts"]
+      "@/utilities/*": ["utilities/*"]
     },
     "lib": [
       "dom",
