@@ -1,14 +1,20 @@
 import { Background, Border } from "@moai/core";
+import { PageError, PageErrorProps } from "./error/error";
 import { Search } from "./search/search";
 
-interface Props {
-	children: React.ReactNode;
+interface Props<T> {
+	Body: (props: T) => JSX.Element;
+	page: PageErrorProps<T>;
 }
 
-export const Page = (props: Props) => (
+export const Page = <T,>(props: Props<T>) => (
 	<Background color="secondary">
 		<Search />
 		<Border color="weak" />
-		{props.children}
+		{props.page.hasError ? (
+			<PageError message={props.page.error} />
+		) : (
+			<props.Body {...props.page} />
+		)}
 	</Background>
 );
