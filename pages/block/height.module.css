@@ -1,3 +1,8 @@
-.overview {
-    /* padding: 8px; */
+.hash {
+	word-break: break-all;
+}
+
+.heading {
+    font-size: 18px;
+    padding: 0 16px;
 }

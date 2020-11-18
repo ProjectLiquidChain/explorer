@@ -22,7 +22,7 @@ const Navigation = ({ height }: Props) => (
 
 export const BlockHeader = ({ height }: Props) => (
 	<div className={s.container}>
-		<div>
+		<div className={[text.strong].join(" ")}>
 			<div className={[].join(" ")}>Block</div>
 			<DivPx size={8} />
 			<h1 className={[s.title, text.strong].join(" ")}>

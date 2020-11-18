@@ -21,7 +21,7 @@ export interface Transaction {
 	height: Block["height"];
 	version: number;
 	sender: UserAccount["address"];
-	nonce: 0;
+	nonce: number;
 	receiver: ContractAccount["address"];
 	payload: object;
 	gasPrice: number;

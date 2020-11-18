@@ -1,0 +1,84 @@
+.container {
+	width: 100%;
+	max-height: 80vh;
+	overflow: auto;
+    position: relative;
+}
+
+.table {
+	position: relative;
+    border-collapse: separate;
+    table-layout: fixed;
+}
+
+.cell {
+    overflow: hidden;
+    padding: 12px 8px;
+    text-overflow: ellipsis;
+
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.left {
+    position: sticky;
+    left: 0;
+    border-right-style: solid;
+    border-right-width: 1px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.left2 {
+    padding-left: 16px;
+}
+
+.top {
+    position: sticky;
+    top: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-top-width: 1px;
+    border-top-style: solid;
+    text-align: left;
+}
+
+.top.left {
+    z-index: 1;
+}
+
+/* Width of columns */
+
+.container table {
+    width: 100%;
+    min-width: calc(160px * 4);
+}
+
+.hash {
+    width: 25%;
+    min-width: 160px;
+}
+
+.block {
+    width: 12.5%;
+    min-width: 80px;
+}
+
+.nonce {
+    width: 12.5%;
+    min-width: 80px;
+}
+
+.sender {
+    width: 25%;
+    min-width: 160px;
+}
+
+.receiver {
+    width: 25%;
+    min-width: 160px;
+}
