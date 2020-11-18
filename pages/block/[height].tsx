@@ -1,14 +1,14 @@
 import { Hash } from "@/components/hash/hash";
-import { Info } from "@/components/info/info";
 import { Number } from "@/components/number/number";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { Time } from "@/components/time/time";
 import { Block, getBlockByHeight } from "@/models/block";
-import { background, Border } from "@moai/core";
+import { background, Border, boxShadow } from "@moai/core";
 import { GetServerSideProps } from "next";
 import { BlockHeader } from "./header/header";
 import s from "./height.module.css";
+import { Info } from "@/components/info/info";
 
 interface Props {
 	block: Block;
@@ -20,28 +20,42 @@ const BlockBody = ({ block }: Props): JSX.Element => (
 	<div>
 		<BlockHeader height={block.height} />
 		<Border color="weak" />
-		<dl className={[s.overview, background.primary].join(" ")}>
+		<div className={[s.overview, background.primary].join(" ")}>
 			<Info
 				label="Height"
 				help="Also known as Block Number. The block height, which indicates the length of the blockchain, increases after the addition of the new block."
+				copy={block.height.toString()}
 			>
 				<Number format="integer" value={block.height} />
 			</Info>
+			<Border color="weak" />
+			<Info label="Transactions">
+				<Number format="integer" value={block.transactions.length} />
+				<span> transaction(s) in this block</span>
+			</Info>
+			<Border color="weak" />
 			<Info label="Time" help="The date and time at which a block is proposed.">
 				<Time value={block.time * 1000} format="relative" />
 				<span> — </span>
 				<Time value={block.time * 1000} format="long" />
 			</Info>
-			<Info label="Hash">
+			<Border color="weak" />
+			<Info label="Hash" help="Hash of this block" copy={block.hash}>
 				<Hash value={block.hash} />
 			</Info>
-			<Info label="Parent">
+			<Border color="weak" />
+			<Info
+				label="Parent"
+				help="Hash of the parent of this block"
+				copy={block.hash}
+			>
 				<Hash value={block.parent} />
 			</Info>
-			<Info label="State root">
+			<Border color="weak" />
+			<Info label="State root" copy={block.stateRoot}>
 				<Hash value={block.stateRoot} />
 			</Info>
-		</dl>
+		</div>
 	</div>
 );
 

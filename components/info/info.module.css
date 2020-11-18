@@ -1,11 +1,19 @@
 .container {
-	padding: 8px;
-    line-height: 1.5;
-    position: relative;
+	padding: 16px;
+	line-height: 1.5;
+	display: flex;
+	align-items: center;
 }
 
-.button {
-	position: absolute;
-	right: 0;
-	top: 8px;
+.body {
+	flex: 1 1 0px;
+}
+
+.action {
+	flex: 0 0 auto;
+}
+
+.label {
+	display: flex;
+	align-items: center;
 }
