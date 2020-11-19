@@ -1,7 +1,7 @@
 import { Transaction } from "@/models/transaction";
-import { background, borderColor, text } from "@moai/core";
+import { background, borderColor, text, Tag } from "@moai/core";
 import Link from "next/link";
-import { Numeric } from "../number/number";
+import { Numeric } from "../numeric/numeric";
 import s from "./transaction-table.module.css";
 
 interface Props {
@@ -15,7 +15,8 @@ const topCls = [cellCls, s.top, background.secondary, text.strong].join(" ");
 const Head = (): JSX.Element => (
 	<tr className={borderColor.weak}>
 		<th className={[topCls, s.hash, s.left].join(" ")}>Transaction Hash</th>
-		<th className={[topCls, s.block, s.left2].join(" ")}>Block</th>
+		<th className={[topCls, s.block, s.left2].join(" ")}>Type</th>
+		<th className={[topCls, s.block].join(" ")}>Block</th>
 		<th className={[topCls, s.nonce].join(" ")}>Nonce</th>
 		<th className={[topCls, s.sender].join(" ")}>Sender</th>
 		<th className={[topCls, s.receiver].join(" ")}>Receiver</th>
@@ -29,7 +30,7 @@ interface RowProps {
 const linkCls = [s.link, text.highlight].join(" ");
 
 const Row = (props: RowProps): JSX.Element => {
-	const { hash, height, sender, receiver, nonce } = props.transaction;
+	const { hash, height, sender, receiver, nonce, type } = props.transaction;
 	return (
 		<tr key={hash}>
 			<td className={[cellCls, s.hash, s.left, background.primary].join(" ")}>
@@ -37,7 +38,10 @@ const Row = (props: RowProps): JSX.Element => {
 					<a className={linkCls}>{hash}</a>
 				</Link>
 			</td>
-			<td className={[cellCls, s.block, s.left2].join(" ")}>
+			<td className={[cellCls, s.type, s.left2].join(" ")}>
+				<Tag>{type}</Tag>
+			</td>
+			<td className={[cellCls, s.block].join(" ")}>
 				<Link href={`/block/${height}`}>
 					<a className={linkCls}>
 						<Numeric value={height} format="integer" />

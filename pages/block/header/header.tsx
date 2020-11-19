@@ -1,4 +1,4 @@
-import { Numeric } from "@/components/number/number";
+import { Numeric } from "@/components/numeric/numeric";
 import { Block } from "@/models/block";
 import { Button, ButtonGroup, DivGrow, DivPx, text } from "@moai/core";
 import { icons } from "@moai/icon";

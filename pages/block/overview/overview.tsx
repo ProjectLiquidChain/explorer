@@ -1,5 +1,5 @@
 import { Info } from "@/components/info/info";
-import { Numeric } from "@/components/number/number";
+import { Numeric } from "@/components/numeric/numeric";
 import { Pane } from "@/components/pane/pane";
 import { Time } from "@/components/time/time";
 import { Block } from "@/models/block";

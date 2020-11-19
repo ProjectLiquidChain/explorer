@@ -2,85 +2,81 @@
 	width: 100%;
 	max-height: 80vh;
 	overflow: auto;
-    position: relative;
+	position: relative;
 }
 
 .table {
 	position: relative;
-    border-collapse: separate;
-    table-layout: fixed;
+	border-collapse: separate;
+	table-layout: fixed;
 }
 
 .cell {
-    overflow: hidden;
-    padding: 12px 8px;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	padding: 12px 8px;
+	text-overflow: ellipsis;
 
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
 }
 
 tbody tr:last-child .cell {
-    border-bottom-style: none;
+	border-bottom-style: none;
 }
 
 .link {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .left {
-    position: sticky;
-    left: 0;
-    border-right-style: solid;
-    border-right-width: 1px;
-    padding-left: 16px;
-    padding-right: 16px;
+	position: sticky;
+	left: 0;
+	border-right-style: solid;
+	border-right-width: 1px;
+	padding-left: 16px;
+	padding-right: 16px;
 }
 
 .left2 {
-    padding-left: 16px;
+	padding-left: 16px;
 }
 
 .top {
-    position: sticky;
-    top: 0;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    text-align: left;
+	position: sticky;
+	top: 0;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	text-align: left;
 }
 
 .top.left {
-    z-index: 1;
+	z-index: 1;
+}
+
+.type {
+	text-transform: capitalize;
 }
 
 /* Width of columns */
 
 .container table {
-    width: 100%;
-    min-width: calc(160px * 4);
+	width: 100%;
+	--width-big: 160px;
+	--width-small: 120px;
+	--width: calc(var(--width-big) * 3 + var(--width-small) * 3);
+	min-width: var(--width);
 }
 
-.hash {
-    width: 25%;
-    min-width: 160px;
-}
-
-.block {
-    width: 12.5%;
-    min-width: 80px;
-}
-
-.nonce {
-    width: 12.5%;
-    min-width: 80px;
-}
-
-.sender {
-    width: 25%;
-    min-width: 160px;
-}
-
+.hash,
+.sender,
 .receiver {
-    width: 25%;
-    min-width: 160px;
+	width: 20%;
+	min-width: var(--width-big);
+}
+
+.type,
+.block,
+.nonce {
+	width: 14%; /* @TODO: use Calc here */
+	min-width: var(--width-small);
 }
