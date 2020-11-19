@@ -9,7 +9,7 @@ interface Argument {
 	value: string;
 }
 
-interface Call {
+export interface Call {
 	name: string;
 	contract: ContractAccount["address"];
 	arguments: Argument[];

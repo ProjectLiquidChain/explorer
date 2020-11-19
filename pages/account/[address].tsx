@@ -3,7 +3,7 @@ import { AccountOverview } from "@/components/account/overview/overview";
 import { container } from "@/components/container/container";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Account, getAccount, isUserAccount } from "@/models/account";
+import { Account, getAccount } from "@/models/account";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 

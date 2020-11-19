@@ -34,7 +34,7 @@ export const AccountOverview = ({ account }: Props) => (
 		)}
 		<Info
 			label="Account Nonce"
-			help="Nonce of the account. This increases after the account made a transaction"
+			help="Sequential running number of this address, beginning with 0 for the first transaction. For example, if the nonce is 10, the address has sent 11 transactions."
 		>
 			<Numeric format="integer" value={account.nonce} />
 		</Info>

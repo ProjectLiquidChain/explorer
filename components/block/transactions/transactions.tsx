@@ -1,6 +1,6 @@
 import { Info } from "@/components/info/info";
 import { Pane } from "@/components/pane/pane";
-import { TransactionTable } from "@/components/transaction-table/transaction-table";
+import { TransactionTable } from "@/components/transaction/table/table";
 import { Block } from "@/models/block";
 import { Border, DivPx, text } from "@moai/core";
 import s from "./transactions.module.css";

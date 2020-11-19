@@ -1,0 +1,11 @@
+.hash {
+	word-break: break-all;
+}
+
+.link {
+	text-decoration: none;
+}
+
+.tag {
+	text-transform: capitalize;
+}

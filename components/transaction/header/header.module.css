@@ -1,0 +1,16 @@
+.container {
+	padding: 16px 16px 12px;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+}
+
+.address {
+	font-size: 18px;
+	line-height: 24px;
+	word-break: break-all;
+	/* Same height as the CopyButton */
+	padding: 4px 0;
+}

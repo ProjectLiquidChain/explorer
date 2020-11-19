@@ -1,8 +1,8 @@
 import { Transaction } from "@/models/transaction";
 import { background, borderColor, text, Tag } from "@moai/core";
 import Link from "next/link";
-import { Numeric } from "../numeric/numeric";
-import s from "./transaction-table.module.css";
+import { Numeric } from "@/components/numeric/numeric";
+import s from "./table.module.css";
 
 interface Props {
 	transactions: Transaction[];
@@ -32,7 +32,7 @@ const linkCls = [s.link, text.highlight].join(" ");
 const Row = (props: RowProps): JSX.Element => {
 	const { hash, height, sender, receiver, nonce, type } = props.transaction;
 	return (
-		<tr key={hash}>
+		<tr>
 			<td className={[cellCls, s.hash, s.left, background.primary].join(" ")}>
 				<Link href={`/transaction/${hash}`}>
 					<a className={linkCls}>{hash}</a>

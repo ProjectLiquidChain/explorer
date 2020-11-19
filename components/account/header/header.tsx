@@ -1,9 +1,6 @@
 import { CopyButton } from "@/components/copy/copy";
-import { Numeric } from "@/components/numeric/numeric";
 import { Account, isUserAccount } from "@/models/account";
-import { Button, ButtonGroup, DivGrow, DivPx, text } from "@moai/core";
-import { icons } from "@moai/icon";
-import Link from "next/link";
+import { DivPx, text } from "@moai/core";
 import s from "./header.module.css";
 
 interface Props {

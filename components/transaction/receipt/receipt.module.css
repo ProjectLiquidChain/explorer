@@ -1,0 +1,16 @@
+.hash {
+	word-break: break-all;
+}
+
+.link {
+	text-decoration: none;
+}
+
+.tag {
+	text-transform: capitalize;
+}
+
+.heading {
+	font-size: 18px;
+	padding: 0 16px;
+}
