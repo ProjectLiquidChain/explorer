@@ -1,5 +1,5 @@
 import { Block, getBlockByHeight, getLatestBlock } from "@/models/block";
-import { getRange } from "@/utilities/number";
+import { getRange } from "@/components/numeric/range";
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 

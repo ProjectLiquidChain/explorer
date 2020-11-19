@@ -1,12 +1,12 @@
+import { BlockHeader } from "@/components/block/header/header";
+import { BlockOverview } from "@/components/block/overview/overview";
+import { BlockTransactions } from "@/components/block/transactions/transactions";
 import { container } from "@/components/container/container";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { Block, getBlockByHeight } from "@/models/block";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
-import { BlockHeader } from "./header/header";
-import { BlockOverview } from "./overview/overview";
-import { BlockTransactions } from "./transactions/transactions";
 
 interface Props {
 	block: Block;
