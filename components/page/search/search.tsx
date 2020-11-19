@@ -14,7 +14,7 @@ export const Search = (props: Props) => {
 				s.container,
 				background.primary,
 				boxShadow.strong,
-				borderColor.strong,
+				borderColor.weak,
 			].join(" ")}
 		>
 			<form

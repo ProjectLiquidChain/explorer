@@ -11,7 +11,7 @@ export const Pane = ({ children }: Props): JSX.Element => (
 			s.container,
 			background.primary,
 			boxShadow.strong,
-			borderColor.strong,
+			borderColor.weak,
         ].join(" ")}
         children={children}
 	/>

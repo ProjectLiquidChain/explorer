@@ -1,3 +1,4 @@
+import { CopyButton } from "@/components/copy/copy";
 import { Numeric } from "@/components/numeric/numeric";
 import { Block } from "@/models/block";
 import { Button, ButtonGroup, DivGrow, DivPx, text } from "@moai/core";
@@ -25,9 +26,13 @@ export const BlockHeader = ({ block }: Props) => (
 		<div className={[text.strong].join(" ")}>
 			<div className={[].join(" ")}>Block</div>
 			<DivPx size={8} />
-			<h1 className={[s.title, text.strong].join(" ")}>
-				<Numeric format="integer" value={block.height} />
-			</h1>
+			<div className={s.title}>
+				<h1 className={[s.titleText, text.strong].join(" ")}>
+					<Numeric format="integer" value={block.height} />
+				</h1>
+				<DivPx size={8} />
+				<CopyButton text={block.height.toString()} />
+			</div>
 		</div>
 		<DivGrow />
 		<Navigation block={block} />

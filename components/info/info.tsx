@@ -1,5 +1,6 @@
-import { Button, DivPx, Icon, text, Tooltip } from "@moai/core";
+import { DivPx, Icon, text, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
+import { CopyButton } from "../copy/copy";
 import s from "./info.module.css";
 
 export interface InfoProps {
@@ -33,20 +34,6 @@ const Value = (props: InfoProps): JSX.Element => (
 	<div className={s.value}>{props.children}</div>
 );
 
-const Copy = (props: { text: string }): JSX.Element => (
-	<Tooltip content="Copy to clipboard">
-		<div className={text.muted}>
-			<Button
-				icon={icons.duplicate}
-				style={Button.style.flat}
-				onClick={() => {
-					navigator.clipboard.writeText(props.text);
-				}}
-			/>
-		</div>
-	</Tooltip>
-);
-
 export const Info = (props: InfoProps) => (
 	<div className={s.container}>
 		<div className={s.body}>
@@ -57,7 +44,7 @@ export const Info = (props: InfoProps) => (
 		{props.copy && (
 			<>
 				<DivPx size={16} />
-				<Copy text={props.copy} />
+				<CopyButton text={props.copy} />
 			</>
 		)}
 	</div>
