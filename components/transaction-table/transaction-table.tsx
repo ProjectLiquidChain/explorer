@@ -1,7 +1,7 @@
 import { Transaction } from "@/models/transaction";
 import { background, borderColor, text } from "@moai/core";
 import Link from "next/link";
-import { Number } from "../number/number";
+import { Numeric } from "../number/number";
 import s from "./transaction-table.module.css";
 
 interface Props {
@@ -40,16 +40,16 @@ const Row = (props: RowProps): JSX.Element => {
 			<td className={[cellCls, s.block, s.left2].join(" ")}>
 				<Link href={`/block/${height}`}>
 					<a className={linkCls}>
-						<Number value={height} format="integer" />
+						<Numeric value={height} format="integer" />
 					</a>
 				</Link>
 			</td>
 			<td className={[cellCls, s.nonce].join(" ")}>
-				<Number value={nonce} format="integer" />
+				<Numeric value={nonce} format="integer" />
 			</td>
 			<td className={[cellCls, s.sender].join(" ")}>
 				<Link href={`/account/${sender}`}>
-					<a>{sender}</a>
+					<a className={linkCls}>{sender}</a>
 				</Link>
 			</td>
 			<td className={[cellCls, s.receiver].join(" ")}>

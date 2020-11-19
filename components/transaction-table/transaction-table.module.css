@@ -20,6 +20,10 @@
     border-bottom-width: 1px;
 }
 
+tbody tr:last-child .cell {
+    border-bottom-style: none;
+}
+
 .link {
     text-decoration: none;
 }
@@ -42,8 +46,6 @@
     top: 0;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-top-width: 1px;
-    border-top-style: solid;
     text-align: left;
 }
 

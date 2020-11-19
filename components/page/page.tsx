@@ -10,7 +10,6 @@ interface Props<T> {
 export const Page = <T,>(props: Props<T>) => (
 	<Background color="secondary">
 		<Search />
-		<Border color="weak" />
 		{props.page.hasError ? (
 			<PageError message={props.page.error} />
 		) : (

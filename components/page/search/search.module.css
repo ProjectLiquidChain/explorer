@@ -1,4 +1,9 @@
 .container {
-    padding: 8px 4px;
-    display: flex;
+	border-bottom-style: solid;
+	border-block-width: 1px;
+}
+
+.form {
+	padding: 8px 4px;
+	display: flex;
 }

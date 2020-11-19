@@ -1,0 +1,17 @@
+.hash {
+	word-break: break-all;
+}
+
+.heading {
+	font-size: 18px;
+	padding: 0 16px;
+}
+
+.main {
+	border-style: solid;
+	border-width: 1px;
+}
+
+.table {
+	margin: -16px;
+}

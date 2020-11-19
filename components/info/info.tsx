@@ -1,4 +1,4 @@
-import { Border, Button, DivPx, Icon, text, Tooltip } from "@moai/core";
+import { Button, DivPx, Icon, text, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
 import s from "./info.module.css";
 
@@ -18,7 +18,7 @@ const Help = (props: { text: string }): JSX.Element => (
 );
 
 const Label = (props: InfoProps): JSX.Element => (
-	<dt className={[s.label, text.strong].join(" ")}>
+	<div className={[s.label, text.strong].join(" ")}>
 		<span>{props.label}</span>
 		{props.help && (
 			<>
@@ -26,23 +26,25 @@ const Label = (props: InfoProps): JSX.Element => (
 				<Help text={props.help} />
 			</>
 		)}
-	</dt>
+	</div>
 );
 
 const Value = (props: InfoProps): JSX.Element => (
-	<div className={s.children}>{props.children}</div>
+	<div className={s.value}>{props.children}</div>
 );
 
 const Copy = (props: { text: string }): JSX.Element => (
-	<div className={text.muted}>
-		<Button
-			icon={icons.duplicate}
-			style={Button.style.flat}
-			onClick={() => {
-				navigator.clipboard.writeText(props.text);
-			}}
-		/>
-	</div>
+	<Tooltip content="Copy to clipboard">
+		<div className={text.muted}>
+			<Button
+				icon={icons.duplicate}
+				style={Button.style.flat}
+				onClick={() => {
+					navigator.clipboard.writeText(props.text);
+				}}
+			/>
+		</div>
+	</Tooltip>
 );
 
 export const Info = (props: InfoProps) => (

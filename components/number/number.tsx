@@ -15,6 +15,6 @@ const formatters: Record<Format, Intl.NumberFormat> = {
 export const formatNumber = (value: number, format: Format): string =>
 	formatters[format].format(value);
 
-export const Number = (props: Props) => (
+export const Numeric = (props: Props) => (
 	<span>{formatNumber(props.value, props.format)}</span>
 );
