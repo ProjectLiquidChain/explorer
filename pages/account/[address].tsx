@@ -25,14 +25,18 @@ const AccountPage = (page: PageProps) => (
 	<Page page={page} Body={AccountBody} />
 );
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
+export const getServerSideProps: GetServerSideProps<PageProps> = async (
 	context
 ) => {
-	const { address } = context.query;
-	if (typeof address !== "string") throw Error("Address is not defined");
-	const account = await getAccount(address);
-	if (account === null) throw Error("Account not found");
-	return { props: { account } };
+	try {
+		const { address } = context.query;
+		if (typeof address !== "string") throw Error("Address is not defined");
+		const account = await getAccount(address);
+		if (account === null) throw Error("Account not found");
+		return { props: { hasError: false, account } };
+	} catch (error) {
+		return { props: { hasError: true, error: error.message } };
+	}
 };
 
 export default AccountPage;

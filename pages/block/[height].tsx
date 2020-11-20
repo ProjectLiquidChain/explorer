@@ -29,11 +29,11 @@ const BlockPage = (page: PageProps) => <Page page={page} Body={BlockBody} />;
 export const getServerSideProps: GetServerSideProps<PageProps> = async (
 	context
 ) => {
-	const { height: heightStr } = context.query;
-	if (typeof heightStr !== "string") throw Error("Height is not defined");
-	const heightNum: number = parseInt(heightStr);
-	if (isNaN(heightNum)) throw Error(`Height "${heightStr}" is not a number`);
 	try {
+		const { height: heightStr } = context.query;
+		if (typeof heightStr !== "string") throw Error("Height is not defined");
+		const heightNum: number = parseInt(heightStr);
+		if (isNaN(heightNum)) throw Error(`Height "${heightStr}" is not a number`);
 		const block = await getBlockByHeight(heightNum);
 		return { props: { hasError: false, block } };
 	} catch (error) {

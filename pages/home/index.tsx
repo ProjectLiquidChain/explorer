@@ -1,5 +1,7 @@
-import { Block, getBlockByHeight, getLatestBlock } from "@/models/block";
 import { getRange } from "@/components/numeric/range";
+import { PageErrorProps } from "@/components/page/error/error";
+import { Page } from "@/components/page/page";
+import { Block, getBlockByHeight, getLatestBlock } from "@/models/block";
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 
@@ -7,36 +9,9 @@ interface Props {
 	blocks: Block[];
 }
 
-const getBlocks = async (
-	from: Block["height"],
-	to: Block["height"]
-): Promise<Block[]> => {
-	const heights = getRange(from, to);
-	return await Promise.all(heights.map(getBlockByHeight));
-};
+type PageProps = PageErrorProps<Props>;
 
-const getNewBlocks = async (from: Block["height"]): Promise<Block[]> => {
-	const latest = await getLatestBlock(undefined);
-	if (latest.height === from) return [];
-	const blocks = await getBlocks(latest.height - 1, from + 1);
-	return [latest, ...blocks];
-};
-
-const BlockItem = (props: { block: Block }) => {
-	const [recent, setRecent] = useState(true);
-	useEffect(() => {
-		const id = window.setTimeout(() => setRecent(false), 1000);
-		return () => window.clearTimeout(id);
-	}, []);
-	return (
-		<div>
-			Block: {props.block.height} - {props.block.hash}
-			{recent ? " (new)" : ""}
-		</div>
-	);
-};
-
-const HomePage = (props: Props) => {
+const HomeBody = (props: Props) => {
 	const [blocks, setBlocks] = useState<Block[]>(props.blocks);
 
 	useEffect(() => {
@@ -57,11 +32,17 @@ const HomePage = (props: Props) => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-	const latest = await getLatestBlock(undefined);
-	const recents = await getBlocks(latest.height - 1, latest.height - 4);
-	const blocks = [latest, ...recents];
-	return { props: { blocks } };
+const HomePage = (page: PageProps) => <Page page={page} Body={HomeBody} />;
+
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+	try {
+		const latest = await getLatestBlock(undefined);
+		const recents = await getBlocks(latest.height - 1, latest.height - 4);
+		const blocks = [latest, ...recents];
+		return { props: { hasError: false, blocks } };
+	} catch (error) {
+		return { props: { hasError: true, error: error.message } };
+	}
 };
 
 export default HomePage;

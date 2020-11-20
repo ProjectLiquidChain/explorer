@@ -1,3 +1,4 @@
+import { getRange } from "@/components/numeric/range";
 import { Hash } from "./basic";
 import { ServerCall, serverCall } from "./server/server";
 import { Receipt, Transaction } from "./transaction";
@@ -24,4 +25,12 @@ export const getBlockByHeight: ServerCall<Block["height"], Block> = async (
 ) => {
 	const result = await serverCall("chain.GetBlockByHeight", { height });
 	return result.block;
+};
+
+export const getBlocksByRange = async (
+	from: Block["height"],
+	to: Block["height"]
+): Promise<Block[]> => {
+	const heights = getRange(from, to);
+	return await Promise.all(heights.map(getBlockByHeight));
 };

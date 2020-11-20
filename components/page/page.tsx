@@ -4,6 +4,7 @@ import { PageError, PageErrorProps } from "./error/error";
 import { Logo } from "./logo/logo";
 import s from "./page.module.css";
 import { Search } from "./search/search";
+import { Theme } from "./theme/theme";
 
 interface Props<T> {
 	Body: (props: T) => JSX.Element;
@@ -27,6 +28,10 @@ export const Page = <T,>(props: Props<T>) => (
 				<DivPx size={16} />
 				<div className={[s.search, background.secondary].join(" ")}>
 					<Search />
+				</div>
+				<DivPx size={16} />
+				<div className={s.theme}>
+					<Theme />
 				</div>
 			</div>
 		</div>

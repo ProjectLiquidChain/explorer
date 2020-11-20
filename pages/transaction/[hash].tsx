@@ -28,13 +28,17 @@ const TransactionPage = (page: PageProps) => (
 	<Page page={page} Body={TransactionBody} />
 );
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
+export const getServerSideProps: GetServerSideProps<PageProps> = async (
 	context
 ) => {
-	const { hash } = context.query;
-	if (typeof hash !== "string") throw Error("Hash is not defined");
-	const { transaction, receipt } = await getTransaction(hash);
-	return { props: { transaction, receipt } };
+	try {
+		const { hash } = context.query;
+		if (typeof hash !== "string") throw Error("Hash is not defined");
+		const { transaction, receipt } = await getTransaction(hash);
+		return { props: { hasError: false, transaction, receipt } };
+	} catch (error) {
+		return { props: { hasError: true, error: error.message } };
+	}
 };
 
 export default TransactionPage;
