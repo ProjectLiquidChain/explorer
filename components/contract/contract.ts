@@ -10,14 +10,9 @@ export interface ContractFunction {
 	parameters: ContractParameter[];
 }
 
-export interface ContractEvent {
-	name: string;
-	parameters: ContractParameter[];
-}
-
 interface Header {
 	version: number;
-	events: ContractEvent[];
+	events: ContractFunction[];
 	functions: ContractFunction[];
 }
 

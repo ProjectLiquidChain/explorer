@@ -1,16 +1,13 @@
+import { Block } from "@/components/block/block";
+import { getBlocksByRange, getLatestBlock } from "@/components/block/fetch/fetch";
 import { BlockTable } from "@/components/block/table/table";
 import { container } from "@/components/container/container";
+import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import {
-	Block,
-	getBlocksByRange,
-	getLatestBlock,
-} from "@/components/block/block";
+import { Pane } from "@/components/pane/pane";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
-import { Pane } from "@/components/pane/pane";
-import { Heading } from "@/components/heading/heading";
 
 interface Props {
 	blocks: Block[];

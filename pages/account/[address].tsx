@@ -10,6 +10,7 @@ import { Heading } from "@/components/heading/heading";
 // import { ContractOverview } from "@/components/contract/contract";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
+import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 
 interface Props {
@@ -25,7 +26,7 @@ const AccountBody = ({ account, contract }: Props) => (
 		<AccountOverview account={account} />
 		{contract && (
 			<>
-				<Heading>Contract Details</Heading>
+				<DivPx size={16} />
 				<ContractOverview contract={contract} />
 			</>
 		)}

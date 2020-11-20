@@ -1,0 +1,29 @@
+.wrapper {
+	width: calc(100% + 32px);
+	overflow: auto;
+	margin: 0 -16px;
+}
+
+.code {
+	font-family: var(--font-mono);
+	line-height: 24px;
+    white-space: nowrap;
+    width: 100%;
+    min-width: max-content;
+}
+
+.code > li {
+    counter-increment: code;
+    padding: 0 16px;
+}
+
+.code > li:before {
+	content: counter(code) " ";
+	opacity: 0.5;
+	width: 4ch;
+	display: inline-block;
+}
+
+.code {
+	counter-reset: code;
+}

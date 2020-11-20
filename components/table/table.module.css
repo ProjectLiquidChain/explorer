@@ -41,6 +41,11 @@
 	padding-left: 16px;
 }
 
+.container td:last-child,
+.container th:last-child {
+	padding-right: 16px;
+}
+
 .container th {
 	position: sticky;
 	top: 0;
