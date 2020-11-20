@@ -1,4 +1,4 @@
-import { Contract, ContractEvent } from "@/models/contract";
+import { Contract, ContractEvent } from "@/components/contract/contract";
 import { Tag } from "@moai/core";
 import { Table } from "../table/table";
 

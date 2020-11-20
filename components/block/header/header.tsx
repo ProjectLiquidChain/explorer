@@ -1,6 +1,6 @@
 import { CopyButton } from "@/components/copy/copy";
 import { Numeric } from "@/components/numeric/numeric";
-import { Block } from "@/models/block";
+import { Block } from "@/components/block/block";
 import { Button, ButtonGroup, DivGrow, DivPx, text } from "@moai/core";
 import { icons } from "@moai/icon";
 import Link from "next/link";

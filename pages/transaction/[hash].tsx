@@ -4,7 +4,7 @@ import { Page } from "@/components/page/page";
 import { TransactionHeader } from "@/components/transaction/header/header";
 import { TransactionOverview } from "@/components/transaction/overview/overview";
 import { TransactionReceipt } from "@/components/transaction/receipt/receipt";
-import { getTransaction, Receipt, Transaction } from "@/models/transaction";
+import { getTransaction, Receipt, Transaction } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 

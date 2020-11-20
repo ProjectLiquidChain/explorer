@@ -1,5 +1,4 @@
-import { Address, Hash } from "./basic";
-import { serverCall, ServerCall } from "./server/server";
+import { Address, Hash, serverCall, ServerCall } from "../server/server";
 
 export interface Account {
 	address: Address; // Key

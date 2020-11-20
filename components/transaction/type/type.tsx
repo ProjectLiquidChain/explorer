@@ -1,4 +1,4 @@
-import { Transaction } from "@/models/transaction";
+import { Transaction } from "@/components/transaction/transaction";
 import { Tag } from "@moai/core";
 import s from "./address.module.css";
 

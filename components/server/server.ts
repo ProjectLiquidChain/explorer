@@ -1,5 +1,12 @@
 const host = process.env.NEXT_PUBLIC_SERVER_HOST;
 
+// @TODO: Should define these as nominal types
+// https://github.com/microsoft/TypeScript/issues/202
+
+export type Hash = string;
+
+export type Address = string;
+
 if (typeof host !== "string") throw Error("SERVER_HOST is not defined");
 
 class JrpcError extends Error {

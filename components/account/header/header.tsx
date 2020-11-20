@@ -1,5 +1,5 @@
 import { CopyButton } from "@/components/copy/copy";
-import { Account, isUserAccount } from "@/models/account";
+import { Account, isUserAccount } from "../account";
 import { DivPx, text } from "@moai/core";
 import s from "./header.module.css";
 

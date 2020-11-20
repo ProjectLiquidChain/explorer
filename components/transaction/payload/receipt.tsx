@@ -1,7 +1,7 @@
 import { Info } from "@/components/info/info";
 import { Numeric } from "@/components/numeric/numeric";
 import { Pane } from "@/components/pane/pane";
-import { Receipt } from "@/models/transaction";
+import { Receipt } from "@/components/transaction/transaction";
 import { Border, DivPx, text } from "@moai/core";
 import { TransactionCalls } from "../calls/calls";
 import s from "./receipt.module.css";

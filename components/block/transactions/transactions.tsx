@@ -1,7 +1,8 @@
+import { Block } from "@/components/block/block";
+import { Divider } from "@/components/divider/divider";
 import { Info } from "@/components/info/info";
 import { Pane } from "@/components/pane/pane";
 import { TransactionTable } from "@/components/transaction/table/table";
-import { Block } from "@/models/block";
 import { Border, DivPx, text } from "@moai/core";
 import s from "./transactions.module.css";
 
@@ -22,19 +23,15 @@ const Overview = ({ block }: Props): JSX.Element => (
 			label="Transaction root"
 			help="Transactions in this block is structured as a tree. This is the hash of that tree's root node."
 			copy={block.transactionRoot}
-		>
-			<span className={s.hash}>{block.transactionRoot}</span>
-		</Info>
-		<DivPx size={16} />
-		<Border color="weak" />
-		<DivPx size={16} />
+			children={block.transactionRoot}
+		/>
+		<Divider />
 		<Info
 			label="Receipt root"
 			help="Receipts in this block is structured as a tree. This is the hash of that tree's root node."
 			copy={block.receiptRoot}
-		>
-			<span className={s.hash}>{block.receiptRoot}</span>
-		</Info>
+			children={block.receiptRoot}
+		/>
 	</Pane>
 );
 

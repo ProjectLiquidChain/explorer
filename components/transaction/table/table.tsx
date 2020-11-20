@@ -1,6 +1,6 @@
 import { Numeric } from "@/components/numeric/numeric";
 import { Table } from "@/components/table/table";
-import { Transaction } from "@/models/transaction";
+import { Transaction } from "@/components/transaction/transaction";
 import { Icon, Tag, text } from "@moai/core";
 import { icons } from "@moai/icon";
 import Link from "next/link";

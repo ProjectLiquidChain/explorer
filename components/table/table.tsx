@@ -1,14 +1,14 @@
 import { background, borderColor, text } from "@moai/core";
 import s from "./table.module.css";
 
-interface Column {
+export interface TableColumn {
 	title: string;
 	className?: string;
 	render: (index: number) => React.ReactNode;
 }
 
 interface Props {
-	columns: Column[];
+	columns: TableColumn[];
 	rowsLength: number;
 	rowKey: (index: number) => string;
 }

@@ -3,7 +3,7 @@ import { BlockHeight } from "@/components/block/height/height";
 import { Info } from "@/components/info/info";
 import { Numeric } from "@/components/numeric/numeric";
 import { Pane } from "@/components/pane/pane";
-import { Transaction } from "@/models/transaction";
+import { Transaction } from "@/components/transaction/transaction";
 import { Border, DivPx } from "@moai/core";
 import { TransactionType } from "../type/type";
 import s from "./overview.module.css";

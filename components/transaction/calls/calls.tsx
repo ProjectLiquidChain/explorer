@@ -1,5 +1,5 @@
 import { Table } from "@/components/table/table";
-import { Call } from "@/models/transaction";
+import { Call } from "@/components/transaction/transaction";
 import { Tag, text } from "@moai/core";
 import Link from "next/link";
 import s from "./calls.module.css";

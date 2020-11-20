@@ -1,5 +1,5 @@
 import { CopyButton } from "@/components/copy/copy";
-import { Transaction } from "@/models/transaction";
+import { Transaction } from "@/components/transaction/transaction";
 import { DivPx, text } from "@moai/core";
 import s from "./header.module.css";
 

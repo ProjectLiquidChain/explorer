@@ -4,8 +4,8 @@ import { container } from "@/components/container/container";
 import { ContractOverview } from "@/components/contract/contract";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Account, getAccount, isUserAccount } from "@/models/account";
-import { Contract, getContract } from "@/models/contract";
+import { Account, getAccount, isUserAccount } from "@/components/account/account";
+import { Contract, getContract } from "@/components/contract/contract";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 

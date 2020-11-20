@@ -2,7 +2,7 @@ import { BlockTable } from "@/components/block/table/table";
 import { container } from "@/components/container/container";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Block, getBlocksByRange, getLatestBlock } from "@/models/block";
+import { Block, getBlocksByRange, getLatestBlock } from "@/components/block/block";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 

@@ -17,6 +17,10 @@
 	align-items: center;
 }
 
+.value {
+	overflow-wrap: break-word;
+}
+
 @media (max-width: 640px) {
 	.body {
 		display: block;

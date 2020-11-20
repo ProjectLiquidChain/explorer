@@ -4,7 +4,7 @@ import { BlockTransactions } from "@/components/block/transactions/transactions"
 import { container } from "@/components/container/container";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Block, getBlockByHeight } from "@/models/block";
+import { Block, getBlockByHeight } from "@/components/block/block";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 

@@ -1,7 +1,8 @@
 import { Link } from "@/components/link/link";
+import { Account } from "../account";
 
 interface Props {
-	value: string;
+	value: Account["address"];
 }
 
 export const AccountAddress = ({ value }: Props) => (

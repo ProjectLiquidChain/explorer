@@ -1,22 +1,24 @@
+import { Block } from "@/components/block/block";
+import { Divider } from "@/components/divider/divider";
 import { Info } from "@/components/info/info";
 import { Numeric } from "@/components/numeric/numeric";
 import { Pane } from "@/components/pane/pane";
 import { Time } from "@/components/time/time";
-import { Block } from "@/models/block";
-import { Border, DivPx } from "@moai/core";
-import s from "./overview.module.css";
 
 interface Props {
 	block: Block;
 }
 
-const Divider = () => (
-	<>
-		<DivPx size={16} />
-		<Border color="weak" />
-		<DivPx size={16} />
-	</>
-);
+const TransactionsCount = ({ block }: Props): JSX.Element => {
+	const len = block.transactions.length;
+	return (
+		<span>
+			<Numeric format="integer" value={len} />
+			<span> {len > 1 ? "transactions" : "transaction"} </span>
+			<span>in this block</span>
+		</span>
+	);
+};
 
 export const BlockOverview = ({ block }: Props) => (
 	<Pane>
@@ -27,10 +29,7 @@ export const BlockOverview = ({ block }: Props) => (
 			<Numeric format="integer" value={block.height} />
 		</Info>
 		<Divider />
-		<Info label="Transactions">
-			<Numeric format="integer" value={block.transactions.length} />
-			<span> transaction(s) in this block</span>
-		</Info>
+		<Info label="Transactions" children={<TransactionsCount block={block} />} />
 		<Divider />
 		<Info label="Time" help="The date and time at which a block is proposed.">
 			<Time value={block.time * 1000} format="relative" />
@@ -38,20 +37,24 @@ export const BlockOverview = ({ block }: Props) => (
 			<Time value={block.time * 1000} format="long" />
 		</Info>
 		<Divider />
-		<Info label="Hash" help="The hash of this block" copy={block.hash}>
-			<span className={s.hash}>{block.hash}</span>
-		</Info>
+		<Info
+			label="Hash"
+			help="The hash of this block"
+			copy={block.hash}
+			children={block.hash}
+		/>
 		<Divider />
 		<Info
 			label="Parent"
 			help="The hash of the parent of this block"
 			copy={block.hash}
-		>
-			<span className={s.hash}>{block.parent}</span>
-		</Info>
+			children={block.parent}
+		/>
 		<Divider />
-		<Info label="State root" copy={block.stateRoot}>
-			<span className={s.hash}>{block.stateRoot}</span>
-		</Info>
+		<Info
+			label="State root"
+			copy={block.stateRoot}
+			children={block.stateRoot}
+		/>
 	</Pane>
 );
