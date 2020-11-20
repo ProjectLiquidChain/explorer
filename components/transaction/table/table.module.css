@@ -10,7 +10,7 @@
 	width: 100%;
 	--width-big: 160px;
 	--width-small: 120px;
-	--width: calc(var(--width-big) * 3 + var(--width-small) * 3);
+	--width: calc(calc(var(--width-big) * 3) + calc(var(--width-small) * 3));
 	min-width: var(--width);
 }
 
