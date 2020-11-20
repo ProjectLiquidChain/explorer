@@ -1,6 +1,6 @@
 import { Timestamp } from "./time";
 
-export type TimeAbsoluteFormat = "long";
+export type TimeAbsoluteFormat = "long" | "time";
 
 const formatters: Record<TimeAbsoluteFormat, Intl.DateTimeFormat> = {
 	long: new Intl.DateTimeFormat("default", {
@@ -9,6 +9,12 @@ const formatters: Record<TimeAbsoluteFormat, Intl.DateTimeFormat> = {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
+		hour: "numeric",
+		minute: "numeric",
+		second: "numeric",
+	}),
+	time: new Intl.DateTimeFormat("default", {
+		hour12: false,
 		hour: "numeric",
 		minute: "numeric",
 		second: "numeric",

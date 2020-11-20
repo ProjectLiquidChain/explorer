@@ -1,0 +1,33 @@
+.heading {
+    font-size: 18px;
+    padding: 16px;
+}
+
+.container {
+	margin: -16px;
+    white-space: nowrap;
+}
+
+.link {
+	text-decoration: none;
+}
+
+.container table {
+	width: 100%;
+	--width-big: 240px;
+	--width-small: 120px;
+	--width: calc(var(--width-big) * 2 + var(--width-small) * 2);
+	min-width: var(--width);
+}
+
+.hash,
+.time {
+	width: 33.3%;
+	min-width: var(--width-big);
+}
+
+.height,
+.transactions {
+	width: 16.7%; /* @TODO: use Calc here */
+	min-width: var(--width-small);
+}

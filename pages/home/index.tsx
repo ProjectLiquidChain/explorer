@@ -1,9 +1,10 @@
-import { getRange } from "@/components/numeric/range";
+import { BlockTable } from "@/components/block/table/table";
+import { container } from "@/components/container/container";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Block, getBlockByHeight, getLatestBlock } from "@/models/block";
+import { Block, getBlocksByRange, getLatestBlock } from "@/models/block";
+import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
-import { useEffect, useState } from "react";
 
 interface Props {
 	blocks: Block[];
@@ -11,33 +12,20 @@ interface Props {
 
 type PageProps = PageErrorProps<Props>;
 
-const HomeBody = (props: Props) => {
-	const [blocks, setBlocks] = useState<Block[]>(props.blocks);
-
-	useEffect(() => {
-		const fn = async () => {
-			const recents = await getNewBlocks(blocks[0].height);
-			setBlocks([...recents, ...blocks].slice(0, 10));
-		};
-		const id = window.setTimeout(fn, 2000);
-		return () => window.clearTimeout(id);
-	}, [blocks]);
-
-	return (
-		<div style={{ whiteSpace: "pre" }}>
-			{blocks.map((block) => (
-				<BlockItem key={block.height} block={block} />
-			))}
-		</div>
-	);
-};
-
+const HomeBody = (props: Props) => (
+	<div className={container.max960}>
+		<DivPx size={16} />
+		<BlockTable blocks={props.blocks} />
+		<DivPx size={32} />
+	</div>
+);
 const HomePage = (page: PageProps) => <Page page={page} Body={HomeBody} />;
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 	try {
 		const latest = await getLatestBlock(undefined);
-		const recents = await getBlocks(latest.height - 1, latest.height - 4);
+		const { height } = latest;
+		const recents = await getBlocksByRange(height - 1, height - 9);
 		const blocks = [latest, ...recents];
 		return { props: { hasError: false, blocks } };
 	} catch (error) {
