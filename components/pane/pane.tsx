@@ -3,16 +3,18 @@ import s from "./pane.module.css";
 
 interface Props {
 	children: React.ReactNode;
+	noPadding?: boolean;
 }
 
-export const Pane = ({ children }: Props): JSX.Element => (
+export const Pane = ({ children, noPadding }: Props): JSX.Element => (
 	<div
 		className={[
 			s.container,
 			background.primary,
 			boxShadow.strong,
 			borderColor.weak,
-        ].join(" ")}
-        children={children}
+			noPadding ? "" : s.padding,
+		].join(" ")}
+		children={children}
 	/>
 );

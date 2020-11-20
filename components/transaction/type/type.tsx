@@ -1,6 +1,6 @@
 import { Transaction } from "@/components/transaction/transaction";
 import { Tag } from "@moai/core";
-import s from "./address.module.css";
+import s from "./type.module.css";
 
 interface Props {
 	value: Transaction["type"];

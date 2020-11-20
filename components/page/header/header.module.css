@@ -1,18 +1,47 @@
 .container {
-	border-bottom-style: solid;
-	border-block-width: 1px;
+	margin-top: -1px;
 }
 
 .body {
-    display: flex;
-    padding: 0 16px;
+	display: flex;
+	padding: 8px;
 }
 
 .logo,
+.theme,
+.search {
+	padding: 8px;
+}
+
+.logo {
+	flex: 0 0 auto;
+}
+
 .theme {
 	flex: 0 0 auto;
 }
 
 .search {
 	flex: 1 1 0px;
+}
+
+@media (max-width: 640px) {
+	.body {
+		flex-wrap: wrap;
+	}
+
+	.search {
+		flex: 0 0 100%;
+		order: 1;
+	}
+
+	.logo {
+		flex: 1 1 0px;
+	}
+}
+
+@media (min-width: 641px) {
+	.logo {
+		width: calc(160px + 5px);
+	}
 }

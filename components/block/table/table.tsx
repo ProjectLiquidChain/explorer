@@ -1,12 +1,9 @@
-import {
-	Block,
-	getBlocksByRange,
-	getLatestBlock,
-} from "@/components/block/block";
+import { Block } from "@/components/block/block";
 import { Numeric } from "@/components/numeric/numeric";
 import { Table, TableColumn } from "@/components/table/table";
 import { Time } from "@/components/time/time";
 import { useEffect, useState } from "react";
+import { getBlocksByRange, getLatestBlock } from "../fetch/fetch";
 import { BlockHeight } from "../height/height";
 import s from "./table.module.css";
 

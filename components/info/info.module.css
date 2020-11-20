@@ -6,6 +6,7 @@
 
 .body {
 	flex: 1 1 0px;
+	overflow: hidden;
 }
 
 .action {

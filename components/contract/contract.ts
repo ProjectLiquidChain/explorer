@@ -1,10 +1,8 @@
-import { ContractAccount } from "./account";
-import { PrimitiveType } from "./basic";
-import { serverCall, ServerCall } from "./server/server";
+import { Primitive } from "../server/server";
 
 export interface ContractParameter {
 	name: string;
-	type: PrimitiveType;
+	type: Primitive;
 }
 
 export interface ContractFunction {
@@ -27,11 +25,3 @@ export interface Contract {
 	header: Header;
 	code: string;
 }
-
-export const getContract: ServerCall<
-	ContractAccount["address"],
-	Contract
-> = async (address) => {
-	const result = await serverCall("chain.GetContract", { address });
-	return result.contract;
-};

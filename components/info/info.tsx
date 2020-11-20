@@ -1,6 +1,6 @@
 import { DivPx, Icon, text, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
-import { CopyButton } from "../../copy/copy";
+import { CopyButton } from "../copy/copy";
 import s from "./info.module.css";
 
 export interface InfoProps {

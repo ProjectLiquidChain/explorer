@@ -1,4 +1,4 @@
-import { Address, Hash, serverCall, ServerCall } from "../server/server";
+import { Address, Hash } from "../server/server";
 
 export interface Account {
 	address: Address; // Key
@@ -12,16 +12,6 @@ export interface ContractAccount extends Account {
 }
 
 export interface UserAccount extends Account {}
-
-export const getAccount: ServerCall<
-	Account["address"],
-	null | ContractAccount | UserAccount
-> = async (address) => {
-	const result = await serverCall("chain.GetAccount", { address });
-	const account = result.account;
-	account.address = address;
-	return account;
-};
 
 export const isUserAccount = (acc: Account): acc is UserAccount => {
 	return (acc as ContractAccount).contractHash === "0".repeat(64);

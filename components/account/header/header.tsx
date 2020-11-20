@@ -1,6 +1,6 @@
 import { CopyButton } from "@/components/copy/copy";
-import { Account, isUserAccount } from "../account";
 import { DivPx, text } from "@moai/core";
+import { Account, isUserAccount } from "../account";
 import s from "./header.module.css";
 
 interface Props {
@@ -12,7 +12,7 @@ export const AccountHeader = ({ account }: Props) => (
 		<div>{isUserAccount(account) ? "User Account" : "Contract Account"}</div>
 		<DivPx size={4} />
 		<div className={s.title}>
-			<h1 className={s.address}>{account.address}</h1>
+			<h1 className={s.address} children={account.address} />
 			<DivPx size={8} />
 			<CopyButton text={account.address.toString()} />
 		</div>

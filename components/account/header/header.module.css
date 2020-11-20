@@ -1,5 +1,5 @@
 .container {
-	padding: 16px 16px 12px;
+	padding: 16px 16px 8px;
 }
 
 .title {
@@ -10,7 +10,7 @@
 .address {
 	font-size: 18px;
 	line-height: 24px;
+	flex: 0 1 auto;
+	overflow: hidden;
 	overflow-wrap: break-word;
-	/* Same height as the CopyButton */
-	padding: 4px 0;
 }

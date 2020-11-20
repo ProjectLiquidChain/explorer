@@ -1,12 +1,15 @@
+import { Account, isUserAccount } from "@/components/account/account";
+import { getAccount } from "@/components/account/fetch/fetch";
 import { AccountHeader } from "@/components/account/header/header";
 import { AccountOverview } from "@/components/account/overview/overview";
 import { container } from "@/components/container/container";
-import { ContractOverview } from "@/components/contract/contract";
+import { Contract } from "@/components/contract/contract";
+import { getContract } from "@/components/contract/fetch/fetch";
+import { ContractOverview } from "@/components/contract/overview/overview";
+import { Heading } from "@/components/heading/heading";
+// import { ContractOverview } from "@/components/contract/contract";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Account, getAccount, isUserAccount } from "@/components/account/account";
-import { Contract, getContract } from "@/components/contract/contract";
-import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 
 interface Props {
@@ -20,7 +23,12 @@ const AccountBody = ({ account, contract }: Props) => (
 	<div className={container.max960}>
 		<AccountHeader account={account} />
 		<AccountOverview account={account} />
-		{contract && <ContractOverview contract={contract} />}
+		{contract && (
+			<>
+				<Heading>Contract Details</Heading>
+				<ContractOverview contract={contract} />
+			</>
+		)}
 	</div>
 );
 

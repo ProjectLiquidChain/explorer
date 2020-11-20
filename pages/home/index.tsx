@@ -2,9 +2,15 @@ import { BlockTable } from "@/components/block/table/table";
 import { container } from "@/components/container/container";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Block, getBlocksByRange, getLatestBlock } from "@/components/block/block";
+import {
+	Block,
+	getBlocksByRange,
+	getLatestBlock,
+} from "@/components/block/block";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
+import { Pane } from "@/components/pane/pane";
+import { Heading } from "@/components/heading/heading";
 
 interface Props {
 	blocks: Block[];
@@ -15,7 +21,10 @@ type PageProps = PageErrorProps<Props>;
 const HomeBody = (props: Props) => (
 	<div className={container.max960}>
 		<DivPx size={16} />
-		<BlockTable blocks={props.blocks} />
+		<Heading>Latest blocks</Heading>
+		<Pane noPadding>
+			<BlockTable blocks={props.blocks} />
+		</Pane>
 	</div>
 );
 const HomePage = (page: PageProps) => <Page page={page} Body={HomeBody} />;

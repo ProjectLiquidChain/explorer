@@ -1,9 +1,10 @@
+import { Heading } from "@/components/heading/heading";
 import { Info } from "@/components/info/info";
 import { Numeric } from "@/components/numeric/numeric";
 import { Pane } from "@/components/pane/pane";
 import { Receipt } from "@/components/transaction/transaction";
 import { Border, DivPx, text } from "@moai/core";
-import { TransactionCalls } from "../calls/calls";
+import { TransactionCalls } from "./calls/calls";
 import s from "./receipt.module.css";
 
 interface Props {
@@ -21,6 +22,7 @@ const Divider = () => (
 export const TransactionReceipt = ({ receipt }: Props) => (
 	<div>
 		<DivPx size={32} />
+		<Heading>Receipt</Heading>
 		<h2 className={[s.heading, text.strong].join(" ")}>Receipt</h2>
 		<DivPx size={16} />
 		<Pane>

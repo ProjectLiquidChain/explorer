@@ -1,7 +1,6 @@
-import { ContractAccount, UserAccount } from "./account";
-import { Hash } from "./basic";
-import { Block } from "./block";
-import { serverCall, ServerCall } from "./server/server";
+import { ContractAccount, UserAccount } from "../account/account";
+import { Block } from "../block/block";
+import { Hash, serverCall, ServerCall } from "../server/server";
 
 interface Argument {
 	type: string;

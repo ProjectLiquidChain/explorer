@@ -1,6 +1,6 @@
 import { Contract, ContractEvent } from "@/components/contract/contract";
 import { Tag } from "@moai/core";
-import { Table } from "../table/table";
+import { Table } from "@/components/table/table";
 
 interface Props {
 	contract: Contract;
