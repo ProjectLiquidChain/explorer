@@ -4,7 +4,7 @@
 
 .container table {
 	width: 100%;
-	--width-big: 160px;
+	--width-big: 240px;
 	--width-small: 120px;
 	--width: calc(var(--width-big) * 2 + var(--width-small) * 1);
 	min-width: var(--width);
@@ -12,11 +12,23 @@
 
 .arguments,
 .contract {
-	width: 36%;
+	width: 40%;
 	min-width: var(--width-big);
 }
 
 .name {
-	width: 27%; /* @TODO: use Calc here */
+	width: 20%; /* @TODO: use Calc here */
 	min-width: var(--width-small);
+}
+
+.argument {
+	word-break: break-all;
+}
+
+.argument + .argument {
+	margin-top: 8px;
+}
+
+.contract {
+	word-break: break-all;
 }

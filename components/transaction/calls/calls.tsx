@@ -23,14 +23,14 @@ const Contract = ({ call }: RowProps): JSX.Element => (
 );
 
 const Arguments = ({ call }: RowProps): JSX.Element => (
-	<div>
-		{call.arguments.map((argument) => (
-			<Tag
-				key={argument.name}
-				children={`${argument.name}: ${argument.value}`}
-			/>
+	<ul>
+		{call.args.map((argument) => (
+			<li className={s.argument} key={argument.name}>
+				<span className={text.strong}>{argument.name}:</span>
+				<span> {argument.value}</span>
+			</li>
 		))}
-	</div>
+	</ul>
 );
 
 export const TransactionCalls = ({ calls }: Props) => (

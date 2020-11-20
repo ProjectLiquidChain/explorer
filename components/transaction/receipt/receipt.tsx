@@ -35,15 +35,14 @@ export const TransactionReceipt = ({ receipt }: Props) => (
 			<Info label="Gas used">
 				<Numeric format="integer" value={receipt.gasUsed} />
 			</Info>
-			<Info label="Gas used">
-				<Numeric format="integer" value={receipt.gasUsed} />
-			</Info>
 		</Pane>
 		<DivPx size={32} />
 		<h2 className={[s.heading, text.strong].join(" ")}>Events</h2>
 		<DivPx size={16} />
 		<Pane>
-			<TransactionCalls calls={receipt.events} />
+			<div className={s.events}>
+				<TransactionCalls calls={receipt.events} />
+			</div>
 		</Pane>
 	</div>
 );

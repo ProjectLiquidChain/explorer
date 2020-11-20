@@ -12,7 +12,7 @@ interface Argument {
 export interface Call {
 	name: string;
 	contract: ContractAccount["address"];
-	arguments: Argument[];
+	args: Argument[];
 }
 
 export interface Transaction {
