@@ -1,3 +1,21 @@
 .container {
-    min-height: 100vh;
+	min-height: 100vh;
+}
+
+.header {
+	border-bottom-style: solid;
+	border-block-width: 1px;
+}
+
+.headerBody {
+    display: flex;
+    padding: 16px;
+}
+
+.logo {
+    flex: 0 0 auto;
+}
+
+.search {
+    flex: 1 1 0px;
 }

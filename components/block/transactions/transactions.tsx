@@ -51,7 +51,11 @@ export const BlockTransactions = ({ block }: Props): JSX.Element => (
 		<Heading count={block.transactions.length} />
 		<DivPx size={16} />
 		<Overview block={block} />
-		<DivPx size={32} />
-		<Table block={block} />
+		{block.transactions.length > 0 && (
+			<>
+				<DivPx size={32} />
+				<Table block={block} />
+			</>
+		)}
 	</div>
 );
