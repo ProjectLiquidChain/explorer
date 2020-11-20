@@ -1,7 +1,7 @@
 import { ContractAccount } from "./account";
 import { serverCall, ServerCall } from "./server/server";
 
-interface Parameter {
+export interface ContractParameter {
 	name: string;
 	type:
 		| "uint8"
@@ -18,20 +18,20 @@ interface Parameter {
 		| "lparray";
 }
 
-interface Function {
+export interface ContractFunction {
 	name: string;
-	parameters: Parameter[];
+	parameters: ContractParameter[];
 }
 
-interface Event {
+export interface ContractEvent {
 	name: string;
-	parameters: Parameter[];
+	parameters: ContractParameter[];
 }
 
 interface Header {
 	version: number;
-	events: Event[];
-	functions: Function[];
+	events: ContractEvent[];
+	functions: ContractFunction[];
 }
 
 export interface Contract {

@@ -15,7 +15,7 @@ export const Search = (props: Props) => {
 			}}
 		>
 			<Input
-				style={Input.style.flat}
+				style={Input.style.outset}
 				value={query}
 				setValue={setQuery}
 				placeholder="Search by Address / Hash / Height"

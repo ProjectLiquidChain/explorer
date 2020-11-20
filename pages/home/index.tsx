@@ -16,7 +16,6 @@ const HomeBody = (props: Props) => (
 	<div className={container.max960}>
 		<DivPx size={16} />
 		<BlockTable blocks={props.blocks} />
-		<DivPx size={32} />
 	</div>
 );
 const HomePage = (page: PageProps) => <Page page={page} Body={HomeBody} />;

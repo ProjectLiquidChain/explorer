@@ -3,7 +3,7 @@ import s from "./table.module.css";
 
 interface Column {
 	title: string;
-	className: string | undefined;
+	className?: string;
 	render: (index: number) => React.ReactNode;
 }
 

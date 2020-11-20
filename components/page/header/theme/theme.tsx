@@ -27,7 +27,7 @@ export const Theme = () => {
 
 	return (
 		<Button
-			style={Button.style.outset}
+			style={Button.style.flat}
 			icon={icons.moon}
 			onClick={() => setDark(!dark)}
 			selected={dark}

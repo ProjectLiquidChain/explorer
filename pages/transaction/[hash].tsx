@@ -20,7 +20,6 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 		<TransactionHeader transaction={transaction} />
 		<TransactionOverview transaction={transaction} />
 		<TransactionReceipt receipt={receipt} />
-		<DivPx size={32} />
 	</div>
 );
 

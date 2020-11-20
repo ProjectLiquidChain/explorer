@@ -1,0 +1,18 @@
+.container {
+	border-bottom-style: solid;
+	border-block-width: 1px;
+}
+
+.body {
+    display: flex;
+    padding: 0 16px;
+}
+
+.logo,
+.theme {
+	flex: 0 0 auto;
+}
+
+.search {
+	flex: 1 1 0px;
+}
