@@ -1,3 +1,4 @@
+import { container } from "@/components/container/container";
 import { Button, DivPx, Paragraph, Strong } from "@moai/core";
 import Link from "next/link";
 import s from "./error.module.css";
@@ -16,7 +17,7 @@ export type PageErrorProps<P> =
 	  } & P);
 
 export const PageError = (props: Props) => (
-	<div className={s.container}>
+	<div className={[s.container, container.max960].join(" ")}>
 		<h1 className={s.title}>
 			<Strong>There was an error rendering this page</Strong>
 		</h1>
