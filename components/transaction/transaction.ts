@@ -15,6 +15,11 @@ export interface Call {
 	args: Argument[];
 }
 
+export interface TransactionPayload {
+	name: string;
+	args: Argument[];
+}
+
 export interface Transaction {
 	hash: string; // Key
 	type: "deploy" | "invoke";

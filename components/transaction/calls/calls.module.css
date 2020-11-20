@@ -3,22 +3,21 @@
 }
 
 .container table {
-	width: 100%;
-	--width-big: 240px;
-	--width-small: 120px;
-	--width: calc(var(--width-big) * 2 + var(--width-small) * 1);
-	min-width: var(--width);
-}
-
-.arguments,
-.contract {
-	width: 40%;
-	min-width: var(--width-big);
+	min-width: 640px;
 }
 
 .name {
-	width: 20%; /* @TODO: use Calc here */
-	min-width: var(--width-small);
+	text-align: left;
+	width: 100px;
+}
+
+.contract {
+	text-align: left;
+	word-break: break-all;
+}
+
+.arguments {
+	text-align: left;
 }
 
 .argument {
@@ -27,8 +26,4 @@
 
 .argument + .argument {
 	margin-top: 8px;
-}
-
-.contract {
-	word-break: break-all;
 }

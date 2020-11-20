@@ -1,9 +1,11 @@
+import { AccountAddress } from "@/components/account/address/address";
+import { BlockHeight } from "@/components/block/height/height";
 import { Info } from "@/components/info/info";
 import { Numeric } from "@/components/numeric/numeric";
 import { Pane } from "@/components/pane/pane";
 import { Transaction } from "@/models/transaction";
-import { Border, DivPx, Tag, text } from "@moai/core";
-import Link from "next/link";
+import { Border, DivPx } from "@moai/core";
+import { TransactionType } from "../type/type";
 import s from "./overview.module.css";
 
 interface Props {
@@ -18,22 +20,14 @@ const Divider = () => (
 	</>
 );
 
-const linkCls = [s.link, text.highlight].join(" ");
-
 export const TransactionOverview = ({ transaction }: Props) => (
 	<Pane>
 		<Info label="Type">
-			<span className={s.tag}>
-				<Tag children={transaction.type} />
-			</span>
+			<TransactionType value={transaction.type} />
 		</Info>
 		<Divider />
 		<Info label="Block">
-			<Link href={`/block/${transaction.height}`}>
-				<a className={linkCls}>
-					<Numeric format="integer" value={transaction.height} />
-				</a>
-			</Link>
+			<BlockHeight value={transaction.height} />
 		</Info>
 		<Divider />
 		<Info
@@ -41,19 +35,20 @@ export const TransactionOverview = ({ transaction }: Props) => (
 			help="The sending party of the transaction (a User account)"
 			copy={transaction.sender}
 		>
-			<Link href={`/account/${transaction.sender}`}>
-				<a className={[linkCls, s.hash].join(" ")}>{transaction.sender}</a>
-			</Link>
+			<span className={s.break}>
+				<AccountAddress value={transaction.sender} />
+			</span>
 		</Info>
 		<Divider />
+		<div>{JSON.stringify(transaction.payload)}</div>
 		<Info
 			label="To"
 			help="The receiving party of the transaction (a Contract address)"
 			copy={transaction.receiver}
 		>
-			<Link href={`/account/${transaction.receiver}`}>
-				<a className={[linkCls, s.hash].join(" ")}>{transaction.receiver}</a>
-			</Link>
+			<span className={s.break}>
+				<AccountAddress value={transaction.receiver} />
+			</span>
 		</Info>
 		<Divider />
 		<Info
@@ -61,7 +56,7 @@ export const TransactionOverview = ({ transaction }: Props) => (
 			help="Signature of the transaction's sender"
 			copy={transaction.signature}
 		>
-			<span className={s.hash}>{transaction.signature}</span>
+			<span className={s.break}>{transaction.signature}</span>
 		</Info>
 		<Divider />
 		<Info

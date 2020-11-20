@@ -3,14 +3,14 @@ import { formatRelativeTime } from "./relative";
 
 export type Timestamp = number;
 
-type Format = "relative" | TimeAbsoluteFormat;
+export type TimeFormat = "relative" | TimeAbsoluteFormat;
 
 interface Props {
 	value: Timestamp;
-	format: Format;
+	format: TimeFormat;
 }
 
-export const formatTime = (value: Timestamp, format: Format): string => {
+export const formatTime = (value: Timestamp, format: TimeFormat): string => {
 	switch (format) {
 		case "relative":
 			return formatRelativeTime(value);
