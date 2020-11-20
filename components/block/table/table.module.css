@@ -1,11 +1,11 @@
 .heading {
-    font-size: 18px;
-    padding: 16px;
+	font-size: 18px;
+	padding: 16px;
 }
 
 .container {
 	margin: -16px;
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 .link {
@@ -13,21 +13,25 @@
 }
 
 .container table {
-	width: 100%;
-	--width-big: 240px;
-	--width-small: 120px;
-	--width: calc(var(--width-big) * 2 + var(--width-small) * 2);
-	min-width: var(--width);
+	min-width: calc(150px + 150px + 100px + 250px);
 }
 
-.hash,
-.time {
-	width: 33.3%;
-	min-width: var(--width-big);
+.height {
+	text-align: left;
+	width: 150px;
 }
 
-.height,
+.hash {
+	text-align: left;
+	min-width: 150px;
+}
+
 .transactions {
-	width: 16.7%; /* @TODO: use Calc here */
-	min-width: var(--width-small);
+	text-align: right;
+	width: 100px;
+}
+
+.time {
+	text-align: right;
+	width: 250px;
 }

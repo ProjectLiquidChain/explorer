@@ -1,7 +1,8 @@
 import { Numeric } from "@/components/numeric/numeric";
 import { Table } from "@/components/table/table";
 import { Transaction } from "@/models/transaction";
-import { Tag, text } from "@moai/core";
+import { Icon, Tag, text } from "@moai/core";
+import { icons } from "@moai/icon";
 import Link from "next/link";
 import s from "./table.module.css";
 
@@ -49,6 +50,12 @@ const Receiver = ({ transaction }: TransactionProps): JSX.Element => (
 	</Link>
 );
 
+const Arrow = (): JSX.Element => (
+	<div className={text.muted}>
+		<Icon path={icons.arrowRight} size={16} />
+	</div>
+);
+
 export const TransactionTable = ({ transactions: txs }: Props) => (
 	<div className={s.container}>
 		<Table
@@ -64,6 +71,21 @@ export const TransactionTable = ({ transactions: txs }: Props) => (
 					render: (i) => <Type transaction={txs[i]} />,
 				},
 				{
+					title: "Sender",
+					className: s.sender,
+					render: (i) => <Sender transaction={txs[i]} />,
+				},
+				{
+					title: "",
+					className: s.arrow,
+					render: () => <Arrow />,
+				},
+				{
+					title: "Receiver",
+					className: s.receiver,
+					render: (i) => <Receiver transaction={txs[i]} />,
+				},
+				{
 					title: "Block",
 					className: s.block,
 					render: (i) => <Block transaction={txs[i]} />,
@@ -72,16 +94,6 @@ export const TransactionTable = ({ transactions: txs }: Props) => (
 					title: "Nonce",
 					className: s.nonce,
 					render: (i) => <Nonce transaction={txs[i]} />,
-				},
-				{
-					title: "Sender",
-					className: s.sender,
-					render: (i) => <Sender transaction={txs[i]} />,
-				},
-				{
-					title: "Receiver",
-					className: s.receiver,
-					render: (i) => <Receiver transaction={txs[i]} />,
 				},
 			]}
 			rowKey={(index) => txs[index].hash}

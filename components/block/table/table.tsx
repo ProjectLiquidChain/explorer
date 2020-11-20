@@ -31,9 +31,9 @@ const Height = ({ block }: RowProps): JSX.Element => (
 
 const BlockTime = ({ block }: RowProps): JSX.Element => (
 	<span>
-		<Time value={block.time * 1000} format="time" />
-		<span> — </span>
 		<Time value={block.time * 1000} format="relative" />
+		<span> — </span>
+		<Time value={block.time * 1000} format="time" />
 	</span>
 );
 
@@ -43,7 +43,7 @@ const Transactions = ({ block }: RowProps): JSX.Element => {
 		<span>
 			<Numeric value={count} format="integer" />
 			<span> </span>
-			<span>{count > 1 ? "transactions" : "transaction"}</span>
+			<span>{count > 1 ? "trxns" : "trxn"}</span>
 		</span>
 	);
 };
@@ -59,19 +59,19 @@ const Body = ({ blocks }: { blocks: Block[] }): JSX.Element => (
 				render: (i) => <Height block={blocks[i]} />,
 			},
 			{
-				title: "Time",
-				className: s.time,
-				render: (i) => <BlockTime block={blocks[i]} />,
+				title: "Hash",
+				className: s.hash,
+				render: (i) => <Hash block={blocks[i]} />,
 			},
 			{
-				title: "Transactions",
+				title: "Trxns",
 				className: s.transactions,
 				render: (i) => <Transactions block={blocks[i]} />,
 			},
 			{
-				title: "Hash",
-				className: s.hash,
-				render: (i) => <Hash block={blocks[i]} />,
+				title: "Time",
+				className: s.time,
+				render: (i) => <BlockTime block={blocks[i]} />,
 			},
 		]}
 		rowKey={(index) => blocks[index].height.toString()}

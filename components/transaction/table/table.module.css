@@ -8,22 +8,37 @@
 
 .container table {
 	width: 100%;
-	--width-big: 160px;
-	--width-small: 120px;
-	--width: calc(calc(var(--width-big) * 3) + calc(var(--width-small) * 3));
-	min-width: var(--width);
+	min-width: 900px;
 }
 
-.hash,
-.sender,
+.hash {
+	text-align: left;
+}
+
+.sender {
+	text-align: center;
+}
+
+.arrow {
+	width: calc(16px + 16px);
+	vertical-align: middle;
+}
+
 .receiver {
-	width: 20%;
-	min-width: var(--width-big);
+	text-align: center;
 }
 
-.type,
-.block,
+.block {
+	text-align: right;
+	width: 100px;
+}
+
+.type {
+	text-align: left;
+	width: 100px;
+}
+
 .nonce {
-	width: 14%; /* @TODO: use Calc here */
-	min-width: var(--width-small);
+	text-align: right;
+	width: 100px;
 }
