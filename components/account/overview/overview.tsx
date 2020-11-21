@@ -30,7 +30,7 @@ export const AccountOverview = ({ account }: Props) => (
 		<Info
 			label="Account creator"
 			copy={account.creator}
-			children={<AccountAddress value={account.creator} />}
+			children={<AccountAddress wrap value={account.creator} />}
 		/>
 		<Divider />
 		<Info

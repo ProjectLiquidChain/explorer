@@ -1,0 +1,22 @@
+.container table {
+	min-width: 480px;
+}
+
+.name {
+	text-align: left;
+	width: 120px;
+}
+
+.type {
+	text-align: left;
+	width: 120px;
+}
+
+td.type {
+	font-family: var(--font-mono);
+}
+
+.value {
+	text-align: left;
+	overflow-wrap: break-word;
+}

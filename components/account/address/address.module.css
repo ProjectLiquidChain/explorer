@@ -1,0 +1,12 @@
+.verified {
+    color: var(--accent-positive);
+}
+
+.wrap {
+    white-space: pre-line;
+    word-break: break-all;
+}
+
+.nowrap {
+    white-space: nowrap;
+}

@@ -10,7 +10,6 @@ interface Props {
 export const AccountHeader = ({ account }: Props) => (
 	<div className={[s.container, text.strong].join(" ")}>
 		<div>{isUserAccount(account) ? "User Account" : "Contract Account"}</div>
-		<DivPx size={4} />
 		<div className={s.title}>
 			<h1 className={s.address} children={account.address} />
 			<DivPx size={8} />

@@ -10,7 +10,6 @@ interface Props {
 export const TransactionHeader = ({ transaction }: Props) => (
 	<div className={[s.container, text.strong].join(" ")}>
 		<div>Transaction</div>
-		<DivPx size={4} />
 		<div className={s.title}>
 			<h1 className={s.address}>{transaction.hash}</h1>
 			<DivPx size={8} />

@@ -25,14 +25,14 @@ export const TransactionOverview = ({ transaction }: Props) => (
 			label="From"
 			help="The sending party of the transaction (a User account)"
 			copy={transaction.sender}
-			children={<AccountAddress value={transaction.sender} />}
+			children={<AccountAddress wrap value={transaction.sender} />}
 		/>
 		<Divider />
 		<Info
 			label="To"
 			help="The receiving party of the transaction (a Contract address)"
 			copy={transaction.receiver}
-			children={<AccountAddress value={transaction.receiver} />}
+			children={<AccountAddress wrap value={transaction.receiver} />}
 		/>
 		<Divider />
 		<Info

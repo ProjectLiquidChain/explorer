@@ -2,6 +2,7 @@ import { container } from "@/components/container/container";
 import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
+import { ReceiptEvent } from "@/components/receipt/event/event";
 import { ReceiptOverview } from "@/components/receipt/overview/overview";
 import { Receipt } from "@/components/receipt/receipt";
 import { getTransaction } from "@/components/transaction/fetch/fetch";
@@ -29,6 +30,11 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 		<DivPx size={16} />
 		<Heading>Transaction Receipt</Heading>
 		<ReceiptOverview receipt={receipt} />
+		<DivPx size={16} />
+		<Heading>Receipt events</Heading>
+		{receipt.events.map((event, index) => (
+			<ReceiptEvent key={index} event={event} />
+		))}
 	</div>
 );
 

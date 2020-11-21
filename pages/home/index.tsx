@@ -7,7 +7,7 @@ import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { Pane } from "@/components/pane/pane";
 import { DivPx } from "@moai/core";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 
 interface Props {
 	blocks: Block[];
@@ -26,15 +26,15 @@ const HomeBody = (props: Props) => (
 );
 const HomePage = (page: PageProps) => <Page page={page} Body={HomeBody} />;
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
 	try {
 		const latest = await getLatestBlock(undefined);
 		const { height } = latest;
 		const recents = await getBlocksByRange(height - 1, height - 9);
 		const blocks = [latest, ...recents];
-		return { props: { hasError: false, blocks } };
+		return { revalidate: 1, props: { hasError: false, blocks } };
 	} catch (error) {
-		return { props: { hasError: true, error: error.message } };
+		return { revalidate: 1, props: { hasError: true, error: error.message } };
 	}
 };
 

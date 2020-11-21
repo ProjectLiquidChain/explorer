@@ -1,6 +1,6 @@
-import { getRange } from "@/components/numeric/range";
-import { ServerCall, serverCall, Hash } from "../server/server";
-import { Receipt, Transaction } from "../transaction/transaction";
+import { Receipt } from "../receipt/receipt";
+import { Hash } from "../server/server";
+import { Transaction } from "../transaction/transaction";
 
 export interface Block {
 	height: number; // Key

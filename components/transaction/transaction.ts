@@ -1,12 +1,6 @@
 import { ContractAccount, UserAccount } from "../account/account";
+import { Argument } from "../argument/argument";
 import { Block } from "../block/block";
-import { Primitive } from "../server/server";
-
-interface Argument {
-	type: Primitive;
-	name: string;
-	value: string;
-}
 
 interface Payload {
 	name: string;

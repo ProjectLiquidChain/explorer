@@ -1,13 +1,13 @@
+import { Block } from "@/components/block/block";
+import { getBlockByHeight } from "@/components/block/fetch/fetch";
 import { BlockHeader } from "@/components/block/header/header";
 import { BlockOverview } from "@/components/block/overview/overview";
 import { BlockTransactions } from "@/components/block/transactions/transactions";
 import { container } from "@/components/container/container";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Block } from "@/components/block/block";
 import { DivPx } from "@moai/core";
-import { GetServerSideProps } from "next";
-import { getBlockByHeight } from "@/components/block/fetch/fetch";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 interface Props {
 	block: Block;
@@ -26,11 +26,9 @@ const BlockBody = ({ block }: Props): JSX.Element => (
 
 const BlockPage = (page: PageProps) => <Page page={page} Body={BlockBody} />;
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async (
-	context
-) => {
+export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 	try {
-		const { height: heightStr } = context.query;
+		const { height: heightStr } = context.params ?? {};
 		if (typeof heightStr !== "string") throw Error("Height is not defined");
 		const heightNum: number = parseInt(heightStr);
 		if (isNaN(heightNum)) throw Error(`Height "${heightStr}" is not a number`);
@@ -40,5 +38,10 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 		return { props: { hasError: true, error: error.message } };
 	}
 };
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+	fallback: true,
+	paths: [],
+});
 
 export default BlockPage;

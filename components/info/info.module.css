@@ -2,6 +2,8 @@
 	line-height: 1.5;
 	display: flex;
 	align-items: center;
+	/* Same height whether having the CopyButton or not */
+	min-height: 32px;
 }
 
 .body {
@@ -15,11 +17,6 @@
 	flex: 0 0 auto;
 }
 
-.heading {
-	display: flex;
-	align-items: center;
-}
-
 .value {
 	overflow-wrap: break-word;
 }
@@ -30,6 +27,7 @@
 @media (min-width: 641px) {
 	.body {
 		display: flex;
+		align-items: center;
 	}
 	.heading {
 		/* Minus the DivPx */

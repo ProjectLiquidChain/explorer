@@ -22,10 +22,9 @@ export const ReceiptCode = ({ code, format }: Props) => {
 		return <div className={s.negative}>Error: {error}</div>;
 	return (
 		<Tooltip content={error}>
-			<div className={[s.negative, s.flex].join(" ")}>
-				<Icon path={icons.error} size={16} />
-				<DivPx size={8} />
-				<span>Error</span>
+			<div className={s.negative}>
+				<Icon display="inline" path={icons.error} size={16} />
+				<span> Error</span>
 			</div>
 		</Tooltip>
 	);

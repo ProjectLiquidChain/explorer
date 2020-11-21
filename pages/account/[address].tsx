@@ -11,7 +11,7 @@ import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { DivPx } from "@moai/core";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 
 interface Props {
 	account: Account;
@@ -37,11 +37,9 @@ const AccountPage = (page: PageProps) => (
 	<Page page={page} Body={AccountBody} />
 );
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async (
-	context
-) => {
+export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 	try {
-		const { address } = context.query;
+		const { address } = context.params ?? {};
 		if (typeof address !== "string") throw Error("Address is not defined");
 
 		// Request both to save time, since they are independent. However the
@@ -61,10 +59,15 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 			throw Error("Contract not found");
 		})();
 
-		return { props: { hasError: false, account, contract } };
+		return { revalidate: 1, props: { hasError: false, account, contract } };
 	} catch (error) {
-		return { props: { hasError: true, error: error.message } };
+		return { revalidate: 1, props: { hasError: true, error: error.message } };
 	}
 };
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+	fallback: true,
+	paths: [],
+});
 
 export default AccountPage;

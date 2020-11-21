@@ -13,7 +13,8 @@ export interface InfoProps {
 const Help = (props: { text: string }): JSX.Element => (
 	<Tooltip content={props.text}>
 		<span className={text.muted}>
-			<Icon path={icons.help} size={16} />
+			<span> </span>
+			<Icon display="inline" path={icons.help} size={16} />
 		</span>
 	</Tooltip>
 );
@@ -21,12 +22,7 @@ const Help = (props: { text: string }): JSX.Element => (
 const Heading = (props: InfoProps): JSX.Element => (
 	<div className={[s.heading, text.strong].join(" ")}>
 		<span className={s.label}>{props.label}</span>
-		{props.help && (
-			<>
-				<DivPx size={8} />
-				<Help text={props.help} />
-			</>
-		)}
+		{props.help && <Help text={props.help} />}
 	</div>
 );
 
@@ -44,9 +40,7 @@ export const Info = (props: InfoProps) => (
 		{props.copy && (
 			<>
 				<DivPx size={8} />
-				<div className={s.copy}>
-					<CopyButton text={props.copy} />
-				</div>
+				<div className={s.copy} children={<CopyButton text={props.copy} />} />
 			</>
 		)}
 	</div>

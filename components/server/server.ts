@@ -7,20 +7,6 @@ export type Hash = string;
 
 export type Address = string;
 
-export type Primitive =
-	| "uint8"
-	| "uint16"
-	| "uint32"
-	| "uint64"
-	| "int8"
-	| "int16"
-	| "int32"
-	| "int64"
-	| "float32"
-	| "float64"
-	| "address"
-	| "lparray";
-
 if (typeof host !== "string") throw Error("SERVER_HOST is not defined");
 
 class JrpcError extends Error {

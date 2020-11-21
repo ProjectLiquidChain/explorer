@@ -1,10 +1,13 @@
+import { AccountAddress } from "@/components/account/address/address";
+import { BlockHeight } from "@/components/block/height/height";
+import { Link } from "@/components/link/link";
 import { Numeric } from "@/components/numeric/numeric";
 import { ReceiptCode } from "@/components/receipt/code/code";
+import { Receipt } from "@/components/receipt/receipt";
 import { Table } from "@/components/table/table";
-import { Receipt, Transaction } from "@/components/transaction/transaction";
+import { Transaction } from "@/components/transaction/transaction";
 import { Icon, Tag, text } from "@moai/core";
 import { icons } from "@moai/icon";
-import Link from "next/link";
 import s from "./table.module.css";
 
 interface Props {
@@ -20,12 +23,8 @@ interface ReceiptProps {
 	receipt: Receipt;
 }
 
-const linkCls = [s.link, text.highlight].join(" ");
-
 const Hash = ({ transaction }: TransactionProps): JSX.Element => (
-	<Link href={`/transaction/${transaction.hash}`}>
-		<a className={linkCls}>{transaction.hash}</a>
-	</Link>
+	<Link href={`/transaction/${transaction.hash}`} children={transaction.hash} />
 );
 
 const Type = ({ transaction }: TransactionProps): JSX.Element => (
@@ -33,11 +32,7 @@ const Type = ({ transaction }: TransactionProps): JSX.Element => (
 );
 
 const Block = ({ transaction }: TransactionProps): JSX.Element => (
-	<Link href={`/block/${transaction.height}`}>
-		<a className={linkCls}>
-			<Numeric value={transaction.height} format="integer" />
-		</a>
-	</Link>
+	<BlockHeight value={transaction.height} />
 );
 
 const Nonce = ({ transaction }: TransactionProps): JSX.Element => (
@@ -45,20 +40,16 @@ const Nonce = ({ transaction }: TransactionProps): JSX.Element => (
 );
 
 const Sender = ({ transaction }: TransactionProps): JSX.Element => (
-	<Link href={`/account/${transaction.sender}`}>
-		<a className={linkCls}>{transaction.sender}</a>
-	</Link>
+	<AccountAddress wrap={false} value={transaction.sender} />
 );
 
 const Receiver = ({ transaction }: TransactionProps): JSX.Element => (
-	<Link href={`/account/${transaction.receiver}`}>
-		<a className={linkCls}>{transaction.receiver}</a>
-	</Link>
+	<AccountAddress wrap={false} value={transaction.receiver} />
 );
 
 const Arrow = (): JSX.Element => (
 	<div className={text.muted}>
-		<Icon path={icons.arrowRight} size={16} />
+		<Icon display="block" path={icons.arrowRight} size={16} />
 	</div>
 );
 
