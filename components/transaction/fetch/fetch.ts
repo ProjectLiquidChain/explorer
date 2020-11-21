@@ -1,5 +1,6 @@
+import { Receipt } from "@/components/receipt/receipt";
 import { serverCall, ServerCall } from "@/components/server/server";
-import { Receipt, Transaction } from "../transaction";
+import { Transaction } from "../transaction";
 
 export const getTransaction: ServerCall<
 	Transaction["hash"],

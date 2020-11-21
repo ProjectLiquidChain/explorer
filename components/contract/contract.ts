@@ -1,8 +1,8 @@
-import { Primitive } from "../server/server";
+import { Argument } from "../argument/argument";
 
 export interface ContractParameter {
 	name: string;
-	type: Primitive;
+	type: Argument["type"];
 }
 
 export interface ContractFunction {

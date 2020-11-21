@@ -1,6 +1,6 @@
-import { Receipt } from "@/components/transaction/transaction";
-import { DivPx, Icon, Tooltip } from "@moai/core";
+import { Icon, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
+import { Receipt } from "../receipt";
 import s from "./code.module.css";
 
 interface Props {

@@ -1,6 +1,7 @@
 import { getRange } from "@/components/numeric/range";
+import { Receipt } from "@/components/receipt/receipt";
 import { serverCall, ServerCall } from "@/components/server/server";
-import { Receipt, Transaction } from "@/components/transaction/transaction";
+import { Transaction } from "@/components/transaction/transaction";
 import { Block } from "../block";
 
 /**
