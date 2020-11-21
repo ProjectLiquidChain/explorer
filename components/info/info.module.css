@@ -5,15 +5,17 @@
 }
 
 .body {
-	flex: 1 1 0px;
+	flex: 0 1px auto;
 	overflow: hidden;
+	padding: 4px;
+	margin: -4px;
 }
 
-.action {
+.copy {
 	flex: 0 0 auto;
 }
 
-.label {
+.heading {
 	display: flex;
 	align-items: center;
 }
@@ -23,24 +25,20 @@
 }
 
 @media (max-width: 640px) {
-	.body {
-		display: block;
-	}
 }
 
 @media (min-width: 641px) {
-	.container {
-		/* Same height whether having action button or not */
-		min-height: 32px;
-	}
 	.body {
 		display: flex;
 	}
-	.label {
+	.heading {
 		width: 160px;
 		flex: 0 0 auto;
 	}
 	.value {
-		flex: 1 1 0px;
+		flex: 0 1 auto;
+		overflow: hidden;
+		padding: 4px;
+		margin: -4px;
 	}
 }

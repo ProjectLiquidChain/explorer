@@ -18,9 +18,9 @@ const Help = (props: { text: string }): JSX.Element => (
 	</Tooltip>
 );
 
-const Label = (props: InfoProps): JSX.Element => (
-	<div className={[s.label, text.strong].join(" ")}>
-		<span>{props.label}</span>
+const Heading = (props: InfoProps): JSX.Element => (
+	<div className={[s.heading, text.strong].join(" ")}>
+		<span className={s.label}>{props.label}</span>
 		{props.help && (
 			<>
 				<DivPx size={8} />
@@ -37,14 +37,16 @@ const Value = (props: InfoProps): JSX.Element => (
 export const Info = (props: InfoProps) => (
 	<div className={s.container}>
 		<div className={s.body}>
-			<Label {...props} />
-			<DivPx size={4} />
+			<Heading {...props} />
+			<div className={s.space} children={<DivPx size={4} />} />
 			<Value {...props} />
 		</div>
 		{props.copy && (
 			<>
-				<DivPx size={16} />
-				<CopyButton text={props.copy} />
+				<DivPx size={8} />
+				<div className={s.copy}>
+					<CopyButton text={props.copy} />
+				</div>
 			</>
 		)}
 	</div>

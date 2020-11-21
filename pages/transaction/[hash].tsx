@@ -3,9 +3,12 @@ import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { TransactionHeader } from "@/components/transaction/header/header";
 import { TransactionOverview } from "@/components/transaction/overview/overview";
-import { TransactionReceipt } from "@/components/transaction/receipt/receipt";
-import { getTransaction, Receipt, Transaction } from "@/components/transaction/transaction";
-import { DivPx } from "@moai/core";
+// import { TransactionReceipt } from "@/components/transaction/receipt/receipt";
+import {
+	getTransaction,
+	Receipt,
+	Transaction,
+} from "@/components/transaction/transaction";
 import { GetServerSideProps } from "next";
 
 interface Props {
@@ -19,7 +22,6 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 	<div className={container.max960}>
 		<TransactionHeader transaction={transaction} />
 		<TransactionOverview transaction={transaction} />
-		<TransactionReceipt receipt={receipt} />
 	</div>
 );
 
