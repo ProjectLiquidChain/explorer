@@ -28,7 +28,6 @@ export const TransactionOverview = ({ transaction }: Props) => (
 			children={<AccountAddress value={transaction.sender} />}
 		/>
 		<Divider />
-		<div>{JSON.stringify(transaction.payload)}</div>
 		<Info
 			label="To"
 			help="The receiving party of the transaction (a Contract address)"

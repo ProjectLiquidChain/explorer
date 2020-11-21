@@ -1,0 +1,25 @@
+.table {
+	margin: -16px;
+}
+
+.table table {
+	min-width: 480px;
+}
+
+.name {
+	text-align: left;
+	width: 160px;
+}
+
+.type {
+	text-align: left;
+    width: 160px;
+}
+
+td.type {
+    font-family: var(--font-mono);
+}
+
+.value {
+	text-align: left;
+}

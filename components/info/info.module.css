@@ -32,7 +32,8 @@
 		display: flex;
 	}
 	.heading {
-		width: 160px;
+		/* Minus the DivPx */
+		width: calc(160px - 4px);
 		flex: 0 0 auto;
 	}
 	.value {

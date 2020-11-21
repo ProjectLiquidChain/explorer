@@ -42,6 +42,7 @@
 
 @media (min-width: 641px) {
 	.logo {
-		width: calc(160px + 5px);
+		/* Try to align with Info */
+		width: 160px;
 	}
 }

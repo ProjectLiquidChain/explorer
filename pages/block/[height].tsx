@@ -19,7 +19,7 @@ const BlockBody = ({ block }: Props): JSX.Element => (
 	<div className={container.max960}>
 		<BlockHeader block={block} />
 		<BlockOverview block={block} />
-		<DivPx size={32} />
+		<DivPx size={16} />
 		<BlockTransactions block={block} />
 	</div>
 );

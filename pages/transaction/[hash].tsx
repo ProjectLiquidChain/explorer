@@ -1,14 +1,17 @@
 import { container } from "@/components/container/container";
+import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { TransactionHeader } from "@/components/transaction/header/header";
 import { TransactionOverview } from "@/components/transaction/overview/overview";
+import { TransactionPayload } from "@/components/transaction/payload/payload";
 // import { TransactionReceipt } from "@/components/transaction/receipt/receipt";
 import {
 	getTransaction,
 	Receipt,
 	Transaction,
 } from "@/components/transaction/transaction";
+import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 
 interface Props {
@@ -22,6 +25,9 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 	<div className={container.max960}>
 		<TransactionHeader transaction={transaction} />
 		<TransactionOverview transaction={transaction} />
+		<DivPx size={16} />
+		<Heading>Transaction Payload</Heading>
+		<TransactionPayload payload={transaction.payload} />
 	</div>
 );
 

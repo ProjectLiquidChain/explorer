@@ -1,6 +1,7 @@
 import { Numeric } from "@/components/numeric/numeric";
+import { ReceiptCode } from "@/components/receipt/code/code";
 import { Table } from "@/components/table/table";
-import { Transaction } from "@/components/transaction/transaction";
+import { Receipt, Transaction } from "@/components/transaction/transaction";
 import { Icon, Tag, text } from "@moai/core";
 import { icons } from "@moai/icon";
 import Link from "next/link";
@@ -8,10 +9,15 @@ import s from "./table.module.css";
 
 interface Props {
 	transactions: Transaction[];
+	receipts: Receipt[];
 }
 
 interface TransactionProps {
 	transaction: Transaction;
+}
+
+interface ReceiptProps {
+	receipt: Receipt;
 }
 
 const linkCls = [s.link, text.highlight].join(" ");
@@ -56,7 +62,11 @@ const Arrow = (): JSX.Element => (
 	</div>
 );
 
-export const TransactionTable = ({ transactions: txs }: Props) => (
+const Code = ({ receipt }: ReceiptProps): JSX.Element => (
+	<ReceiptCode code={receipt.code} />
+);
+
+export const TransactionTable = ({ transactions: txs, receipts }: Props) => (
 	<div className={s.container}>
 		<Table
 			columns={[
@@ -69,6 +79,11 @@ export const TransactionTable = ({ transactions: txs }: Props) => (
 					title: "Type",
 					className: s.type,
 					render: (i) => <Type transaction={txs[i]} />,
+				},
+				{
+					title: "Code",
+					className: s.code,
+					render: (i) => <Code receipt={receipts[i]} />,
 				},
 				{
 					title: "Sender",

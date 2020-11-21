@@ -1,0 +1,10 @@
+.error {
+	display: flex;
+	align-items: center;
+
+	color: var(--accent-negative);
+}
+
+.success {
+	color: var(--accent-positive);
+}

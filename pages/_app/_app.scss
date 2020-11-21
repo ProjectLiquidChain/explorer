@@ -7,4 +7,7 @@ body {
 	--font-mono: "Source Code Pro", monospace;
 	// ss02: disambiguation without zero
 	font-feature-settings: "tnum", "ss04";
+
+	--accent-positive: #48bb78;
+    --accent-negative: #f56565;
 }

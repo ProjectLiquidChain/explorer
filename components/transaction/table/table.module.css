@@ -2,10 +2,6 @@
 	text-decoration: none;
 }
 
-.type {
-	text-transform: capitalize;
-}
-
 .container table {
 	width: 100%;
 	min-width: 900px;
@@ -13,6 +9,7 @@
 
 .hash {
 	text-align: left;
+	width: 160px;
 }
 
 .sender {
@@ -34,8 +31,15 @@
 }
 
 .type {
+	text-transform: capitalize;
 	text-align: left;
 	width: 100px;
+}
+
+.code {
+	text-align: left;
+	width: 100px;
+	vertical-align: middle; /* Has icon */
 }
 
 .nonce {
