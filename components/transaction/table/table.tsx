@@ -63,7 +63,7 @@ const Arrow = (): JSX.Element => (
 );
 
 const Code = ({ receipt }: ReceiptProps): JSX.Element => (
-	<ReceiptCode code={receipt.code} />
+	<ReceiptCode code={receipt.code} format="short" />
 );
 
 export const TransactionTable = ({ transactions: txs, receipts }: Props) => (

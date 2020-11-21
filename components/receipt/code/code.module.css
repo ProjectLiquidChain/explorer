@@ -1,10 +1,12 @@
-.error {
+.flex {
 	display: flex;
 	align-items: center;
+}
 
+.negative {
 	color: var(--accent-negative);
 }
 
-.success {
+.positive {
 	color: var(--accent-positive);
 }
