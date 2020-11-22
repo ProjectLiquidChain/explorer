@@ -1,7 +1,7 @@
 import { Block } from "@/components/block/block";
 import { CopyButton } from "@/components/copy/copy";
 import { Numeric } from "@/components/numeric/numeric";
-import { Button, ButtonGroup, DivGrow, DivPx, text } from "@moai/core";
+import { Button, ButtonGroup, DivGrow, DivPx, text, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
 import Link from "next/link";
 import s from "./header.module.css";
@@ -12,12 +12,28 @@ interface Props {
 
 const Navigation = ({ block }: Props) => (
 	<ButtonGroup skipChildTypeCheck>
-		<Link href={`/block/${block.height - 1}`}>
-			<Button.Forwarded icon={icons.chevronLeft} style={Button.style.outset} />
-		</Link>
-		<Link href={`/block/${block.height + 1}`}>
-			<Button.Forwarded icon={icons.chevronRight} style={Button.style.outset} />
-		</Link>
+		<Tooltip content="Go to parent (previous) block">
+			<div>
+				<Link href={`/block/${block.height - 1}`}>
+					<Button.Forwarded
+						icon={icons.chevronLeft}
+						iconLabel="Go to parent (previous) block"
+						style={Button.style.outset}
+					/>
+				</Link>
+			</div>
+		</Tooltip>
+		<Tooltip content="Go to child (next) block">
+			<div>
+				<Link href={`/block/${block.height + 1}`}>
+					<Button.Forwarded
+						icon={icons.chevronRight}
+						iconLabel="Go to child (next) block"
+						style={Button.style.outset}
+					/>
+				</Link>
+			</div>
+		</Tooltip>
 	</ButtonGroup>
 );
 

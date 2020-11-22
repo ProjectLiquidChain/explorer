@@ -13,6 +13,7 @@ export const CopyButton = (props: Props): JSX.Element => {
 			<div className={text.muted}>
 				<Button
 					icon={copied ? icons.tick : icons.duplicate}
+					iconLabel="Copy to clipboard"
 					style={Button.style.flat}
 					onClick={async () => {
 						await navigator.clipboard.writeText(props.text);

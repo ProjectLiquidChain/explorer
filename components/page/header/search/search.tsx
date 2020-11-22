@@ -20,7 +20,12 @@ export const Search = () => {
 				setValue={setQuery}
 				placeholder="Search by Address / Hash / Height"
 			/>
-			<Button style={Button.style.flat} type="submit" icon={icons.search} />
+			<Button
+				style={Button.style.flat}
+				type="submit"
+				icon={icons.search}
+				iconLabel="Submit search"
+			/>
 		</form>
 	);
 };
