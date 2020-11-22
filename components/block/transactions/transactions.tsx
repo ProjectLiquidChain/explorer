@@ -47,11 +47,8 @@ export const BlockTransactions = ({ block }: Props): JSX.Element => {
 	return (
 		<div>
 			<Heading>
-				<span>{count} </span>
-				<span>{count > 1 ? "Transactions" : "Transaction"}</span>
-				<span> ({errCount} </span>
-				<span>{errCount > 1 ? "errors" : "error"}</span>
-				<span> )</span>
+				<span>{`${count} ${count > 1 ? "Transactions" : "Transaction"}`}</span>
+				<span>{` (${errCount} ${errCount > 1 ? "errors" : "error"})`}</span>
 			</Heading>
 			<Pane>
 				<Overview block={block} />
