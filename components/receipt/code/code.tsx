@@ -1,4 +1,4 @@
-import { Icon, Tooltip } from "@moai/core";
+import { Icon, text, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
 import { Receipt } from "../receipt";
 import s from "./code.module.css";
@@ -17,12 +17,13 @@ const codeError: Map<number, string> = new Map([
 
 export const ReceiptCode = ({ code, format }: Props) => {
 	const error = codeError.get(code);
-	if (error === undefined) return <span className={s.positive}>Success</span>;
+	if (error === undefined)
+		return <span className={text.positive}>Success</span>;
 	if (format === "long")
-		return <div className={s.negative}>Error: {error}</div>;
+		return <div className={text.negative}>Error: {error}</div>;
 	return (
 		<Tooltip content={error}>
-			<span className={s.negative}>
+			<span className={text.negative}>
 				<Icon display="inline" path={icons.error} size={16} />
 				<span> Error</span>
 			</span>

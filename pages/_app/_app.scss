@@ -8,9 +8,12 @@ body:not(.override) {
 	// ss02: disambiguation without zero
 	font-feature-settings: "tnum", "ss04";
 
-	--accent-positive: #48bb78;
-	--accent-negative: #f56565;
-
 	// Future Moai
 	line-height: 20px;
+
+	// Liquid color scheme
+	--accent-0: #2052D5;
+	--accent-1: #2A66E8;
+	--accent-2: #4284F3;
+	--accent-3: #66A6F7;
 }

@@ -1,5 +1,5 @@
 import { Link } from "@/components/link/link";
-import { DivPx, Icon, Tooltip } from "@moai/core";
+import { DivPx, Icon, text, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
 import { Account } from "../account";
 import s from "./address.module.css";
@@ -13,7 +13,7 @@ const verified = ["LB36YY2JHKXFXSESE75QIB5KWTOPFJ5G4267PJWLPY4WDLHGCBRRJWLS"];
 
 const Verified = () => (
 	<Tooltip content="Verified contract account">
-		<span className={s.verified}>
+		<span className={text.positive}>
 			<Icon display="inline" path={icons.tickCircle} size={16} />
 			<span> </span>
 		</span>

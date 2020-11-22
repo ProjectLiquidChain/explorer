@@ -19,6 +19,7 @@ export const Search = () => {
 				value={query}
 				setValue={setQuery}
 				placeholder="Search by Address / Hash / Height"
+				aria-label="Search by Address / Hash / Height"
 			/>
 			<Button
 				style={Button.style.flat}
