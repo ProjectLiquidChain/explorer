@@ -11,7 +11,7 @@ import { TransactionOverview } from "@/components/transaction/overview/overview"
 import { TransactionPayload } from "@/components/transaction/payload/payload";
 import { Transaction } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 interface Props {
 	transaction: Transaction;
@@ -39,13 +39,15 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 );
 
 const TransactionPage = (page: PageProps) => (
-	<Page page={page} Body={TransactionBody} />
+	<Page
+		title={(p) => `Liquid Transaction #${p.transaction.hash}`}
+		description={(p) =>
+			`See details of transaction ${p.transaction.hash} on Liquid Blockchain Explorer`
+		}
+		page={page}
+		Body={TransactionBody}
+	/>
 );
-
-export const getStaticPaths: GetStaticPaths = async () => ({
-	paths: [],
-	fallback: true,
-});
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 	try {
@@ -57,5 +59,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 		return { props: { hasError: true, error: error.message } };
 	}
 };
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+	paths: [],
+	fallback: "blocking",
+});
 
 export default TransactionPage;

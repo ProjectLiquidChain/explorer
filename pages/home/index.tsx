@@ -1,13 +1,16 @@
 import { Block } from "@/components/block/block";
-import { getBlocksByRange, getLatestBlock } from "@/components/block/fetch/fetch";
+import {
+	getBlocksByRange,
+	getLatestBlock,
+} from "@/components/block/fetch/fetch";
 import { BlockTable } from "@/components/block/table/table";
 import { container } from "@/components/container/container";
 import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
-import { Page } from "@/components/page/page";
+import { Page, PageDefaultHead } from "@/components/page/page";
 import { Pane } from "@/components/pane/pane";
 import { DivPx } from "@moai/core";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 
 interface Props {
 	blocks: Block[];
@@ -24,7 +27,14 @@ const HomeBody = (props: Props) => (
 		</Pane>
 	</div>
 );
-const HomePage = (page: PageProps) => <Page page={page} Body={HomeBody} />;
+const HomePage = (page: PageProps) => (
+	<Page
+		title={() => PageDefaultHead.title}
+		description={() => PageDefaultHead.description}
+		page={page}
+		Body={HomeBody}
+	/>
+);
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
 	try {

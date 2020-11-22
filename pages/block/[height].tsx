@@ -24,7 +24,16 @@ const BlockBody = ({ block }: Props): JSX.Element => (
 	</div>
 );
 
-const BlockPage = (page: PageProps) => <Page page={page} Body={BlockBody} />;
+const BlockPage = (page: PageProps) => (
+	<Page
+		title={(p) => `Liquid Block #${p.block.height}`}
+		description={(p) =>
+			`See details of block ${p.block.height} on Liquid Blockchain Explorer`
+		}
+		page={page}
+		Body={BlockBody}
+	/>
+);
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 	try {
@@ -40,7 +49,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-	fallback: true,
+	fallback: "blocking",
 	paths: [],
 });
 

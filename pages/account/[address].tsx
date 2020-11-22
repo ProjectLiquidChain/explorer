@@ -34,10 +34,18 @@ const AccountBody = ({ account, contract }: Props) => (
 );
 
 const AccountPage = (page: PageProps) => (
-	<Page page={page} Body={AccountBody} />
+	<Page
+		title={(p) => `Liquid Account #${p.account.address}`}
+		description={(p) =>
+			`See details of account ${p.account.address} on Liquid Blockchain Explorer`
+		}
+		page={page}
+		Body={AccountBody}
+	/>
 );
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
+	let props: PageProps;
 	try {
 		const { address } = context.params ?? {};
 		if (typeof address !== "string") throw Error("Address is not defined");
@@ -59,14 +67,15 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			throw Error("Contract not found");
 		})();
 
-		return { revalidate: 1, props: { hasError: false, account, contract } };
+		props = { hasError: false, account, contract };
 	} catch (error) {
-		return { revalidate: 1, props: { hasError: true, error: error.message } };
+		props = { hasError: true, error: error.message };
 	}
+	return { revalidate: 1, props };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-	fallback: true,
+	fallback: "blocking",
 	paths: [],
 });
 
