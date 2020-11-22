@@ -33,7 +33,10 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 		<DivPx size={16} />
 		<Heading>Receipt events</Heading>
 		{receipt.events.map((event, index) => (
-			<ReceiptEvent key={index} event={event} />
+			<>
+				{index > 0 && <DivPx size={16} />}
+				<ReceiptEvent key={index} event={event} />
+			</>
 		))}
 	</div>
 );

@@ -4,7 +4,7 @@ import { text } from "@moai/core";
 
 export const Logo = () => (
 	<Link href="/">
-		<a className={[s.container, text.highlight].join(" ")}>
+		<a className={[s.container, text.blueWeak].join(" ")}>
 			<svg
 				width="32"
 				height="32"

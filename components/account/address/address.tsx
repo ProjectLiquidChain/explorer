@@ -13,7 +13,7 @@ const verified = ["LB36YY2JHKXFXSESE75QIB5KWTOPFJ5G4267PJWLPY4WDLHGCBRRJWLS"];
 
 const Verified = () => (
 	<Tooltip content="Verified contract account">
-		<span className={text.positive}>
+		<span className={text.greenWeak}>
 			<Icon display="inline" path={icons.tickCircle} size={16} />
 			<span> </span>
 		</span>

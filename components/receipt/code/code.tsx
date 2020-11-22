@@ -17,14 +17,16 @@ const codeError: Map<number, string> = new Map([
 export const ReceiptCode = ({ code, format }: Props) => {
 	const error = codeError.get(code);
 	if (error === undefined)
-		return <span className={text.positive}>Success</span>;
+		return <span className={text.greenStrong}>Success</span>;
 	if (format === "long")
-		return <div className={text.negative}>Error: {error}</div>;
+		return <div className={text.greenStrong}>Error: {error}</div>;
 	return (
 		<Tooltip content={error}>
-			<span className={text.negative}>
-				<Icon display="inline" path={icons.error} size={16} />
-				<span> Error</span>
+			<span>
+				<span className={text.redWeak}>
+					<Icon display="inline" path={icons.error} size={16} />
+				</span>
+				<span className={text.redStrong}> Error</span>
 			</span>
 		</Tooltip>
 	);
