@@ -1,7 +1,6 @@
 import { Icon, text, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
 import { Receipt } from "../receipt";
-import s from "./code.module.css";
 
 interface Props {
 	code: Receipt["code"];
