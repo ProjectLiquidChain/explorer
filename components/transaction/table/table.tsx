@@ -4,7 +4,7 @@ import { Link } from "@/components/link/link";
 import { Numeric } from "@/components/numeric/numeric";
 import { ReceiptCode } from "@/components/receipt/code/code";
 import { Receipt } from "@/components/receipt/receipt";
-import { Table } from "@/components/table/table";
+import { Table, TableColumn } from "@/components/table/table";
 import { Transaction } from "@/components/transaction/transaction";
 import { Icon, Tag, text } from "@moai/core";
 import { icons } from "@moai/icon";
@@ -12,7 +12,7 @@ import s from "./table.module.css";
 
 interface Props {
 	transactions: Transaction[];
-	receipts: Receipt[];
+	receipts: Receipt[] | null;
 }
 
 interface TransactionProps {
@@ -57,53 +57,59 @@ const Code = ({ receipt }: ReceiptProps): JSX.Element => (
 	<ReceiptCode code={receipt.code} format="short" />
 );
 
-export const TransactionTable = ({ transactions: txs, receipts }: Props) => (
-	<div className={s.container}>
-		<Table
-			columns={[
-				{
-					title: "Hash",
-					className: s.hash,
-					render: (i) => <Hash transaction={txs[i]} />,
-				},
-				{
-					title: "Type",
-					className: s.type,
-					render: (i) => <Type transaction={txs[i]} />,
-				},
+const getColumns = ({ transactions, receipts }: Props): TableColumn[] => [
+	{
+		title: "Hash",
+		className: s.hash,
+		render: (i) => <Hash transaction={transactions[i]} />,
+	},
+	{
+		title: "Type",
+		className: s.type,
+		render: (i) => <Type transaction={transactions[i]} />,
+	},
+	...(receipts === null
+		? []
+		: [
 				{
 					title: "Code",
 					className: s.code,
-					render: (i) => <Code receipt={receipts[i]} />,
+					render: (i: number) => <Code receipt={receipts[i]} />,
 				},
-				{
-					title: "Sender",
-					className: s.sender,
-					render: (i) => <Sender transaction={txs[i]} />,
-				},
-				{
-					title: "",
-					className: s.arrow,
-					render: () => <Arrow />,
-				},
-				{
-					title: "Receiver",
-					className: s.receiver,
-					render: (i) => <Receiver transaction={txs[i]} />,
-				},
-				{
-					title: "Block",
-					className: s.block,
-					render: (i) => <Block transaction={txs[i]} />,
-				},
-				{
-					title: "Nonce",
-					className: s.nonce,
-					render: (i) => <Nonce transaction={txs[i]} />,
-				},
-			]}
-			rowKey={(index) => txs[index].hash}
-			rowsLength={txs.length}
+		  ]),
+	{
+		title: "Sender",
+		className: s.sender,
+		render: (i) => <Sender transaction={transactions[i]} />,
+	},
+	{
+		title: "",
+		className: s.arrow,
+		render: () => <Arrow />,
+	},
+	{
+		title: "Receiver",
+		className: s.receiver,
+		render: (i) => <Receiver transaction={transactions[i]} />,
+	},
+	{
+		title: "Block",
+		className: s.block,
+		render: (i) => <Block transaction={transactions[i]} />,
+	},
+	{
+		title: "Nonce",
+		className: s.nonce,
+		render: (i) => <Nonce transaction={transactions[i]} />,
+	},
+];
+
+export const TransactionTable = (props: Props) => (
+	<div className={s.container}>
+		<Table
+			columns={getColumns(props)}
+			rowKey={(index) => props.transactions[index].hash}
+			rowsLength={props.transactions.length}
 		/>
 	</div>
 );

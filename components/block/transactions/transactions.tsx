@@ -1,8 +1,8 @@
 import { Block } from "@/components/block/block";
 import { Divider } from "@/components/divider/divider";
-import { Heading } from "@/components/heading/heading";
 import { Info } from "@/components/info/info";
 import { Pane } from "@/components/pane/pane";
+import { TransactionsHeading } from "@/components/transaction/heading/heading";
 import { TransactionTable } from "@/components/transaction/table/table";
 import { Border, DivPx } from "@moai/core";
 import s from "./transactions.module.css";
@@ -41,19 +41,15 @@ const Table = ({ block }: Props): JSX.Element => (
 	</div>
 );
 
-export const BlockTransactions = ({ block }: Props): JSX.Element => {
-	const count = block.transactions.length;
-	const errCount = block.receipts.filter((r) => r.code > 0).length;
-	return (
-		<div>
-			<Heading>
-				<span>{`${count} ${count > 1 ? "Transactions" : "Transaction"}`}</span>
-				<span>{` (${errCount} ${errCount > 1 ? "errors" : "error"})`}</span>
-			</Heading>
-			<Pane>
-				<Overview block={block} />
-				{count > 0 && <Table block={block} />}
-			</Pane>
-		</div>
-	);
-};
+export const BlockTransactions = ({ block }: Props): JSX.Element => (
+	<div>
+		<TransactionsHeading
+			receipts={block.receipts}
+			transactions={block.transactions}
+		/>
+		<Pane>
+			<Overview block={block} />
+			{block.transactions.length > 0 && <Table block={block} />}
+		</Pane>
+	</div>
+);

@@ -3,8 +3,9 @@ import { Transaction } from "@/components/transaction/transaction";
 import { Transfer } from "@/components/transfer/transfer";
 import { Account, Asset, ContractAccount, UserAccount } from "../account";
 
-export const getAccount: ServerCall<
-	Account["address"],
+type AccountCall<T> = ServerCall<Account["address"], T>;
+
+export const getAccount: AccountCall<
 	null | ContractAccount | UserAccount
 > = async (address) => {
 	const result = await serverCall("chain.GetAccount", { address });
@@ -13,26 +14,19 @@ export const getAccount: ServerCall<
 	return account;
 };
 
-export const getAccountTransactions: ServerCall<
-	Account["address"],
-	Transaction[]
-> = async (address) => {
+export const getAccountTransactions: AccountCall<Transaction[]> = async (
+	address
+) => {
 	const result = await serverCall("surf.GetAccountTxs", { address });
 	return result.transactions;
 };
 
-export const getAccountTransfers: ServerCall<
-	Account["address"],
-	Transfer[]
-> = async (address) => {
+export const getAccountTransfers: AccountCall<Transfer[]> = async (address) => {
 	const result = await serverCall("surf.GetAccountTransfers", { address });
 	return result.transfers;
-}
+};
 
-export const getAccountAssets: ServerCall<
-	Account["address"],
-	Asset[]
-> = async (address) => {
+export const getAccountAssets: AccountCall<Asset[]> = async (address) => {
 	const result = await serverCall("surf.GetAccountAssets", { address });
 	return result.assets;
-}
+};

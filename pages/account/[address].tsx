@@ -1,35 +1,48 @@
-import { Account, isUserAccount } from "@/components/account/account";
-import { getAccount } from "@/components/account/fetch/fetch";
+import { Account, Asset, isUserAccount } from "@/components/account/account";
+import * as fetchAccount from "@/components/account/fetch/fetch";
 import { AccountHeader } from "@/components/account/header/header";
 import { AccountOverview } from "@/components/account/overview/overview";
 import { container } from "@/components/container/container";
 import { Contract } from "@/components/contract/contract";
 import { getContract } from "@/components/contract/fetch/fetch";
 import { ContractOverview } from "@/components/contract/overview/overview";
-import { Heading } from "@/components/heading/heading";
-// import { ContractOverview } from "@/components/contract/contract";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
+import { Pane } from "@/components/pane/pane";
+import { TransactionsHeading } from "@/components/transaction/heading/heading";
+import { TransactionTable } from "@/components/transaction/table/table";
+import { Transaction } from "@/components/transaction/transaction";
+import { Transfer } from "@/components/transfer/transfer";
 import { DivPx } from "@moai/core";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 interface Props {
 	account: Account;
 	contract: Contract | null;
+	transactions: Transaction[];
+	assets: Asset[];
+	transfers: Transfer[];
 }
 
 type PageProps = PageErrorProps<Props>;
 
-const AccountBody = ({ account, contract }: Props) => (
+const AccountBody = (props: Props): JSX.Element => (
 	<div className={container.max960}>
-		<AccountHeader account={account} />
-		<AccountOverview account={account} />
-		{contract && (
+		<AccountHeader account={props.account} />
+		<AccountOverview account={props.account} />
+		{props.contract && (
 			<>
 				<DivPx size={16} />
-				<ContractOverview contract={contract} />
+				<ContractOverview contract={props.contract} />
 			</>
 		)}
+		<DivPx size={16} />
+		<TransactionsHeading transactions={props.transactions} receipts={null} />
+		<Pane noPadding>
+			<TransactionTable transactions={props.transactions} receipts={null} />
+		</Pane>
+		{JSON.stringify(props.assets)}
+		{JSON.stringify(props.transfers)}
 	</div>
 );
 
@@ -44,21 +57,28 @@ const AccountPage = (page: PageProps) => (
 	/>
 );
 
+const getPromiseValue = <T,>(promise: PromiseSettledResult<T>) => {
+	if (promise.status === "fulfilled") return promise.value;
+	throw Error("Failed to fetch");
+};
+
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 	let props: PageProps;
 	try {
 		const { address } = context.params ?? {};
 		if (typeof address !== "string") throw Error("Address is not defined");
 
-		// Request both to save time, since they are independent. However the
-		// 2nd may fail when the account turns out to be a User account
+		// Request all to save time, since they are independent. It is ok for
+		// the 2nd to fail (when the account turns out to be a User account)
 		const result = await Promise.allSettled([
-			getAccount(address),
+			fetchAccount.getAccount(address),
 			getContract(address),
+			fetchAccount.getAccountTransactions(address),
+			fetchAccount.getAccountAssets(address),
+			fetchAccount.getAccountTransfers(address),
 		]);
 
-		if (result[0].status === "rejected") throw Error("Account not found");
-		const account = result[0].value;
+		const account = getPromiseValue(result[0]);
 		if (account === null) throw Error("Account not found");
 
 		const contract = (() => {
@@ -67,7 +87,14 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			throw Error("Contract not found");
 		})();
 
-		props = { hasError: false, account, contract };
+		props = {
+			hasError: false,
+			account,
+			contract,
+			transactions: getPromiseValue(result[2]),
+			assets: getPromiseValue(result[3]),
+			transfers: getPromiseValue(result[4]),
+		};
 	} catch (error) {
 		props = { hasError: true, error: error.message };
 	}
