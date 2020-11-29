@@ -17,11 +17,11 @@ export const Theme = () => {
 	useEffect(() => {
 		const ls = window.document.documentElement.classList;
 		if (dark) {
-			ls.remove("theme-light");
-			ls.add("theme-dark");
+			ls.remove("light");
+			ls.add("dark");
 		} else {
-			ls.remove("theme-dark");
-			ls.add("theme-light");
+			ls.remove("dark");
+			ls.add("light");
 		}
 	}, [dark]);
 
