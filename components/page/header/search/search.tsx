@@ -1,10 +1,13 @@
 import { background, borderColor, Button, Input } from "@moai/core";
 import { icons } from "@moai/icon";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import s from "./search.module.css";
+import { getSearchUrl } from "./url";
 
 export const Search = () => {
 	const [query, setQuery] = useState("");
+	const router = useRouter();
 	return (
 		<form
 			className={[s.container, background.secondary, borderColor.weak].join(
@@ -12,6 +15,7 @@ export const Search = () => {
 			)}
 			onSubmit={(event) => {
 				event.preventDefault();
+				router.push(getSearchUrl(query));
 			}}
 		>
 			<Input
