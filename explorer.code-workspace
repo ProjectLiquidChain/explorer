@@ -6,5 +6,8 @@
 		{
 			"path": "../../dvkndn/moai"
 		}
-	]
+	],
+	"settings": {
+		"typescript.tsdk": "explorer/node_modules/typescript/lib"
+	}
 }

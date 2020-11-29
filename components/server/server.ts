@@ -21,7 +21,7 @@ class JrpcError extends Error {
 }
 
 export const serverCall = async (
-	method: string,
+	method: `${"surf" | "chain"}.${string}`,
 	params: unknown
 ): Promise<any> => {
 	const body: BodyInit = JSON.stringify({
@@ -33,7 +33,8 @@ export const serverCall = async (
 	const headers: HeadersInit = {
 		"Content-Type": "application/json",
 	};
-	const response = await fetch(host, {
+	const url = method.startsWith("surf") ? `${host}/surf` : host;
+	const response = await fetch(url, {
 		method: "POST",
 		headers: headers,
 		body: body,

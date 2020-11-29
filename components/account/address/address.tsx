@@ -1,5 +1,5 @@
 import { Link } from "@/components/link/link";
-import { DivPx, Icon, text, Tooltip } from "@moai/core";
+import { Icon, text, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
 import { Account } from "../account";
 import s from "./address.module.css";

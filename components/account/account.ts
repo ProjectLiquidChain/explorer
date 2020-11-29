@@ -1,5 +1,17 @@
 import { Address, Hash } from "../server/server";
 
+export interface Token {
+	address: Address;
+	currency: string;
+	decimals: number;
+}
+
+export interface Asset {
+	balance: string;
+	token: Token;
+	account: { address: Account["address"] };
+}
+
 export interface Account {
 	address: Address; // Key
 	nonce: number;
