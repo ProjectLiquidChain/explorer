@@ -9,6 +9,7 @@ import { ContractOverview } from "@/components/contract/overview/overview";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { Pane } from "@/components/pane/pane";
+import { Receipt } from "@/components/receipt/receipt";
 import { TransactionsHeading } from "@/components/transaction/heading/heading";
 import { TransactionTable } from "@/components/transaction/table/table";
 import { Transaction } from "@/components/transaction/transaction";
@@ -20,6 +21,7 @@ interface Props {
 	account: Account;
 	contract: Contract | null;
 	transactions: Transaction[];
+	receipts: Receipt[];
 	assets: Asset[];
 	transfers: Transfer[];
 }
@@ -37,9 +39,15 @@ const AccountBody = (props: Props): JSX.Element => (
 			</>
 		)}
 		<DivPx size={16} />
-		<TransactionsHeading transactions={props.transactions} receipts={null} />
+		<TransactionsHeading
+			transactions={props.transactions}
+			receipts={props.receipts}
+		/>
 		<Pane noPadding>
-			<TransactionTable transactions={props.transactions} receipts={null} />
+			<TransactionTable
+				transactions={props.transactions}
+				receipts={props.receipts}
+			/>
 		</Pane>
 		{JSON.stringify(props.assets)}
 		{JSON.stringify(props.transfers)}
@@ -91,7 +99,8 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			hasError: false,
 			account,
 			contract,
-			transactions: getPromiseValue(result[2]),
+			transactions: getPromiseValue(result[2]).transactions,
+			receipts: getPromiseValue(result[2]).receipts,
 			assets: getPromiseValue(result[3]),
 			transfers: getPromiseValue(result[4]),
 		};

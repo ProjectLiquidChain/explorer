@@ -1,3 +1,4 @@
+import { Receipt } from "@/components/receipt/receipt";
 import { serverCall, ServerCall } from "@/components/server/server";
 import { Transaction } from "@/components/transaction/transaction";
 import { Transfer } from "@/components/transfer/transfer";
@@ -14,11 +15,13 @@ export const getAccount: AccountCall<
 	return account;
 };
 
-export const getAccountTransactions: AccountCall<Transaction[]> = async (
-	address
-) => {
+export const getAccountTransactions: AccountCall<{
+	receipts: Receipt[],
+	transactions: Transaction[]
+}> = async ( address) => {
 	const result = await serverCall("surf.GetAccountTxs", { address });
-	return result.transactions;
+	const { transactions, receipts } = result;
+	return { transactions, receipts };
 };
 
 export const getAccountTransfers: AccountCall<Transfer[]> = async (address) => {
