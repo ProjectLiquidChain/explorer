@@ -45,18 +45,18 @@ export const TransactionOverview = ({ transaction }: Props) => (
 		<Info
 			label="Nonce"
 			help="Sequential running number for an address, beginning with 0 for the first transaction. For example, if the nonce of a transaction is 10, it would be the 11th transaction sent from the sender's address."
-			children={<Numeric format="integer" value={transaction.nonce} />}
+			children={<Numeric type="integer" value={transaction.nonce} />}
 		/>
 		<Divider />
 		<Info
 			label="Gas limit"
 			help="Maximum amount of gas provided for the transaction. Zero means unlimited."
-			children={<Numeric format="integer" value={transaction.gasLimit} />}
+			children={<Numeric type="integer" value={transaction.gasLimit} />}
 		/>
 		<Divider />
 		<Info
 			label="Gas price"
-			children={<Numeric format="integer" value={transaction.gasPrice} />}
+			children={<Numeric type="integer" value={transaction.gasPrice} />}
 		/>
 	</Pane>
 );

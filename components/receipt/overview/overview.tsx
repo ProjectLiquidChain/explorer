@@ -26,7 +26,7 @@ export const ReceiptOverview = ({ receipt }: Props) => (
 		<Divider />
 		<Info
 			label="Gas used"
-			children={<Numeric format="integer" value={receipt.gasUsed} />}
+			children={<Numeric type="integer" value={receipt.gasUsed} />}
 		/>
 	</Pane>
 );

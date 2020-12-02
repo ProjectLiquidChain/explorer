@@ -13,7 +13,7 @@ const TransactionsCount = ({ block }: Props): JSX.Element => {
 	const len = block.transactions.length;
 	return (
 		<span>
-			<Numeric format="integer" value={len} />
+			<Numeric type="integer" value={len} />
 			<span> {len > 1 ? "transactions" : "transaction"} </span>
 			<span>in this block</span>
 		</span>
@@ -26,7 +26,7 @@ export const BlockOverview = ({ block }: Props) => (
 			label="Height"
 			help="Also known as Block Number. The block height, which indicates the length of the blockchain, increases after the addition of the new block."
 		>
-			<Numeric format="integer" value={block.height} />
+			<Numeric type="integer" value={block.height} />
 		</Info>
 		<Divider />
 		<Info label="Transactions" children={<TransactionsCount block={block} />} />

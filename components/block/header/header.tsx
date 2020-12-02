@@ -43,7 +43,7 @@ export const BlockHeader = ({ block }: Props) => (
 			<div className={[].join(" ")}>Block</div>
 			<div className={s.title}>
 				<h1 className={[s.titleText, text.strong].join(" ")}>
-					<Numeric format="integer" value={block.height} />
+					<Numeric type="integer" value={block.height} />
 				</h1>
 				<DivPx size={8} />
 				<CopyButton text={block.height.toString()} />

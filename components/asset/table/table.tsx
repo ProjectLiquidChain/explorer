@@ -1,4 +1,5 @@
 import { AccountAddress } from "@/components/account/address/address";
+import { Numeric } from "@/components/numeric/numeric";
 import { Table, TableColumn } from "@/components/table/table";
 import { Asset } from "../asset";
 import s from "./table.module.css";
@@ -16,8 +17,11 @@ const Token = ({ asset }: RowProps): JSX.Element => (
 );
 
 const Balance = ({ asset }: RowProps): JSX.Element => (
-	<div>9,223,372,036,854,775,808</div>
-	// <div>{asset.balance}</div>
+	<Numeric
+		type="big-decimal"
+		value={asset.balance}
+		decimal={asset.token.decimals}
+	/>
 );
 
 const Address = ({ asset }: RowProps): JSX.Element => (

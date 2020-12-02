@@ -36,7 +36,7 @@ const Block = ({ transaction }: TransactionProps): JSX.Element => (
 );
 
 const Nonce = ({ transaction }: TransactionProps): JSX.Element => (
-	<Numeric value={transaction.nonce} format="integer" />
+	<Numeric value={transaction.nonce} type="integer" />
 );
 
 const Sender = ({ transaction }: TransactionProps): JSX.Element => (

@@ -34,7 +34,7 @@ const Transactions = ({ block }: RowProps): JSX.Element => {
 	const count = block.transactions.length;
 	return (
 		<span>
-			<Numeric value={count} format="integer" />
+			<Numeric value={count} type="integer" />
 			<span> </span>
 			<span>{count > 1 ? "trxns" : "trxn"}</span>
 		</span>
