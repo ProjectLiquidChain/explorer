@@ -1,0 +1,17 @@
+.container table {
+	min-width: 480px;
+}
+
+.token {
+	text-align: left;
+	width: 100px;
+}
+
+.balance {
+	text-align: right;
+	width: 220px;
+}
+
+.address {
+	text-align: left;
+}

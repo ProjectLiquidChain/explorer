@@ -2,10 +2,12 @@ import { Account, Asset, isUserAccount } from "@/components/account/account";
 import * as fetchAccount from "@/components/account/fetch/fetch";
 import { AccountHeader } from "@/components/account/header/header";
 import { AccountOverview } from "@/components/account/overview/overview";
+import { AssetTable } from "@/components/asset/table/table";
 import { container } from "@/components/container/container";
 import { Contract } from "@/components/contract/contract";
 import { getContract } from "@/components/contract/fetch/fetch";
 import { ContractOverview } from "@/components/contract/overview/overview";
+import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { Pane } from "@/components/pane/pane";
@@ -38,19 +40,22 @@ const AccountBody = (props: Props): JSX.Element => (
 				<ContractOverview contract={props.contract} />
 			</>
 		)}
+
 		<DivPx size={16} />
-		<TransactionsHeading
-			transactions={props.transactions}
-			receipts={props.receipts}
-		/>
+		<Heading children="Assets" />
+		<Pane noPadding>
+			<AssetTable assets={props.assets} />
+		</Pane>
+
+		<DivPx size={16} />
+		<Heading children="Recent Transactions" />
 		<Pane noPadding>
 			<TransactionTable
 				transactions={props.transactions}
 				receipts={props.receipts}
 			/>
 		</Pane>
-		{JSON.stringify(props.assets)}
-		{JSON.stringify(props.transfers)}
+		{JSON.stringify(props.transfers.length)}
 	</div>
 );
 
