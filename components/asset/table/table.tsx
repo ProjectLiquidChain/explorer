@@ -1,6 +1,7 @@
 import { AccountAddress } from "@/components/account/address/address";
 import { Numeric } from "@/components/numeric/numeric";
 import { Table, TableColumn } from "@/components/table/table";
+import { TokenCurrency } from "@/components/token/currency/currency";
 import { Asset } from "../asset";
 import s from "./table.module.css";
 
@@ -13,7 +14,7 @@ interface RowProps {
 }
 
 const Token = ({ asset }: RowProps): JSX.Element => (
-	<span>{asset.token.currency}</span>
+	<TokenCurrency token={asset.token} />
 );
 
 const Balance = ({ asset }: RowProps): JSX.Element => (

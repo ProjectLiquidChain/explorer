@@ -1,4 +1,4 @@
-import { Token } from "../account/account";
+import { Token } from "../token/token";
 
 export interface Asset {
 	balance: string;

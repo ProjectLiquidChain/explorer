@@ -1,0 +1,45 @@
+.container table {
+	min-width: 1200px;
+}
+
+.noSelect {
+	user-select: none;
+}
+
+.token {
+	text-align: left;
+	width: 100px;
+}
+
+.balance {
+	text-align: right;
+	width: 220px;
+}
+
+.sender {
+	text-align: center;
+}
+
+.arrow {
+	width: calc(16px + 16px);
+	vertical-align: middle;
+}
+
+.receiver {
+	text-align: center;
+}
+
+.block {
+	text-align: right;
+	width: 100px;
+}
+
+.transaction {
+	text-align: left;
+	width: 160px;
+}
+
+.memo {
+	text-align: left;
+	width: 160px;
+}

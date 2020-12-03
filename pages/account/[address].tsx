@@ -1,7 +1,8 @@
-import { Account, Asset, isUserAccount } from "@/components/account/account";
+import { Account, isUserAccount } from "@/components/account/account";
 import * as fetchAccount from "@/components/account/fetch/fetch";
 import { AccountHeader } from "@/components/account/header/header";
 import { AccountOverview } from "@/components/account/overview/overview";
+import { Asset } from "@/components/asset/asset";
 import { AssetTable } from "@/components/asset/table/table";
 import { container } from "@/components/container/container";
 import { Contract } from "@/components/contract/contract";
@@ -12,9 +13,9 @@ import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { Pane } from "@/components/pane/pane";
 import { Receipt } from "@/components/receipt/receipt";
-import { TransactionsHeading } from "@/components/transaction/heading/heading";
 import { TransactionTable } from "@/components/transaction/table/table";
 import { Transaction } from "@/components/transaction/transaction";
+import { TransferTable } from "@/components/transfer/table/table";
 import { Transfer } from "@/components/transfer/transfer";
 import { DivPx } from "@moai/core";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -55,13 +56,18 @@ const AccountBody = (props: Props): JSX.Element => (
 				receipts={props.receipts}
 			/>
 		</Pane>
-		{JSON.stringify(props.transfers.length)}
+
+		<DivPx size={16} />
+		<Heading children="Recent Transfers" />
+		<Pane noPadding>
+			<TransferTable transfers={props.transfers} />
+		</Pane>
 	</div>
 );
 
 const AccountPage = (page: PageProps) => (
 	<Page
-		title={(p) => `Liquid Account #${p.account.address}`}
+		title={(p) => `Liquid Account ${p.account.address}`}
 		description={(p) =>
 			`See details of account ${p.account.address} on Liquid Blockchain Explorer`
 		}
