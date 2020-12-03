@@ -12,6 +12,7 @@ import { TransactionPayload } from "@/components/transaction/payload/payload";
 import { Transaction } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { Fragment } from "react";
 
 interface Props {
 	transaction: Transaction;
@@ -33,10 +34,10 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 		<DivPx size={16} />
 		<Heading>Receipt events</Heading>
 		{receipt.events.map((event, index) => (
-			<>
-				{index > 0 && <DivPx size={16} />}
-				<ReceiptEvent key={index} event={event} />
-			</>
+			<Fragment key={index}>
+				{index > 0 && <DivPx size={32} />}
+				<ReceiptEvent event={event} />
+			</Fragment>
 		))}
 	</div>
 );
