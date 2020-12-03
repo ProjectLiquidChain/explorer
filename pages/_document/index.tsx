@@ -1,7 +1,7 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
 const DocumentBody = () => (
-	<Html>
+	<Html className="light">
 		<Head>
 			<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		</Head>
