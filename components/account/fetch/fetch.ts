@@ -1,8 +1,9 @@
+import { Asset } from "@/components/asset/asset";
 import { Receipt } from "@/components/receipt/receipt";
 import { serverCall, ServerCall } from "@/components/server/server";
 import { Transaction } from "@/components/transaction/transaction";
 import { Transfer } from "@/components/transfer/transfer";
-import { Account, Asset, ContractAccount, UserAccount } from "../account";
+import { Account, ContractAccount, UserAccount } from "../account";
 
 type AccountCall<T> = ServerCall<Account["address"], T>;
 
