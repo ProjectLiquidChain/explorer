@@ -1,5 +1,6 @@
 import { Link } from "@/components/link/link";
 import { Tag, Tooltip } from "@moai/core";
+import { useRouter } from "next/router";
 import { Account } from "../account";
 import s from "./address.module.css";
 
@@ -32,14 +33,14 @@ const Verified = ({ value }: { value: string }): JSX.Element => (
 
 export const AccountAddress = ({ value, wrap, hideVerified }: Props) => {
 	const verified = verifiedMap.get(value);
-	return (
-		<Link href={`/account/${value}`}>
-			<span className={wrap ? s.wrap : s.nowrap}>
-				{verified !== undefined && !hideVerified && (
-					<Verified value={verified} />
-				)}
-				<span className={s.text}>{value}</span>
-			</span>
-		</Link>
+	const children = (
+		<span className={wrap ? s.wrap : s.nowrap}>
+			{verified !== undefined && !hideVerified && <Verified value={verified} />}
+			<span className={s.text}>{value}</span>
+		</span>
 	);
+
+	const router = useRouter();
+	if (router.query.address === value) return children;
+	return <Link href={`/account/${value}`} children={children} />;
 };
