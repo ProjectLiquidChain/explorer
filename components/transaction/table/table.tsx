@@ -12,7 +12,7 @@ import s from "./table.module.css";
 
 interface Props {
 	transactions: Transaction[];
-	receipts: Receipt[] | null;
+	receipts: Receipt[];
 }
 
 interface TransactionProps {
@@ -68,15 +68,11 @@ const getColumns = ({ transactions, receipts }: Props): TableColumn[] => [
 		className: s.type,
 		render: (i) => <Type transaction={transactions[i]} />,
 	},
-	...(receipts === null
-		? []
-		: [
-				{
-					title: "Code",
-					className: s.code,
-					render: (i: number) => <Code receipt={receipts[i]} />,
-				},
-		  ]),
+	{
+		title: "Code",
+		className: s.code,
+		render: (i: number) => <Code receipt={receipts[i]} />,
+	},
 	{
 		title: "Sender",
 		className: s.sender,
