@@ -1,6 +1,6 @@
-import { Token } from "../account/account";
 import { Block } from "../block/block";
 import { Address, Hash } from "../server/server";
+import { Token } from "../token/token";
 
 export interface Transfer {
 	index: number;
