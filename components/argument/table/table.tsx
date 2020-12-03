@@ -22,7 +22,7 @@ const Value = ({ arg }: RowProps): JSX.Element => {
 		case "float64":
 			return <span>{arg.value}</span>; // @TODO Numeric float
 		default:
-			return <Numeric type="integer" value={parseInt(arg.value)} />;
+			return <Numeric type="big-decimal" value={arg.value} decimal={0} />;
 	}
 };
 
