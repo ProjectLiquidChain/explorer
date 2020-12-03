@@ -1,3 +1,4 @@
+import { text } from "@moai/core";
 import Big from "big.js";
 import { formatNumberRaw } from "./format";
 
@@ -34,4 +35,23 @@ export const formatNumber = (props: Props): string => {
 	}
 };
 
-export const Numeric = (props: Props) => <span>{formatNumber(props)}</span>;
+const splitZeros = (text: string): [string, string] => {
+	let i = text.length - 1;
+	while (text[i] === "0") i--;
+	return [text.slice(0, i + 1), text.slice(i + 1)];
+};
+
+export const Numeric = (props: Props): JSX.Element => {
+	const value = formatNumber(props);
+	if (props.type === "big-decimal" && props.decimal > 0) {
+		const [significant, zero] = splitZeros(value);
+		return (
+			<span>
+				<span>{significant}</span>
+				<span className={text.muted}>{zero}</span>
+			</span>
+		);
+	} else {
+		return <span>{value}</span>
+	}
+};
