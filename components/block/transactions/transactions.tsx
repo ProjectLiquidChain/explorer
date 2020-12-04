@@ -1,7 +1,7 @@
 import { Block } from "@/components/block/block";
 import { Divider } from "@/components/divider/divider";
 import { Info } from "@/components/info/info";
-import { Pane } from "@/components/pane/pane";
+import { Pane } from "@moai/pane/pane";
 import { TransactionsHeading } from "@/components/transaction/heading/heading";
 import { TransactionTable } from "@/components/transaction/table/table";
 import { Border, DivPx } from "@moai/core";

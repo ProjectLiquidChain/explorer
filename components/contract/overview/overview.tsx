@@ -4,7 +4,7 @@ import {
 	ContractParameter,
 } from "@/components/contract/contract";
 import { Heading } from "@/components/heading/heading";
-import { Pane } from "@/components/pane/pane";
+import { Pane } from "@moai/pane/pane";
 import { background, DivPx, text } from "@moai/core";
 import { Fragment } from "react";
 import s from "./overview.module.css";

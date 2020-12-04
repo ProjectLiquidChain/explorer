@@ -2,7 +2,7 @@ import { Account, isContractAccount } from "@/components/account/account";
 import { Divider } from "@/components/divider/divider";
 import { Info } from "@/components/info/info";
 import { Numeric } from "@/components/numeric/numeric";
-import { Pane } from "@/components/pane/pane";
+import { Pane } from "@moai/pane/pane";
 import { AccountAddress } from "../address/address";
 
 interface Props {

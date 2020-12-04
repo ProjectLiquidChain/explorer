@@ -2,7 +2,7 @@ import { AccountAddress } from "@/components/account/address/address";
 import { ArgumentTable } from "@/components/argument/table/table";
 import { Divider } from "@/components/divider/divider";
 import { Info } from "@/components/info/info";
-import { Pane } from "@/components/pane/pane";
+import { Pane } from "@moai/pane/pane";
 import { Border, DivPx } from "@moai/core";
 import { Receipt } from "../receipt";
 import s from "./event.module.css";
