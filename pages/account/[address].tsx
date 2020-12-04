@@ -11,13 +11,13 @@ import { ContractOverview } from "@/components/contract/overview/overview";
 import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Pane } from "@moai/pane/pane";
 import { Receipt } from "@/components/receipt/receipt";
 import { TransactionTable } from "@/components/transaction/table/table";
 import { Transaction } from "@/components/transaction/transaction";
 import { TransferTable } from "@/components/transfer/table/table";
 import { Transfer } from "@/components/transfer/transfer";
-import { DivPx } from "@moai/core";
+import { DivPx, Tab, Tabs } from "@moai/core";
+import { Pane } from "@moai/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 interface Props {
@@ -30,6 +30,22 @@ interface Props {
 }
 
 type PageProps = PageErrorProps<Props>;
+
+const getTabs = (props: Props): Tab[] => [
+	{
+		title: "Transactions",
+		pane: () => (
+			<TransactionTable
+				transactions={props.transactions}
+				receipts={props.receipts}
+			/>
+		),
+	},
+	{
+		title: "Transfers",
+		pane: () => <TransferTable transfers={props.transfers} />,
+	},
+];
 
 const AccountBody = (props: Props): JSX.Element => (
 	<div className={container.max960}>
@@ -49,19 +65,8 @@ const AccountBody = (props: Props): JSX.Element => (
 		</Pane>
 
 		<DivPx size={16} />
-		<Heading children="Recent Transactions" />
-		<Pane noPadding>
-			<TransactionTable
-				transactions={props.transactions}
-				receipts={props.receipts}
-			/>
-		</Pane>
-
-		<DivPx size={16} />
-		<Heading children="Recent Transfers" />
-		<Pane noPadding>
-			<TransferTable transfers={props.transfers} />
-		</Pane>
+		<Heading children="Recent Activitie" />
+		<Tabs children={getTabs(props)} noPadding />
 	</div>
 );
 

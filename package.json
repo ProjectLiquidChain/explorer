@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@moai/core": "0.118.0",
+    "@moai/core": "0.119.0",
     "@moai/icon": "0.10.0",
     "@tippyjs/react": "4.2.0",
     "@types/big.js": "6.0.0",

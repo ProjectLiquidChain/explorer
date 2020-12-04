@@ -1,5 +1,5 @@
 import { container } from "@/components/container/container";
-import { Pane } from "@moai/pane/pane";
+import { Pane } from "@moai/core";
 import { DivPx } from "@moai/core";
 import s from "./header.module.css";
 import { Logo } from "./logo/logo";

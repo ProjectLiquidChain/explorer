@@ -3,7 +3,7 @@ import { BlockHeight } from "@/components/block/height/height";
 import { Divider } from "@/components/divider/divider";
 import { Info } from "@/components/info/info";
 import { Numeric } from "@/components/numeric/numeric";
-import { Pane } from "@moai/pane/pane";
+import { Pane } from "@moai/core";
 import { Transaction } from "@/components/transaction/transaction";
 import { TransactionType } from "../type/type";
 

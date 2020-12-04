@@ -8,7 +8,7 @@ import { container } from "@/components/container/container";
 import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page, PageDefaultHead } from "@/components/page/page";
-import { Pane } from "@moai/pane/pane";
+import { Pane } from "@moai/core";
 import { DivPx } from "@moai/core";
 import { GetStaticProps } from "next";
 
