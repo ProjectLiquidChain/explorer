@@ -1,4 +1,8 @@
 import { Account, isUserAccount } from "@/components/account/account";
+import {
+	AccountActivities,
+	AccountActivitiesProps,
+} from "@/components/account/activities/activities";
 import * as fetchAccount from "@/components/account/fetch/fetch";
 import { AccountHeader } from "@/components/account/header/header";
 import { AccountOverview } from "@/components/account/overview/overview";
@@ -11,49 +15,26 @@ import { ContractOverview } from "@/components/contract/overview/overview";
 import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Receipt } from "@/components/receipt/receipt";
-import { TransactionTable } from "@/components/transaction/table/table";
-import { Transaction } from "@/components/transaction/transaction";
-import { TransferTable } from "@/components/transfer/table/table";
-import { Transfer } from "@/components/transfer/transfer";
-import { DivPx, Tab, Tabs } from "@moai/core";
-import { Pane } from "@moai/core";
+import { DivPx, Pane } from "@moai/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 
-interface Props {
+interface Props extends AccountActivitiesProps {
 	account: Account;
 	contract: Contract | null;
-	transactions: Transaction[];
-	receipts: Receipt[];
 	assets: Asset[];
-	transfers: Transfer[];
 }
 
 type PageProps = PageErrorProps<Props>;
-
-const getTabs = (props: Props): Tab[] => [
-	{
-		title: "Transactions",
-		pane: () => (
-			<TransactionTable
-				transactions={props.transactions}
-				receipts={props.receipts}
-			/>
-		),
-	},
-	{
-		title: "Transfers",
-		pane: () => <TransferTable transfers={props.transfers} />,
-	},
-];
 
 const AccountBody = (props: Props): JSX.Element => (
 	<div className={container.max960}>
 		<AccountHeader account={props.account} />
 		<AccountOverview account={props.account} />
+
 		{props.contract && (
 			<>
 				<DivPx size={16} />
+				<Heading children="Contract" />
 				<ContractOverview contract={props.contract} />
 			</>
 		)}
@@ -65,8 +46,12 @@ const AccountBody = (props: Props): JSX.Element => (
 		</Pane>
 
 		<DivPx size={16} />
-		<Heading children="Recent Activitie" />
-		<Tabs children={getTabs(props)} noPadding />
+		<Heading children="Recent Activities" />
+		<AccountActivities
+			receipts={props.receipts}
+			transactions={props.transactions}
+			transfers={props.transfers}
+		/>
 	</div>
 );
 

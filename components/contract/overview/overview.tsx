@@ -3,9 +3,7 @@ import {
 	ContractFunction,
 	ContractParameter,
 } from "@/components/contract/contract";
-import { Heading } from "@/components/heading/heading";
-import { Pane } from "@moai/core";
-import { background, DivPx, text } from "@moai/core";
+import { background, Tabs, text } from "@moai/core";
 import { Fragment } from "react";
 import s from "./overview.module.css";
 
@@ -28,30 +26,30 @@ const Parameters = ({ parameters }: { parameters: ContractParameter[] }) => (
 	</>
 );
 
+const renderFunction = (func: ContractFunction, index: number): JSX.Element => (
+	<li key={func.name} className={index % 2 === 0 ? background.secondary : ""}>
+		<span>{func.name}</span>
+		<Parameters parameters={func.parameters} />
+	</li>
+);
+
 const Code = ({ functions }: { functions: ContractFunction[] }) => (
-	<Pane>
-		<div className={s.wrapper}>
-			<ol className={s.code}>
-				{functions.map((func, index) => (
-					<li
-						key={func.name}
-						className={index % 2 === 0 ? background.secondary : ""}
-					>
-						<span>{func.name}</span>
-						<Parameters parameters={func.parameters} />
-					</li>
-				))}
-			</ol>
-		</div>
-	</Pane>
+	<div className={s.wrapper}>
+		<ol className={s.code}>{functions.map(renderFunction)}</ol>
+	</div>
 );
 
 export const ContractOverview = ({ contract }: Props) => (
-	<div>
-		<Heading>Contract Functions</Heading>
-		<Code functions={contract.header.functions} />
-		<DivPx size={16} />
-		<Heading>Contract Events</Heading>
-		<Code functions={contract.header.events} />
-	</div>
+	<Tabs>
+		{[
+			{
+				title: "Functions",
+				pane: () => <Code functions={contract.header.functions} />,
+			},
+			{
+				title: "Events",
+				pane: () => <Code functions={contract.header.events} />,
+			},
+		]}
+	</Tabs>
 );

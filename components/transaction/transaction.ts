@@ -20,3 +20,6 @@ export interface Transaction {
 	gasLimit: number;
 	signature: string;
 }
+
+export const getTransactionPlural = (count: number): string =>
+	count > 1 ? "transactions" : "transaction";

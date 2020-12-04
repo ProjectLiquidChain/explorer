@@ -14,3 +14,6 @@ export interface Transfer {
 	to: { address: Address };
 	token: Token;
 }
+
+export const getTranferPlural = (count: number): string =>
+	count > 1 ? "tranfers" : "transfer";
