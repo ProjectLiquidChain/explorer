@@ -37,14 +37,18 @@ const HomePage = (page: PageProps) => (
 );
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
+	const interval = process.env.NEXT_PUBLIC_BLOCK_INTERVAL;
+	if (interval === undefined) throw Error("BLOCK_INTERVAL is undefined");
+	const revalidate = parseInt(interval);
+
 	try {
 		const latest = await getLatestBlock(undefined);
 		const { height } = latest;
 		const recents = await getBlocksByRange(height - 1, height - 9);
 		const blocks = [latest, ...recents];
-		return { revalidate: 1, props: { hasError: false, blocks } };
+		return { revalidate, props: { hasError: false, blocks } };
 	} catch (error) {
-		return { revalidate: 1, props: { hasError: true, error: error.message } };
+		return { revalidate, props: { hasError: true, error: error.message } };
 	}
 };
 
