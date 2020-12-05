@@ -8,9 +8,9 @@ import { container } from "@/components/container/container";
 import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page, PageDefaultHead } from "@/components/page/page";
-import { Pane } from "@moai/core";
-import { DivPx } from "@moai/core";
+import { DivPx, Pane } from "@moai/core";
 import { GetStaticProps } from "next";
+import * as React from "react";
 
 interface Props {
 	blocks: Block[];
@@ -18,15 +18,51 @@ interface Props {
 
 type PageProps = PageErrorProps<Props>;
 
-const HomeBody = (props: Props) => (
-	<div className={container.max960}>
-		<DivPx size={16} />
-		<Heading>Latest blocks</Heading>
-		<Pane noPadding>
-			<BlockTable blocks={props.blocks} />
-		</Pane>
-	</div>
-);
+const getNewBlocks = async (prevHeight: Block["height"]): Promise<Block[]> => {
+	const latest = await getLatestBlock(undefined);
+	const from = latest.height - 1;
+	const to = Math.max(prevHeight + 1, latest.height - 10);
+	if (from < to) return [];
+	const blocks = await getBlocksByRange(from, to);
+	return [latest, ...blocks];
+};
+
+const setNewBlocks = async (
+	lastHeight: React.MutableRefObject<number>,
+	setBlocks: React.Dispatch<React.SetStateAction<Block[]>>
+): Promise<void> => {
+	const newBlocks = await getNewBlocks(lastHeight.current);
+	if (newBlocks.length === 0) return;
+	setBlocks((prevBlocks) => {
+		const isContinue =
+			newBlocks[newBlocks.length - 1].height === prevBlocks[0].height + 1;
+		return isContinue ? [...newBlocks, ...prevBlocks].slice(0, 10) : newBlocks;
+	});
+};
+
+const HomeBody = (props: Props) => {
+	const [blocks, setBlocks] = React.useState(props.blocks);
+	const lastHeight = React.useRef(1);
+
+	React.useEffect(() => {
+		lastHeight.current = blocks[0].height;
+	}, [blocks]);
+
+	React.useEffect(() => {
+		window.setInterval(() => {
+			setNewBlocks(lastHeight, setBlocks);
+		}, 5000);
+	}, [lastHeight, setBlocks]);
+
+	return (
+		<div className={container.max960}>
+			<DivPx size={16} />
+			<Heading>Latest blocks</Heading>
+			<Pane noPadding children={<BlockTable blocks={blocks} />} />
+		</div>
+	);
+};
+
 const HomePage = (page: PageProps) => (
 	<Page
 		title={() => PageDefaultHead.title}

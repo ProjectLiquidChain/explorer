@@ -2,9 +2,7 @@ import { Block } from "@/components/block/block";
 import { Numeric } from "@/components/numeric/numeric";
 import { Table, TableColumn } from "@/components/table/table";
 import { Time } from "@/components/time/time";
-import { useEffect, useState } from "react";
-import { getBlocksByRange, getLatestBlock } from "../fetch/fetch";
-import { BlockHeight } from "../height/height";
+import { BlockTableHeight } from "./height/height";
 import s from "./table.module.css";
 
 interface Props {
@@ -14,13 +12,6 @@ interface Props {
 interface RowProps {
 	block: Block;
 }
-
-const getNewBlocks = async (from: Block["height"]): Promise<Block[]> => {
-	const latest = await getLatestBlock(undefined);
-	if (latest.height === from) return [];
-	const blocks = await getBlocksByRange(latest.height - 1, from + 1);
-	return [latest, ...blocks];
-};
 
 const BlockTime = ({ block }: RowProps): JSX.Element => (
 	<span>
@@ -41,48 +32,35 @@ const Transactions = ({ block }: RowProps): JSX.Element => {
 	);
 };
 
-export const BlockTable = (props: Props) => {
-	const [blocks, setBlocks] = useState<Block[]>(props.blocks);
+const getColumns = ({ blocks }: Props): TableColumn[] => [
+	{
+		title: "Height",
+		className: s.height,
+		render: (i) => <BlockTableHeight block={blocks[i]} />,
+	},
+	{
+		title: "Hash",
+		className: s.hash,
+		render: (i) => <span>{blocks[i].hash}</span>,
+	},
+	{
+		title: "Trxns",
+		className: s.transactions,
+		render: (i) => <Transactions block={blocks[i]} />,
+	},
+	{
+		title: "Time",
+		className: s.time,
+		render: (i) => <BlockTime block={blocks[i]} />,
+	},
+];
 
-	useEffect(() => {
-		const fn = async () => {
-			const recents = await getNewBlocks(blocks[0].height);
-			setBlocks([...recents, ...blocks].slice(0, 10));
-		};
-		const id = window.setTimeout(fn, 2000);
-		return () => window.clearTimeout(id);
-	}, [blocks]);
-
-	const columns: TableColumn[] = [
-		{
-			title: "Height",
-			className: s.height,
-			render: (i) => <BlockHeight value={blocks[i].height} />,
-		},
-		{
-			title: "Hash",
-			className: s.hash,
-			render: (i) => <span>{blocks[i].hash}</span>,
-		},
-		{
-			title: "Trxns",
-			className: s.transactions,
-			render: (i) => <Transactions block={blocks[i]} />,
-		},
-		{
-			title: "Time",
-			className: s.time,
-			render: (i) => <BlockTime block={blocks[i]} />,
-		},
-	];
-
-	return (
-		<div className={s.container}>
-			<Table
-				columns={columns}
-				rowKey={(index) => blocks[index].height.toString()}
-				rowsLength={blocks.length}
-			/>
-		</div>
-	);
-};
+export const BlockTable = (props: Props) => (
+	<div className={s.container}>
+		<Table
+			columns={getColumns(props)}
+			rowKey={(index) => props.blocks[index].height.toString()}
+			rowsLength={props.blocks.length}
+		/>
+	</div>
+);
