@@ -58,9 +58,17 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 		const { hash } = context.params ?? {};
 		if (typeof hash !== "string") throw Error("Hash is not defined");
 		const { transaction, receipt } = await getTransaction(hash);
-		return { props: { hasError: false, transaction, receipt } };
+		return {
+			// If the transaction exists then it won't change
+			revalidate: undefined,
+			props: { hasError: false, transaction, receipt },
+		};
 	} catch (error) {
-		return { props: { hasError: true, error: error.message } };
+		return {
+			// The transaction does not exist yet but may be in the future
+			revalidate: 1,
+			props: { hasError: true, error: error.message },
+		};
 	}
 };
 

@@ -42,9 +42,17 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 		const heightNum: number = parseInt(heightStr);
 		if (isNaN(heightNum)) throw Error(`Height "${heightStr}" is not a number`);
 		const block = await getBlockByHeight(heightNum);
-		return { props: { hasError: false, block } };
+		return {
+			// The block won't change if it exists
+			revalidate: undefined,
+			props: { hasError: false, block },
+		};
 	} catch (error) {
-		return { props: { hasError: true, error: error.message } };
+		return {
+			// The block does not exist yet but may be in the future
+			revalidate: 1,
+			props: { hasError: true, error: error.message },
+		};
 	}
 };
 
