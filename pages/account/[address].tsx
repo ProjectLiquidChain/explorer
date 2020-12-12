@@ -66,9 +66,12 @@ const AccountPage = (page: PageProps) => (
 	/>
 );
 
-const getPromiseValue = <T,>(promise: PromiseSettledResult<T>) => {
+const getPromiseValue = <T,>(
+	model: string,
+	promise: PromiseSettledResult<T>
+): T => {
 	if (promise.status === "fulfilled") return promise.value;
-	throw Error("Failed to fetch");
+	throw Error(`Failed to fetch ${model}`);
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
@@ -87,10 +90,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			fetchAccount.getAccountTransfers(address),
 		]);
 
-		const account = getPromiseValue(result[0]);
-		if (account === null) throw Error("Account not found");
+		const account = getPromiseValue("account", result[0]);
+		if (account === null) throw Error("Account is not created");
 
-		const contract = (() => {
+		const contract = ((): Contract | null => {
 			if (isUserAccount(account)) return null;
 			if (result[1].status === "fulfilled") return result[1].value;
 			throw Error("Contract not found");
@@ -100,10 +103,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			hasError: false,
 			account,
 			contract,
-			transactions: getPromiseValue(result[2]).transactions,
-			receipts: getPromiseValue(result[2]).receipts,
-			assets: getPromiseValue(result[3]),
-			transfers: getPromiseValue(result[4]),
+			transactions: getPromiseValue("transactions", result[2]).transactions,
+			receipts: getPromiseValue("receipts", result[2]).receipts,
+			assets: getPromiseValue("assets", result[3]),
+			transfers: getPromiseValue("transfers", result[4]),
 		};
 	} catch (error) {
 		props = { hasError: true, error: error.message };
