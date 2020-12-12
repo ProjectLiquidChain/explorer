@@ -19,7 +19,7 @@ export const ReceiptCode = ({ code, format }: Props) => {
 	if (error === undefined)
 		return <span className={text.greenStrong}>Success</span>;
 	if (format === "long")
-		return <div className={text.greenStrong}>Error: {error}</div>;
+		return <span className={text.redStrong}>Error: {error}</span>;
 	return (
 		<Tooltip content={error}>
 			<span>
