@@ -1,4 +1,4 @@
-import "@moai/core";
+import "@moai/core/index.css";
 import { AppProps } from "next/app";
 import "./_app.scss";
 

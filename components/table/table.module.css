@@ -7,9 +7,12 @@
 
 .container table {
 	position: relative;
+	/* To make heading's bottom border visible while scrolling */
 	border-collapse: separate;
+	border-spacing: 0;
 	table-layout: fixed;
 	width: 100%;
+	overflow-wrap: normal;
 }
 
 .container th,
