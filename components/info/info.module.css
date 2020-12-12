@@ -31,7 +31,8 @@
 	}
 	.heading {
 		/* Minus the DivPx */
-		width: calc(160px - 4px);
+		width: 25vw;
+		max-width: 240px;
 		flex: 0 0 auto;
 	}
 	.value {

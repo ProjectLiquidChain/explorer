@@ -1,5 +1,5 @@
 .container table {
-	min-width: 1200px;
+	min-width: 1100px;
 }
 
 .noSelect {
@@ -36,7 +36,6 @@
 
 .transaction {
 	text-align: left;
-	width: 160px;
 }
 
 .memo {

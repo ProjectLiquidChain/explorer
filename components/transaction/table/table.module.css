@@ -3,13 +3,11 @@
 }
 
 .container table {
-	width: 100%;
-	min-width: 900px;
+	min-width: 960px;
 }
 
 .hash {
 	text-align: left;
-	width: 160px;
 }
 
 .sender {
