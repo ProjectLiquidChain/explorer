@@ -36,13 +36,6 @@ export const TransactionOverview = ({ transaction }: Props) => (
 		/>
 		<Divider />
 		<Info
-			label="Signature"
-			help="Signature of the transaction's sender"
-			copy={transaction.signature}
-			children={transaction.signature}
-		/>
-		<Divider />
-		<Info
 			label="Nonce"
 			help="Sequential running number for an address, beginning with 0 for the first transaction. For example, if the nonce of a transaction is 10, it would be the 11th transaction sent from the sender's address."
 			children={<Numeric type="integer" value={transaction.nonce} />}
@@ -57,6 +50,13 @@ export const TransactionOverview = ({ transaction }: Props) => (
 		<Info
 			label="Gas price"
 			children={<Numeric type="integer" value={transaction.gasPrice} />}
+		/>
+		<Divider />
+		<Info
+			label="Signature"
+			help="Signature of the transaction's sender"
+			copy={transaction.signature}
+			children={transaction.signature}
 		/>
 	</Pane>
 );
