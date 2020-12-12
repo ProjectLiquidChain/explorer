@@ -31,7 +31,7 @@ export const ArgumentTable = ({ args }: Props) => (
 		<Table
 			columns={[
 				{
-					title: "Argument",
+					title: "Parameter",
 					className: s.name,
 					render: (i) => args[i].name,
 				},

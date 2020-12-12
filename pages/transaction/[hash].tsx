@@ -26,7 +26,7 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 		<TransactionHeader transaction={transaction} />
 		<TransactionOverview transaction={transaction} />
 		<DivPx size={16} />
-		<Heading>Transaction Payload</Heading>
+		<Heading>Invoke Payload</Heading>
 		<TransactionPayload payload={transaction.payload} />
 		<DivPx size={16} />
 		<Heading>Transaction Receipt</Heading>

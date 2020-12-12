@@ -11,7 +11,7 @@ interface Props {
 
 export const TransactionPayload = ({ payload }: Props) => (
 	<Pane>
-		<Info label="Payload name" children={payload.name} />
+		<Info label="Method name" children={payload.name} />
 		<DivPx size={32} />
 		<div className={s.table}>
 			<Border color="weak" />
