@@ -1,3 +1,4 @@
+import { formatNumber } from "@/components/numeric/numeric";
 import { Receipt } from "@/components/receipt/receipt";
 import { TransactionTable } from "@/components/transaction/table/table";
 import * as Transaction from "@/components/transaction/transaction";
@@ -8,14 +9,14 @@ import s from "./activities.module.css";
 
 interface PaneProps {
 	count: number;
-	models: string;
+	pluralize: (count: number) => string;
 	children: React.ReactNode;
 }
 
-const Pane = ({ count, models, children }: PaneProps): JSX.Element => (
+const Pane = ({ count, pluralize, children }: PaneProps): JSX.Element => (
 	<div>
 		<div className={s.info}>
-			{count} recent {models}
+			{count} recent {pluralize(count)}
 		</div>
 		{count > 0 && (
 			<>
@@ -27,39 +28,55 @@ const Pane = ({ count, models, children }: PaneProps): JSX.Element => (
 );
 
 export interface AccountActivitiesProps {
+	transactionPages: number;
 	transactions: Transaction.Transaction[];
 	receipts: Receipt[];
+	transferPages: number;
 	transfers: Transfer.Transfer[];
 }
 
-const getTabs = (props: AccountActivitiesProps): Tab[] => [
-	{
-		title: `Transactions (${props.transactions.length})`,
+const getEstimated = (pages: number, first: number): string => {
+	if (pages === 0) return "0";
+	if (pages === 1) return `${first}`;
+	const value = (pages - 1) * 100;
+	const text = formatNumber({ type: "integer", value });
+	return `${text}+`;
+};
+
+const getTransactionTab = (props: AccountActivitiesProps): Tab => {
+	const count = props.transactions.length;
+	return {
+		id: "transactions",
+		title: `Transactions (${getEstimated(props.transactionPages, count)})`,
 		pane: () => (
-			<Pane
-				count={props.transactions.length}
-				models={Transaction.getTransactionPlural(props.transactions.length)}
-			>
+			<Pane count={count} pluralize={Transaction.pluralizeTransaction}>
 				<TransactionTable
 					transactions={props.transactions}
 					receipts={props.receipts}
 				/>
 			</Pane>
 		),
-	},
-	{
-		title: `Transfers (${props.transfers.length})`,
+	};
+};
+
+const getTransferTab = (props: AccountActivitiesProps): Tab => {
+	const count = props.transfers.length;
+	return {
+		id: "transfers",
+		title: `Transfers (${getEstimated(props.transferPages, count)})`,
 		pane: () => (
-			<Pane
-				count={props.transfers.length}
-				models={Transfer.getTranferPlural(props.transfers.length)}
-			>
+			<Pane count={count} pluralize={Transfer.pluralizeTransfer}>
 				<TransferTable transfers={props.transfers} />
 			</Pane>
 		),
-	},
-];
+	};
+};
 
 export const AccountActivities = (
 	props: AccountActivitiesProps
-): JSX.Element => <Tabs children={getTabs(props)} noPadding />;
+): JSX.Element => (
+	<Tabs
+		children={[getTransactionTab(props), getTransferTab(props)]}
+		noPadding
+	/>
+);

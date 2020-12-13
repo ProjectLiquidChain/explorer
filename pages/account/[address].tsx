@@ -51,7 +51,9 @@ const AccountBody = (props: Props): JSX.Element => (
 		<AccountActivities
 			receipts={props.receipts}
 			transactions={props.transactions}
+			transactionPages={props.transactionPages}
 			transfers={props.transfers}
+			transferPages={props.transferPages}
 		/>
 	</div>
 );
@@ -67,7 +69,7 @@ const AccountPage = (page: PageProps) => (
 	/>
 );
 
-const getPromiseValue = <T,>(promise: PromiseSettledResult<T>): T => {
+const getValue = <T,>(promise: PromiseSettledResult<T>): T => {
 	if (promise.status === "fulfilled") return promise.value;
 	throw promise.reason;
 };
@@ -83,12 +85,12 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 		const result = await Promise.allSettled([
 			fetchAccount.getAccount(address),
 			getContract(address),
-			fetchAccount.getAccountTransactions(address),
 			fetchAccount.getAccountAssets(address),
+			fetchAccount.getAccountTransactions(address),
 			fetchAccount.getAccountTransfers(address),
 		]);
 
-		const account = getPromiseValue(result[0]);
+		const account = getValue(result[0]);
 
 		const contract = ((): Contract | null => {
 			if (isUserAccount(account)) return null;
@@ -96,17 +98,17 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			throw result[1].reason;
 		})();
 
+		const assets = getValue(result[2]);
+		const { transactionPages, transactions, receipts } = getValue(result[3]);
+		const { transferPages, transfers } = getValue(result[4]);
+
 		props = {
 			hasError: false,
-			account,
-			contract,
-			transactions: getPromiseValue(result[2]).transactions,
-			receipts: getPromiseValue(result[2]).receipts,
-			assets: getPromiseValue(result[3]),
-			transfers: getPromiseValue(result[4]),
+			...{ account, contract, assets },
+			...{ transactions, transactionPages, receipts },
+			...{ transfers, transferPages },
 		};
 	} catch (unknownError: unknown) {
-		console.log(toServerError(unknownError));
 		props = { hasError: true, error: toServerError(unknownError) };
 	}
 	return { revalidate: 1, props };

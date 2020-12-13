@@ -15,5 +15,5 @@ export interface Transfer {
 	token: Token;
 }
 
-export const getTranferPlural = (count: number): string =>
+export const pluralizeTransfer = (count: number): string =>
 	count > 1 ? "tranfers" : "transfer";

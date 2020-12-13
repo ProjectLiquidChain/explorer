@@ -43,10 +43,12 @@ export const ContractOverview = ({ contract }: Props) => (
 	<Tabs>
 		{[
 			{
+				id: "functions",
 				title: "Functions",
 				pane: () => <Code functions={contract.header.functions} />,
 			},
 			{
+				id: "events",
 				title: "Events",
 				pane: () => <Code functions={contract.header.events} />,
 			},

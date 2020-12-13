@@ -21,5 +21,5 @@ export interface Transaction {
 	signature: string;
 }
 
-export const getTransactionPlural = (count: number): string =>
+export const pluralizeTransaction = (count: number): string =>
 	count > 1 ? "transactions" : "transaction";

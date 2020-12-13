@@ -19,15 +19,20 @@ export const getAccount: AccountCall<Account> = async (address) => {
 export const getAccountTransactions: AccountCall<{
 	receipts: Receipt[];
 	transactions: Transaction[];
+	transactionPages: number;
 }> = async (address) => {
 	const result = await serverCall("surf.GetAccountTxs", { address });
-	const { transactions, receipts } = result;
-	return { transactions, receipts };
+	const { totalPages, transactions, receipts } = result;
+	return { transactions, receipts, transactionPages: totalPages };
 };
 
-export const getAccountTransfers: AccountCall<Transfer[]> = async (address) => {
+export const getAccountTransfers: AccountCall<{
+	transfers: Transfer[];
+	transferPages: number;
+}> = async (address) => {
 	const result = await serverCall("surf.GetAccountTransfers", { address });
-	return result.transfers;
+	const { transfers, totalPages } = result;
+	return { transfers, transferPages: totalPages };
 };
 
 export const getAccountAssets: AccountCall<Asset[]> = async (address) => {
