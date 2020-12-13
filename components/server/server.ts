@@ -33,20 +33,22 @@ export const serverCall = async (
 	});
 
 	if (response.ok === false) {
-		throw new ServerError({
+		const error: ServerError = {
 			type: "http",
 			title: response.status.toString(),
 			message: response.statusText,
-		});
+		};
+		throw error;
 	}
 
 	const json = await response.json();
 	if (json.error) {
-		throw new ServerError({
+		const error: ServerError = {
 			type: "jrpc",
-			title: json.error.code,
-			message: `${json.error.message} (${json.error.data})`,
-		});
+			title: "Invalid Request",
+			message: `${json.error.message} (code: ${json.error.code})`,
+		};
+		throw error;
 	}
 
 	return json.result;

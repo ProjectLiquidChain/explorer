@@ -6,6 +6,7 @@ import { BlockTransactions } from "@/components/block/transactions/transactions"
 import { container } from "@/components/container/container";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
+import { toServerError } from "@/components/server/error";
 import { DivPx } from "@moai/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 
@@ -47,11 +48,11 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			revalidate: undefined,
 			props: { hasError: false, block },
 		};
-	} catch (error) {
+	} catch (error: unknown) {
 		return {
 			// The block does not exist yet but may be in the future
 			revalidate: 1,
-			props: { hasError: true, error: error.message },
+			props: { hasError: true, error: toServerError(error) },
 		};
 	}
 };

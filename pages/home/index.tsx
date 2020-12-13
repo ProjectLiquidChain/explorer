@@ -8,6 +8,7 @@ import { container } from "@/components/container/container";
 import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page, PageDefaultHead } from "@/components/page/page";
+import { toServerError } from "@/components/server/error";
 import { DivPx, Pane } from "@moai/core";
 import { GetStaticProps } from "next";
 import * as React from "react";
@@ -84,8 +85,9 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 		const recents = await getBlocksByRange(height - 1, height - 9);
 		const blocks = [latest, ...recents];
 		return { revalidate, props: { hasError: false, blocks } };
-	} catch (error) {
-		return { revalidate, props: { hasError: true, error: error.message } };
+	} catch (unknown: unknown) {
+		const error = toServerError(unknown);
+		return { revalidate, props: { hasError: true, error } };
 	}
 };
 

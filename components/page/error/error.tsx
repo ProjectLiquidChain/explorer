@@ -1,28 +1,27 @@
 import { container } from "@/components/container/container";
-import { Button, DivPx, Paragraph, Strong } from "@moai/core";
+import { ServerError } from "@/components/server/error";
+import { Button, DivPx, text } from "@moai/core";
 import Link from "next/link";
 import s from "./error.module.css";
 
 interface Props {
-	message: string;
+	error: ServerError;
 }
 
 export type PageErrorProps<P> =
 	| {
 			hasError: true;
-			error: string;
+			error: ServerError;
 	  }
 	| ({
 			hasError: false;
 	  } & P);
 
-export const PageError = (props: Props) => (
+export const PageError = ({ error }: Props) => (
 	<div className={[s.container, container.max960].join(" ")}>
-		<h1 className={s.title}>
-			<Strong>There was an error rendering this page</Strong>
-		</h1>
+		<h1 className={[s.title, text.strong].join(" ")} children={error.title} />
 		<DivPx size={8} />
-		<Paragraph>{props.message}</Paragraph>
+		<p className={[s.message, text.p].join(" ")} children={error.message} />
 		<DivPx size={16} />
 		<div className={s.buttons}>
 			<Link href="/">

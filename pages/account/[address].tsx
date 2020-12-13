@@ -15,6 +15,7 @@ import { ContractOverview } from "@/components/contract/overview/overview";
 import { Heading } from "@/components/heading/heading";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
+import { toServerError } from "@/components/server/error";
 import { DivPx, Pane } from "@moai/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 
@@ -66,12 +67,9 @@ const AccountPage = (page: PageProps) => (
 	/>
 );
 
-const getPromiseValue = <T,>(
-	model: string,
-	promise: PromiseSettledResult<T>
-): T => {
+const getPromiseValue = <T,>(promise: PromiseSettledResult<T>): T => {
 	if (promise.status === "fulfilled") return promise.value;
-	throw Error(`Failed to fetch ${model}: ${promise.reason}`);
+	throw promise.reason;
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
@@ -90,26 +88,26 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			fetchAccount.getAccountTransfers(address),
 		]);
 
-		const account = getPromiseValue("account", result[0]);
-		if (account === null) throw Error("Account is not created");
+		const account = getPromiseValue(result[0]);
 
 		const contract = ((): Contract | null => {
 			if (isUserAccount(account)) return null;
 			if (result[1].status === "fulfilled") return result[1].value;
-			throw Error("Contract not found");
+			throw result[1].reason;
 		})();
 
 		props = {
 			hasError: false,
 			account,
 			contract,
-			transactions: getPromiseValue("transactions", result[2]).transactions,
-			receipts: getPromiseValue("receipts", result[2]).receipts,
-			assets: getPromiseValue("assets", result[3]),
-			transfers: getPromiseValue("transfers", result[4]),
+			transactions: getPromiseValue(result[2]).transactions,
+			receipts: getPromiseValue(result[2]).receipts,
+			assets: getPromiseValue(result[3]),
+			transfers: getPromiseValue(result[4]),
 		};
-	} catch (error) {
-		props = { hasError: true, error: error.message };
+	} catch (unknownError: unknown) {
+		console.log(toServerError(unknownError));
+		props = { hasError: true, error: toServerError(unknownError) };
 	}
 	return { revalidate: 1, props };
 };

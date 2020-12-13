@@ -11,12 +11,6 @@ interface Props<T> {
 	description: (props: T) => string;
 }
 
-// const Loading = () => (
-// 	<div className={[s.loading, container.max960].join(" ")}>
-// 		<ProgressCircle value={null} size={16} />
-// 	</div>
-// );
-
 const defaults = {
 	title: "Liquid Blockchain Explorer",
 	description:
@@ -41,7 +35,7 @@ export const Page = <T,>(props: Props<T>) => {
 		<div className={[s.container, background.secondary].join(" ")}>
 			<Head {...props} />
 			<PageHeader />
-			{page.hasError ? <PageError message={page.error} /> : <Body {...page} />}
+			{page.hasError ? <PageError error={page.error} /> : <Body {...page} />}
 			<DivPx size={32} />
 		</div>
 	);

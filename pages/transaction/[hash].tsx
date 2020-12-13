@@ -5,6 +5,7 @@ import { Page } from "@/components/page/page";
 import { ReceiptEvent } from "@/components/receipt/event/event";
 import { ReceiptOverview } from "@/components/receipt/overview/overview";
 import { Receipt } from "@/components/receipt/receipt";
+import { toServerError } from "@/components/server/error";
 import { getTransaction } from "@/components/transaction/fetch/fetch";
 import { TransactionHeader } from "@/components/transaction/header/header";
 import { TransactionOverview } from "@/components/transaction/overview/overview";
@@ -63,11 +64,11 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			revalidate: undefined,
 			props: { hasError: false, transaction, receipt },
 		};
-	} catch (error) {
+	} catch (error: unknown) {
 		return {
 			// The transaction does not exist yet but may be in the future
 			revalidate: 1,
-			props: { hasError: true, error: error.message },
+			props: { hasError: true, error: toServerError(error) },
 		};
 	}
 };
