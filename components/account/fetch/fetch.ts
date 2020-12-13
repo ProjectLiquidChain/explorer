@@ -3,23 +3,23 @@ import { Receipt } from "@/components/receipt/receipt";
 import { serverCall, ServerCall } from "@/components/server/server";
 import { Transaction } from "@/components/transaction/transaction";
 import { Transfer } from "@/components/transfer/transfer";
-import { Account, ContractAccount, UserAccount } from "../account";
+import { Account, createFakeAccount } from "../account";
 
 type AccountCall<T> = ServerCall<Account["address"], T>;
 
-export const getAccount: AccountCall<
-	null | ContractAccount | UserAccount
-> = async (address) => {
-	const result = await serverCall("chain.GetAccount", { address });
-	const account = result.account;
+export const getAccount: AccountCall<Account> = async (address) => {
+	const { account } = (await serverCall("chain.GetAccount", {
+		address,
+	})) as { account: Account | null };
+	if (account === null) return createFakeAccount(address);
 	account.address = address;
 	return account;
 };
 
 export const getAccountTransactions: AccountCall<{
-	receipts: Receipt[],
-	transactions: Transaction[]
-}> = async ( address) => {
+	receipts: Receipt[];
+	transactions: Transaction[];
+}> = async (address) => {
 	const result = await serverCall("surf.GetAccountTxs", { address });
 	const { transactions, receipts } = result;
 	return { transactions, receipts };

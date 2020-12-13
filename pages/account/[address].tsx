@@ -71,7 +71,7 @@ const getPromiseValue = <T,>(
 	promise: PromiseSettledResult<T>
 ): T => {
 	if (promise.status === "fulfilled") return promise.value;
-	throw Error(`Failed to fetch ${model}`);
+	throw Error(`Failed to fetch ${model}: ${promise.reason}`);
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
