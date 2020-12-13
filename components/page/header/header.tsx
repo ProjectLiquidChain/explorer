@@ -15,6 +15,6 @@ export const PageHeader = () => (
 			<DivPx size={16} />
 			<div className={s.theme} children={<Theme />} />
 		</div>
-		<Border color="weak" />
+		<Border color="strong" />
 	</div>
 );
