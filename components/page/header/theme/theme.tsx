@@ -2,6 +2,13 @@ import { Button, ButtonGroup, Tooltip } from "@moai/core";
 import { icons } from "@moai/icon";
 import { useEffect, useState } from "react";
 
+const applyTheme = (theme: "light" | "dark"): void => {
+	const classes = window.document.documentElement.classList;
+	if (classes.contains(theme)) return;
+	classes.remove(theme === "light" ? "dark" : "light");
+	classes.add(theme);
+};
+
 export const Theme = () => {
 	const [dark, setDark] = useState(false);
 
@@ -15,14 +22,7 @@ export const Theme = () => {
 	}, [dark]);
 
 	useEffect(() => {
-		const ls = window.document.documentElement.classList;
-		if (dark) {
-			ls.remove("light");
-			ls.add("dark");
-		} else {
-			ls.remove("dark");
-			ls.add("light");
-		}
+		applyTheme(dark ? "dark" : "light");
 	}, [dark]);
 
 	return (
