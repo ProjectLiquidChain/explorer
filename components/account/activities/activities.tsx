@@ -17,8 +17,12 @@ const Pane = ({ count, models, children }: PaneProps): JSX.Element => (
 		<div className={s.info}>
 			{count} recent {models}
 		</div>
-		<Border color="weak" />
-		{children}
+		{count > 0 && (
+			<>
+				<Border color="weak" />
+				{children}
+			</>
+		)}
 	</div>
 );
 
@@ -30,7 +34,7 @@ export interface AccountActivitiesProps {
 
 const getTabs = (props: AccountActivitiesProps): Tab[] => [
 	{
-		title: "Transactions",
+		title: `Transactions (${props.transactions.length})`,
 		pane: () => (
 			<Pane
 				count={props.transactions.length}
@@ -44,7 +48,7 @@ const getTabs = (props: AccountActivitiesProps): Tab[] => [
 		),
 	},
 	{
-		title: "Transfers",
+		title: `Transfers (${props.transfers.length})`,
 		pane: () => (
 			<Pane
 				count={props.transfers.length}
