@@ -49,9 +49,10 @@ const HomeBody = (props: Props) => {
 	}, [blocks]);
 
 	React.useEffect(() => {
-		window.setInterval(() => {
+		const handle = window.setInterval(() => {
 			setNewBlocks(lastHeight, setBlocks);
 		}, 5000);
+		return () => window.clearInterval(handle);
 	}, [lastHeight, setBlocks]);
 
 	return (
