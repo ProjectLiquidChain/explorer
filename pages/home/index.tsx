@@ -6,6 +6,7 @@ import {
 import { BlockTable } from "@/components/block/table/table";
 import { container } from "@/components/container/container";
 import { Heading } from "@/components/heading/heading";
+import { Overview } from "@/components/overview/overview";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page, PageDefaultHead } from "@/components/page/page";
 import { toServerError } from "@/components/server/error";
@@ -57,10 +58,13 @@ const HomeBody = (props: Props) => {
 	}, [lastHeight, setBlocks]);
 
 	return (
-		<div className={container.max960}>
-			<DivPx size={16} />
-			<Heading>Latest blocks</Heading>
-			<Pane noPadding children={<BlockTable blocks={blocks} />} />
+		<div>
+			<Overview block={blocks[0]} />
+			<div className={container.max960}>
+				<DivPx size={16} />
+				<Heading>Latest blocks</Heading>
+				<Pane noPadding children={<BlockTable blocks={blocks} />} />
+			</div>
 		</div>
 	);
 };

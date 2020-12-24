@@ -1,0 +1,20 @@
+.wrapper {
+	color: var(--gray-1);
+}
+
+:global(.dark) .wrapper {
+	background-color: var(--blue-5);
+}
+
+:global(.light) .wrapper {
+	background-color: var(--blue-6);
+}
+
+.container {
+	padding: 16px 8px;
+}
+
+.overview {
+	display: flex;
+	flex-wrap: wrap;
+}
