@@ -2,7 +2,7 @@ import { Clock, Cube, DocumentText } from "@moai/icon/hrs";
 import { Block } from "../block/block";
 import { container } from "../container/container";
 import { Numeric } from "../numeric/numeric";
-import { Search } from "../page/header/search/search";
+import { OverviewChart } from "./chart/chart";
 import { OverviewInfo } from "./info/info";
 import s from "./overview.module.css";
 
@@ -27,6 +27,9 @@ export const Overview = (props: Props) => (
 					10 transactions
 				</OverviewInfo>
 			</div>
+            <div className={s.chart}>
+                <OverviewChart />
+            </div>
 		</div>
 	</div>
 );
