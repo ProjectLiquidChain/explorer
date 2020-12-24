@@ -1,5 +1,5 @@
 import { Icon, text, Tooltip } from "@moai/core";
-import { icons } from "@moai/icon";
+import { ExclamationCircle } from "@moai/icon/hrs";
 import { Receipt } from "../receipt";
 
 interface Props {
@@ -24,7 +24,7 @@ export const ReceiptCode = ({ code, format }: Props) => {
 		<Tooltip content={error}>
 			<span>
 				<span className={text.redWeak}>
-					<Icon display="inline" path={icons.error} size={16} />
+					<Icon display="inline" path={ExclamationCircle} size={16} />
 				</span>
 				<span className={text.redStrong}> Error</span>
 			</span>

@@ -2,9 +2,9 @@ import { Block } from "@/components/block/block";
 import { CopyButton } from "@/components/copy/copy";
 import { Numeric } from "@/components/numeric/numeric";
 import { Button, ButtonGroup, DivGrow, DivPx, text, Tooltip } from "@moai/core";
-import { icons } from "@moai/icon";
 import Link from "next/link";
 import s from "./header.module.css";
+import { ChevronRight, ChevronLeft } from "@moai/icon/hrs";
 
 interface Props {
 	block: Block;
@@ -16,7 +16,7 @@ const Navigation = ({ block }: Props) => (
 			<div>
 				<Link href={`/block/${block.height - 1}`}>
 					<Button.Forwarded
-						icon={icons.chevronLeft}
+						icon={ChevronLeft}
 						iconLabel="Go to parent (previous) block"
 						style={Button.style.outset}
 					/>
@@ -27,7 +27,7 @@ const Navigation = ({ block }: Props) => (
 			<div>
 				<Link href={`/block/${block.height + 1}`}>
 					<Button.Forwarded
-						icon={icons.chevronRight}
+						icon={ChevronRight}
 						iconLabel="Go to child (next) block"
 						style={Button.style.outset}
 					/>

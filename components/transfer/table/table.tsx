@@ -5,7 +5,7 @@ import { Numeric } from "@/components/numeric/numeric";
 import { Table, TableColumn } from "@/components/table/table";
 import { TokenCurrency } from "@/components/token/currency/currency";
 import { Icon, text } from "@moai/core";
-import { icons } from "@moai/icon";
+import { ArrowRight } from "@moai/icon/hrs";
 import { Transfer } from "../transfer";
 import s from "./table.module.css";
 
@@ -27,7 +27,7 @@ const Receiver = ({ transfer }: RowProps): JSX.Element => (
 
 const Arrow = (): JSX.Element => (
 	<div className={text.muted}>
-		<Icon display="block" path={icons.arrowRight} size={16} />
+		<Icon display="block" path={ArrowRight} size={16} />
 	</div>
 );
 

@@ -1,5 +1,5 @@
 import { background, borderColor, Button, Input } from "@moai/core";
-import { icons } from "@moai/icon";
+import { Search as SearchIcon } from "@moai/icon/hrs";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import s from "./search.module.css";
@@ -28,7 +28,7 @@ export const Search = () => {
 			<Button
 				style={Button.style.flat}
 				type="submit"
-				icon={icons.search}
+				icon={SearchIcon}
 				iconLabel="Submit search"
 			/>
 		</form>

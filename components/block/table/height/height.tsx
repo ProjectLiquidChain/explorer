@@ -1,5 +1,5 @@
 import { Icon, text } from "@moai/core";
-import { icons } from "@moai/icon";
+import { ChevronRight } from "@moai/icon/hrs";
 import { useEffect, useState } from "react";
 import { Block } from "../../block";
 import { BlockHeight } from "../../height/height";
@@ -11,7 +11,7 @@ interface Props {
 
 const Dot = ({ recent }: { recent: boolean }): JSX.Element => (
 	<span className={[text.blueStrong, recent ? s.show : s.hide].join(" ")}>
-		<Icon display="inline" size={16} path={icons.dot} />
+		<Icon display="inline" size={16} path={ChevronRight} />
 	</span>
 );
 

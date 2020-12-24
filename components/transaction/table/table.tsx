@@ -7,7 +7,7 @@ import { Receipt } from "@/components/receipt/receipt";
 import { Table, TableColumn } from "@/components/table/table";
 import { Transaction } from "@/components/transaction/transaction";
 import { Icon, Tag, text } from "@moai/core";
-import { icons } from "@moai/icon";
+import { ArrowRight } from "@moai/icon/hrs";
 import s from "./table.module.css";
 
 interface Props {
@@ -49,7 +49,7 @@ const Receiver = ({ transaction }: TransactionProps): JSX.Element => (
 
 const Arrow = (): JSX.Element => (
 	<div className={text.muted}>
-		<Icon display="block" path={icons.arrowRight} size={16} />
+		<Icon display="block" path={ArrowRight} size={16} />
 	</div>
 );
 

@@ -1,5 +1,5 @@
 import { Tooltip, Button, text } from "@moai/core";
-import { icons } from "@moai/icon";
+import { Check, Duplicate } from "@moai/icon/hrs";
 import { useState } from "react";
 
 interface Props {
@@ -12,7 +12,7 @@ export const CopyButton = (props: Props): JSX.Element => {
 		<Tooltip content="Copy to clipboard">
 			<div className={text.muted}>
 				<Button
-					icon={copied ? icons.tick : icons.duplicate}
+					icon={copied ? Check : Duplicate}
 					iconLabel="Copy to clipboard"
 					style={Button.style.flat}
 					onClick={async () => {

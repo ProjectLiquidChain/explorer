@@ -1,5 +1,5 @@
 import { DivPx, Icon, text, Tooltip } from "@moai/core";
-import { icons } from "@moai/icon";
+import { InformationCircle } from "@moai/icon/hrs";
 import { CopyButton } from "../copy/copy";
 import s from "./info.module.css";
 
@@ -14,7 +14,7 @@ const Help = (props: { text: string }): JSX.Element => (
 	<Tooltip content={props.text}>
 		<span className={text.muted}>
 			<span> </span>
-			<Icon display="inline" path={icons.help} size={16} />
+			<Icon display="inline" path={InformationCircle} size={16} />
 		</span>
 	</Tooltip>
 );

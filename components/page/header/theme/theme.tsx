@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, Tooltip } from "@moai/core";
-import { icons } from "@moai/icon";
+import { Moon, Sun } from "@moai/icon/hrs";
 import { useEffect, useState } from "react";
 
 const applyTheme = (theme: "light" | "dark"): void => {
@@ -30,7 +30,7 @@ export const Theme = () => {
 			<Tooltip content="Use light theme">
 				<Button.Forwarded
 					style={Button.style.outset}
-					icon={icons.flash}
+					icon={Sun}
 					iconLabel="Use light theme"
 					onClick={() => setDark(false)}
 					selected={!dark}
@@ -39,7 +39,7 @@ export const Theme = () => {
 			<Tooltip content="Use dark theme">
 				<Button.Forwarded
 					style={Button.style.outset}
-					icon={icons.moon}
+					icon={Moon}
 					iconLabel="Use dark theme"
 					onClick={() => setDark(true)}
 					selected={dark}
