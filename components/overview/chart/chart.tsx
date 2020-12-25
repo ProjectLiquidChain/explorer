@@ -1,6 +1,8 @@
 import * as C from "chart.js";
 import { useEffect, useRef } from "react";
 import { CHART_OPTIONS } from "./config";
+import s from "./chart.module.css";
+import { DivPx } from "@moai/core";
 
 C.Chart.register(
 	C.LineController,
@@ -40,5 +42,13 @@ export const OverviewChart = (): JSX.Element => {
 		var chart = new C.Chart(ctx, CHART_CONFIG);
 		return () => void chart.destroy();
 	}, [canvas]);
-	return <canvas ref={canvas} width="100" height="100" />;
+	return (
+		<div>
+			<div className={s.label}>Transactions history in 14 days</div>
+			<DivPx size={8} />
+			<div style={{ height: 100 }}>
+				<canvas ref={canvas} width="100" height="100" />
+			</div>
+		</div>
+	);
 };

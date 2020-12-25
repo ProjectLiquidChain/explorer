@@ -1,8 +1,6 @@
 .container {
-	padding: 8px;
-	min-width: 160px;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .label {

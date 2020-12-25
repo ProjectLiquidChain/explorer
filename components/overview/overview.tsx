@@ -13,44 +13,48 @@ interface Props {
 	block: Block;
 }
 
-/*
-				<OverviewInfo icon={Clock} label="Avg. Block Time (24h)">
-					30.4 seconds
-				</OverviewInfo>
-				<OverviewInfo icon={Clock} label="Avg. Tx Per Block (24h)">
-					10 transactions
-                </OverviewInfo>
-                */
+const Infos = (props: Props): JSX.Element => (
+	<div className={s.infos}>
+		<div className={s.info}>
+			<OverviewInfo
+				icon={OverviewBlockIcon}
+				label="Block Height"
+				children={<Numeric type="integer" value={props.block.height} />}
+			/>
+		</div>
+		<div className={s.info}>
+			<OverviewInfo
+				icon={OverviewBlockTimeIcon}
+				label="Avg. Block Time (24h)"
+				children="24.2 seconds"
+			/>
+		</div>
+		<div className={s.info}>
+			<OverviewInfo
+				icon={OverviewTransactionIcon}
+				label="Total Transactions"
+				children={<Numeric type="integer" value={82712821} />}
+			/>
+		</div>
+		<div className={s.info}>
+			<OverviewInfo
+				icon={OverviewBlockTransactionIcon}
+				label="Avg. Tx per Block (24h)"
+				children={<Numeric type="integer" value={123} />}
+			/>
+		</div>
+	</div>
+);
 
-export const Overview = (props: Props) => (
+export const Overview = (props: Props): JSX.Element => (
 	<div className={s.wrapper}>
 		<div className={[s.container, container.max960].join(" ")}>
-			<div className={s.section}>
-				<OverviewInfo
-					icon={OverviewBlockIcon}
-					label="Block Height"
-					children={<Numeric type="integer" value={props.block.height} />}
-				/>
-				<OverviewInfo
-					icon={OverviewBlockTimeIcon}
-					label="Avg. Block Time (24h)"
-					children="24.2 seconds"
-				/>
-			</div>
-			<div className={s.section}>
-				<OverviewInfo
-					icon={OverviewTransactionIcon}
-					label="Total Transactions"
-					children={<Numeric type="integer" value={82712821} />}
-				/>
-				<OverviewInfo
-					icon={OverviewBlockTransactionIcon}
-					label="Avg. Tx per Block (24h)"
-					children={<Numeric type="integer" value={123} />}
-				/>
-			</div>
-			<div className={s.section}>
-				<OverviewChart />
+			<div className={s.title}>Liquid Chain Explorer</div>
+			<div className={s.body}>
+				<Infos {...props} />
+				<div className={s.chart}>
+					<OverviewChart />
+				</div>
 			</div>
 		</div>
 	</div>

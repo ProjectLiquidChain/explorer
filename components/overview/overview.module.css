@@ -5,9 +5,52 @@
 
 .container {
 	padding: 48px 8px;
-	display: flex;
 }
 
-.section {
+.title {
+	padding: 8px;
+	font-size: 48px;
+	font-weight: 700;
+	line-height: 48px;
+	margin-bottom: 36px;
+}
+
+@media (max-width: 640px) {
+	.body {
+		display: block;
+	}
+}
+
+@media (min-width: 641px) {
+	.body {
+		display: flex;
+	}
+}
+
+.infos {
+	flex: 2 1 0px;
+	position: relative;
+}
+
+@media (max-width: 640px) {
+	.infos {
+		display: block;
+	}
+}
+
+@media (min-width: 641px) {
+	.infos {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
+.chart {
 	flex: 1 1 0px;
+	padding: 8px;
+}
+
+.info {
+	flex: 0 0 50%;
+	padding: 8px;
 }

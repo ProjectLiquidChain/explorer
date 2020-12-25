@@ -13,7 +13,7 @@ export const OverviewInfo = (props: Props): JSX.Element => (
 		<DivPx size={4} />
 		<div className={s.body}>
 			<div className={s.label}>{props.label}</div>
-			{/* <DivPx size={4} /> */}
+			<DivPx size={4} />
 			<div className={s.value}>{props.children}</div>
 		</div>
 	</div>
