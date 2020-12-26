@@ -1,11 +1,13 @@
-import { PaginationHeader } from "@/components/pagination-section/header/header";
+import { Heading } from "@/components/heading/heading";
+import { Pagination } from "@/components/pagination/pagination";
 import { Receipt } from "@/components/receipt/receipt";
 import { getRecentTransactions } from "@/components/transaction/fetch/fetch";
 import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
-import { Pane } from "@moai/core";
+import { DivPx, Pane } from "@moai/core";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { Transaction } from "../transaction";
+import s from "./pagination.module.css";
 
 interface Props {
 	transactions: Transaction[];
@@ -20,25 +22,27 @@ export const TransactionPagination = (props: Props): JSX.Element => {
 	const [transactions, setTransactions] = useState(props.transactions);
 	const [receipts, setReceipts] = useState(props.receipts);
 	const [page, setPage] = useState(props.page);
-	const [busy, setBusy] = useState(false);
 
 	const onPageChange = useCallback(async (page: number): Promise<void> => {
-		setBusy(true);
 		const result = await getRecentTransactions({ page });
 		setTransactions(result.transactions);
 		setReceipts(result.receipts);
 		setPage(page);
-		router.push(`/transactions?page=${page}`, undefined, { shallow: true });
-		setBusy(false);
+		const url = `/transactions?page=${page}`;
+		await router.push(url, undefined, { shallow: true });
 	}, []);
 
 	return (
 		<div>
-			<PaginationHeader
-				heading="Recent Transactions"
-				busy={busy}
-				pagination={{ current: page, total: props.totalPages, onPageChange }}
-			/>
+			<div className={s.header}>
+				<h1 className={s.title}>Recent Transactions</h1>
+				<DivPx size={16} />
+				<Pagination
+					current={page}
+					onPageChange={onPageChange}
+					total={props.totalPages}
+				/>
+			</div>
 			<Pane noPadding>
 				<TransactionTableWide transactions={transactions} receipts={receipts} />
 			</Pane>
