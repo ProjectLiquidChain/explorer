@@ -1,73 +1,39 @@
 import { Block } from "@/components/block/block";
-import {
-	getBlocksByRange,
-	getLatestBlock,
-} from "@/components/block/fetch/fetch";
-import { BlockTable } from "@/components/block/table/table";
+import { getRecentBlocks } from "@/components/block/fetch/fetch";
 import { container } from "@/components/container/container";
-import { Heading } from "@/components/heading/heading";
+import { Feed } from "@/components/feed/feed";
 import { Overview } from "@/components/overview/overview";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page, PageDefaultHead } from "@/components/page/page";
+import { Receipt } from "@/components/receipt/receipt";
 import { toServerError } from "@/components/server/error";
-import { DivPx, Pane } from "@moai/core";
+import { getRecentTransactions } from "@/components/transaction/fetch/fetch";
+import { Transaction } from "@/components/transaction/transaction";
+import { DivPx } from "@moai/core";
 import { GetStaticProps } from "next";
 import * as React from "react";
 
 interface Props {
 	blocks: Block[];
+	transactions: Transaction[];
+	receipts: Receipt[];
 }
 
 type PageProps = PageErrorProps<Props>;
 
-const getNewBlocks = async (prevHeight: Block["height"]): Promise<Block[]> => {
-	const latest = await getLatestBlock(undefined);
-	const from = latest.height - 1;
-	const to = Math.max(prevHeight + 1, latest.height - 10);
-	if (from < to) return [];
-	const blocks = await getBlocksByRange(from, to);
-	return [latest, ...blocks];
-};
-
-const setNewBlocks = async (
-	lastHeight: React.MutableRefObject<number>,
-	setBlocks: React.Dispatch<React.SetStateAction<Block[]>>
-): Promise<void> => {
-	const newBlocks = await getNewBlocks(lastHeight.current);
-	if (newBlocks.length === 0) return;
-	setBlocks((prevBlocks) => {
-		const isContinue =
-			newBlocks[newBlocks.length - 1].height === prevBlocks[0].height + 1;
-		return isContinue ? [...newBlocks, ...prevBlocks].slice(0, 10) : newBlocks;
-	});
-};
-
-const HomeBody = (props: Props) => {
-	const [blocks, setBlocks] = React.useState(props.blocks);
-	const lastHeight = React.useRef(1);
-
-	React.useEffect(() => {
-		lastHeight.current = blocks[0].height;
-	}, [blocks]);
-
-	React.useEffect(() => {
-		const handle = window.setInterval(() => {
-			setNewBlocks(lastHeight, setBlocks);
-		}, 5000);
-		return () => window.clearInterval(handle);
-	}, [lastHeight, setBlocks]);
-
-	return (
-		<div>
-			<Overview block={blocks[0]} />
-			<div className={container.max960}>
-				<DivPx size={16} />
-				<Heading>Latest blocks</Heading>
-				<Pane noPadding children={<BlockTable blocks={blocks} />} />
-			</div>
+const HomeBody = (props: Props) => (
+	<div>
+		<Overview block={props.blocks[0]} />
+		<DivPx size={16} />
+		<div className={container.max960}>
+			<Feed
+				blocks={props.blocks}
+				transactions={props.transactions}
+				receipts={props.receipts}
+			/>
 		</div>
-	);
-};
+	</div>
+);
 
 const HomePage = (page: PageProps) => (
 	<Page
@@ -84,11 +50,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 	const revalidate = parseInt(interval);
 
 	try {
-		const latest = await getLatestBlock(undefined);
-		const { height } = latest;
-		const recents = await getBlocksByRange(height - 1, height - 9);
-		const blocks = [latest, ...recents];
-		return { revalidate, props: { hasError: false, blocks } };
+		const blocks = await getRecentBlocks(undefined);
+		const { transactions, receipts } = await getRecentTransactions(undefined);
+		const props: Props = { blocks, transactions, receipts };
+		return { revalidate, props: { hasError: false, ...props } };
 	} catch (unknown: unknown) {
 		const error = toServerError(unknown);
 		return { revalidate, props: { hasError: true, error } };

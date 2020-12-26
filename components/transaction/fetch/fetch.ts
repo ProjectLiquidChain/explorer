@@ -8,3 +8,15 @@ export const getTransaction: ServerCall<
 > = (hash) => {
 	return serverCall("chain.GetTransaction", { hash });
 };
+
+/**
+ * Return 10 latest transactions
+ */
+export const getRecentTransactions: ServerCall<
+	undefined,
+	{ transactions: Transaction[]; receipts: Receipt[] }
+> = async () => {
+	const result = await serverCall("surf.GetTxs", { limit: 10, page: 0 });
+	const { transactions, receipts } = result;
+	return { transactions, receipts };
+};

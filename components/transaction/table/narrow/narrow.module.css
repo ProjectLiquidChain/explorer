@@ -1,0 +1,22 @@
+.link {
+	text-decoration: none;
+}
+
+.container table {
+	min-width: 480px;
+}
+
+.hash {
+	text-align: left;
+}
+
+.block {
+	text-align: right;
+	width: 100px;
+}
+
+.type {
+	text-transform: capitalize;
+	text-align: left;
+	width: 100px;
+}

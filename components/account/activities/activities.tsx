@@ -1,6 +1,6 @@
 import { formatNumber } from "@/components/numeric/numeric";
 import { Receipt } from "@/components/receipt/receipt";
-import { TransactionTable } from "@/components/transaction/table/table";
+import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
 import * as Transaction from "@/components/transaction/transaction";
 import { TransferTable } from "@/components/transfer/table/table";
 import * as Transfer from "@/components/transfer/transfer";
@@ -50,7 +50,7 @@ const getTransactionTab = (props: AccountActivitiesProps): Tab => {
 		title: `Transactions (${getEstimated(props.transactionPages, count)})`,
 		pane: () => (
 			<Pane count={count} pluralize={Transaction.pluralizeTransaction}>
-				<TransactionTable
+				<TransactionTableWide
 					transactions={props.transactions}
 					receipts={props.receipts}
 				/>

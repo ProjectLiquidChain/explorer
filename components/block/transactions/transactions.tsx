@@ -3,7 +3,7 @@ import { Divider } from "@/components/divider/divider";
 import { Info } from "@/components/info/info";
 import { Pane } from "@moai/core";
 import { TransactionsHeading } from "@/components/transaction/heading/heading";
-import { TransactionTable } from "@/components/transaction/table/table";
+import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
 import { Border, DivPx } from "@moai/core";
 import s from "./transactions.module.css";
 
@@ -33,7 +33,7 @@ const Table = ({ block }: Props): JSX.Element => (
 	<div className={s.table}>
 		<DivPx size={32} />
 		<Border color="weak" />
-		<TransactionTable
+		<TransactionTableWide
 			transactions={block.transactions}
 			receipts={block.receipts}
 		/>

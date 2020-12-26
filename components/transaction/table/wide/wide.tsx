@@ -8,7 +8,7 @@ import { Table, TableColumn } from "@/components/table/table";
 import { Transaction } from "@/components/transaction/transaction";
 import { Icon, Tag, text } from "@moai/core";
 import { ArrowRight } from "@moai/icon/hrs";
-import s from "./table.module.css";
+import s from "./wide.module.css";
 
 interface Props {
 	transactions: Transaction[];
@@ -57,7 +57,10 @@ const Code = ({ receipt }: ReceiptProps): JSX.Element => (
 	<ReceiptCode code={receipt.code} format="short" />
 );
 
-const getColumns = ({ transactions, receipts }: Props): TableColumn[] => [
+export const getTableColumns = ({
+	transactions,
+	receipts,
+}: Props): TableColumn[] => [
 	{
 		title: "Hash",
 		className: s.hash,
@@ -100,10 +103,10 @@ const getColumns = ({ transactions, receipts }: Props): TableColumn[] => [
 	},
 ];
 
-export const TransactionTable = (props: Props) => (
+export const TransactionTableWide = (props: Props) => (
 	<div className={s.container}>
 		<Table
-			columns={getColumns(props)}
+			columns={getTableColumns(props)}
 			rowKey={(index) => props.transactions[index].hash}
 			rowsLength={props.transactions.length}
 		/>

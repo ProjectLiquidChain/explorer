@@ -2,8 +2,9 @@ import { Block } from "@/components/block/block";
 import { Numeric } from "@/components/numeric/numeric";
 import { Table, TableColumn } from "@/components/table/table";
 import { Time } from "@/components/time/time";
-import { BlockTableHeight } from "./height/height";
-import s from "./table.module.css";
+import { pluralizeTransaction } from "@/components/transaction/transaction";
+import { BlockTableHeight } from "../height/height";
+import s from "./narrow.module.css";
 
 interface Props {
 	blocks: Block[];
@@ -27,7 +28,7 @@ const Transactions = ({ block }: RowProps): JSX.Element => {
 		<span>
 			<Numeric value={count} type="integer" />
 			<span> </span>
-			<span>{count > 1 ? "trxns" : "trxn"}</span>
+			<span>{pluralizeTransaction(count)}</span>
 		</span>
 	);
 };
@@ -39,12 +40,7 @@ const getColumns = ({ blocks }: Props): TableColumn[] => [
 		render: (i) => <BlockTableHeight block={blocks[i]} />,
 	},
 	{
-		title: "Hash",
-		className: s.hash,
-		render: (i) => <span>{blocks[i].hash}</span>,
-	},
-	{
-		title: "Trxns",
+		title: "Transactions",
 		className: s.transactions,
 		render: (i) => <Transactions block={blocks[i]} />,
 	},
@@ -55,7 +51,7 @@ const getColumns = ({ blocks }: Props): TableColumn[] => [
 	},
 ];
 
-export const BlockTable = (props: Props) => (
+export const BlockTableNarrow = (props: Props) => (
 	<div className={s.container}>
 		<Table
 			columns={getColumns(props)}

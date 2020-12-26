@@ -41,3 +41,11 @@ export const getBlocksByRange = async (
 	const heights = getRange(from, to);
 	return await Promise.all(heights.map(getBlockByHeight));
 };
+
+/**
+ * Return 10 recent blocks
+ */
+export const getRecentBlocks: ServerCall<undefined, Block[]> = async () => {
+	const latest = await getLatestBlock(undefined);
+	return await getBlocksByRange(latest.height, latest.height - 9);
+};
