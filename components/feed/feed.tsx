@@ -6,12 +6,12 @@ import { BlockTableNarrow } from "../block/table/narrow/narrow";
 import { Heading } from "../heading/heading";
 import { getRecentTransactions } from "../transaction/fetch/fetch";
 import { TransactionTableNarrow } from "../transaction/table/narrow/narrow";
-import { CompletedTransaction } from "../transaction/transaction";
+import { TransactionBundle } from "../transaction/transaction";
 import s from "./feed.module.css";
 
 interface Props {
 	blocks: Block[];
-	transactions: CompletedTransaction[];
+	transactions: TransactionBundle[];
 }
 
 export const Feed = (props: Props): JSX.Element => {
@@ -29,7 +29,7 @@ export const Feed = (props: Props): JSX.Element => {
 	useEffect(() => {
 		const timer = window.setInterval(async () => {
 			const result = await getRecentTransactions({ page: 0 });
-			setTransactions(result.transactions);
+			setTransactions(result.transactions.slice(0, 10));
 		}, 5000);
 		return () => window.clearInterval(timer);
 	}, []);

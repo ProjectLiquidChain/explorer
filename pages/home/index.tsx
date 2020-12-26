@@ -7,14 +7,14 @@ import { PageErrorProps } from "@/components/page/error/error";
 import { Page, PageDefaultHead } from "@/components/page/page";
 import { toServerError } from "@/components/server/error";
 import { getRecentTransactions } from "@/components/transaction/fetch/fetch";
-import { CompletedTransaction } from "@/components/transaction/transaction";
+import { TransactionBundle } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
 import { GetStaticProps } from "next";
 import * as React from "react";
 
 interface Props {
 	blocks: Block[];
-	transactions: CompletedTransaction[];
+	transactions: TransactionBundle[];
 }
 
 type PageProps = PageErrorProps<Props>;
