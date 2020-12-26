@@ -6,6 +6,11 @@
 	min-width: 480px;
 }
 
+.container {
+	overflow: auto;
+}
+
+
 .hash {
 	text-align: left;
 }
