@@ -27,7 +27,7 @@ const BlockBody = ({ block }: Props): JSX.Element => (
 
 const BlockPage = (page: PageProps) => (
 	<Page
-		title={(p) => `Liquid Block #${p.block.height}`}
+		title={(p) => `Block #${p.block.height} - Liquid`}
 		description={(p) =>
 			`See details of block ${p.block.height} on Liquid Blockchain Explorer`
 		}

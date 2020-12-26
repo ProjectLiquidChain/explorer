@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const TokenCurrency = ({ token }: Props): JSX.Element => (
-	<Link href={`/account/${token.address}`}>
+	<Link href={`/accounts/${token.address}`}>
 		<Tag>{token.currency}</Tag>
 	</Link>
 );

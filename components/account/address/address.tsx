@@ -42,5 +42,5 @@ export const AccountAddress = ({ value, wrap, hideVerified }: Props) => {
 
 	const router = useRouter();
 	if (router.query.address === value) return children;
-	return <Link href={`/account/${value}`} children={children} />;
+	return <Link href={`/accounts/${value}`} children={children} />;
 };

@@ -45,7 +45,7 @@ const Balance = ({ transfer }: RowProps): JSX.Element => (
 
 const Transaction = ({ transfer }: RowProps): JSX.Element => (
 	<Link
-		href={`/transaction/${transfer.transaction.hash}`}
+		href={`/transactions/${transfer.transaction.hash}`}
 		children={transfer.transaction.hash}
 	/>
 );

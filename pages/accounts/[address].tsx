@@ -60,7 +60,7 @@ const AccountBody = (props: Props): JSX.Element => (
 
 const AccountPage = (page: PageProps) => (
 	<Page
-		title={(p) => `Liquid Account ${p.account.address}`}
+		title={(p) => `Account ${p.account.address} - Liquid`}
 		description={(p) =>
 			`See details of account ${p.account.address} on Liquid Blockchain Explorer`
 		}

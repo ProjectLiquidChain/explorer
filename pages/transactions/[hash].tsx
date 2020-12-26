@@ -45,7 +45,7 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 
 const TransactionPage = (page: PageProps) => (
 	<Page
-		title={(p) => `Liquid Transaction ${p.transaction.hash}`}
+		title={(p) => `Transaction ${p.transaction.hash} - Liquid`}
 		description={(p) =>
 			`See details of transaction ${p.transaction.hash} on Liquid Blockchain Explorer`
 		}

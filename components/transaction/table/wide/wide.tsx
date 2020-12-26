@@ -24,7 +24,10 @@ interface ReceiptProps {
 }
 
 const Hash = ({ transaction }: TransactionProps): JSX.Element => (
-	<Link href={`/transaction/${transaction.hash}`} children={transaction.hash} />
+	<Link
+		href={`/transactions/${transaction.hash}`}
+		children={transaction.hash}
+	/>
 );
 
 const Type = ({ transaction }: TransactionProps): JSX.Element => (

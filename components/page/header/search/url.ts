@@ -5,12 +5,12 @@
 export const getSearchUrl = (query: string): string => {
 	// Block's height: Integer
 	if (parseInt(query, 10).toString(10) === query) {
-		return `/block/${query}`;
+		return `/blocks/${query}`;
 	}
 	// Account's address: LBGLLK7WVV...
 	if (query.startsWith("L")) {
-		return `/account/${query}`;
+		return `/accounts/${query}`;
 	}
 	// Transaction's hash: all else
-	return `/transaction/${query}`;
+	return `/transactions/${query}`;
 };

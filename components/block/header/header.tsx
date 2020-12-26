@@ -14,7 +14,7 @@ const Navigation = ({ block }: Props) => (
 	<ButtonGroup skipChildTypeCheck>
 		<Tooltip content="Go to parent (previous) block">
 			<div>
-				<Link href={`/block/${block.height - 1}`}>
+				<Link href={`/blocks/${block.height - 1}`}>
 					<Button.Forwarded
 						icon={ChevronLeft}
 						iconLabel="Go to parent (previous) block"
@@ -25,7 +25,7 @@ const Navigation = ({ block }: Props) => (
 		</Tooltip>
 		<Tooltip content="Go to child (next) block">
 			<div>
-				<Link href={`/block/${block.height + 1}`}>
+				<Link href={`/blocks/${block.height + 1}`}>
 					<Button.Forwarded
 						icon={ChevronRight}
 						iconLabel="Go to child (next) block"

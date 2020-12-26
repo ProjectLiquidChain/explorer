@@ -6,23 +6,18 @@ type Theme = "light" | "dark";
 
 const applyTheme = (theme: Theme): void => {
 	const classes = window.document.documentElement.classList;
-	console.log(classes.contains(theme));
 	if (classes.contains(theme)) return;
 	classes.remove(theme === "light" ? "dark" : "light");
 	classes.add(theme);
 };
 
-export const getTheme = (): Theme => {
-	// Server side
-	if (window === undefined) return "light";
-	// Client
-	const stored = window.localStorage.getItem("theme");
-	if (stored === "light" || stored === "dark") return stored;
-	return "light";
-};
-
 export const useTheme = () => {
-	const [theme, setTheme] = useState(() => getTheme());
+	const [theme, setTheme] = useState<Theme>("light");
+
+	useEffect(() => {
+		const theme = window.localStorage.getItem("theme") ?? "light";
+		setTheme(theme as Theme);
+	}, []);
 
 	useEffect(() => {
 		window.localStorage.setItem("theme", theme);

@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const BlockHeight = ({ value }: Props) => (
-	<Link href={`/block/${value}`}>
+	<Link href={`/blocks/${value}`}>
 		<Numeric type="integer" value={value} />
 	</Link>
 );

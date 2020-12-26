@@ -2,6 +2,12 @@
 	text-decoration: none;
 }
 
+.container {
+	max-height: 80vh;
+	overflow: auto;
+	position: relative;
+}
+
 .container table {
 	min-width: 960px;
 }

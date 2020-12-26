@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 
 	try {
 		const blocks = await getRecentBlocks(undefined);
-		const { transactions, receipts } = await getRecentTransactions(undefined);
+		const { transactions, receipts } = await getRecentTransactions({ page: 0 });
 		const props: Props = { blocks, transactions, receipts };
 		return { revalidate, props: { hasError: false, ...props } };
 	} catch (unknown: unknown) {

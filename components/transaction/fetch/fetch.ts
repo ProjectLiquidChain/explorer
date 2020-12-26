@@ -9,14 +9,11 @@ export const getTransaction: ServerCall<
 	return serverCall("chain.GetTransaction", { hash });
 };
 
-/**
- * Return 10 latest transactions
- */
 export const getRecentTransactions: ServerCall<
-	undefined,
-	{ transactions: Transaction[]; receipts: Receipt[] }
-> = async () => {
-	const result = await serverCall("surf.GetTxs", { limit: 10, page: 0 });
-	const { transactions, receipts } = result;
-	return { transactions, receipts };
+	{ page: number },
+	{ transactions: Transaction[]; receipts: Receipt[], totalPages: number }
+> = async ({ page }) => {
+	const result = await serverCall("surf.GetTxs", { limit: 100, page: page });
+	const { transactions, receipts, totalPages } = result;
+	return { transactions, receipts, totalPages };
 };
