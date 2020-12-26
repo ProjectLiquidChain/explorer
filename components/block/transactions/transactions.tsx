@@ -30,16 +30,19 @@ const Overview = ({ block }: Props): JSX.Element => (
 	</div>
 );
 
-const Table = ({ block }: Props): JSX.Element => (
-	<div className={s.table}>
-		<DivPx size={32} />
-		<Border color="weak" />
-		<TransactionTableWide
-			transactions={completeTransactions(block.transactions, block.receipts)}
-		/>
-		<Border color="weak" />
-	</div>
-);
+const Table = ({ block }: Props): JSX.Element => {
+	console.log(block);
+	return (
+		<div className={s.table}>
+			<DivPx size={32} />
+			<Border color="weak" />
+			<TransactionTableWide
+				transactions={completeTransactions(block.transactions, block.receipts)}
+			/>
+			<Border color="weak" />
+		</div>
+	);
+};
 
 export const BlockTransactions = ({ block }: Props): JSX.Element => (
 	<div>

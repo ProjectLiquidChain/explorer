@@ -23,7 +23,7 @@ export const getAccountTransactions: AccountCall<{
 	transactionPages: number;
 }> = async (address) => {
 	const r = await serverCall("surf.GetAccountTxs", { address });
-	const transactions = completeTransactions(r.transaction, r.receipts);
+	const transactions = completeTransactions(r.transactions, r.receipts);
 	return { transactions, transactionPages: r.totalPages };
 };
 

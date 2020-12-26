@@ -5,18 +5,16 @@ import { Feed } from "@/components/feed/feed";
 import { Overview } from "@/components/overview/overview";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page, PageDefaultHead } from "@/components/page/page";
-import { Receipt } from "@/components/receipt/receipt";
 import { toServerError } from "@/components/server/error";
 import { getRecentTransactions } from "@/components/transaction/fetch/fetch";
-import { Transaction } from "@/components/transaction/transaction";
+import { CompletedTransaction } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
 import { GetStaticProps } from "next";
 import * as React from "react";
 
 interface Props {
 	blocks: Block[];
-	transactions: Transaction[];
-	receipts: Receipt[];
+	transactions: CompletedTransaction[];
 }
 
 type PageProps = PageErrorProps<Props>;
@@ -26,11 +24,7 @@ const HomeBody = (props: Props) => (
 		<Overview block={props.blocks[0]} />
 		<DivPx size={16} />
 		<div className={container.max960}>
-			<Feed
-				blocks={props.blocks}
-				transactions={props.transactions}
-				receipts={props.receipts}
-			/>
+			<Feed blocks={props.blocks} transactions={props.transactions} />
 		</div>
 	</div>
 );
@@ -50,11 +44,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 	const revalidate = parseInt(interval);
 
 	try {
-		const blocks = await getRecentBlocks(undefined);
-		const result = await getRecentTransactions({ page: 0 });
-		const transactions = result.transactions.slice(0, 10);
-		const receipts = result.receipts.slice(0, 10);
-		const props: Props = { blocks, transactions, receipts };
+		const { blocks } = await getRecentBlocks({ page: 0 });
+		let { transactions } = await getRecentTransactions({ page: 0 });
+		transactions = transactions.slice(0, 10);
+		const props: Props = { blocks, transactions };
 		return { revalidate, props: { hasError: false, ...props } };
 	} catch (unknown: unknown) {
 		const error = toServerError(unknown);

@@ -49,7 +49,6 @@ const AccountBody = (props: Props): JSX.Element => (
 		<DivPx size={16} />
 		<Heading children="Recent Activities" />
 		<AccountActivities
-			receipts={props.receipts}
 			transactions={props.transactions}
 			transactionPages={props.transactionPages}
 			transfers={props.transfers}
@@ -99,19 +98,19 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 		})();
 
 		const assets = getValue(result[2]);
-		const { transactionPages, transactions, receipts } = getValue(result[3]);
+		const { transactionPages, transactions } = getValue(result[3]);
 		const { transferPages, transfers } = getValue(result[4]);
 
 		props = {
 			hasError: false,
 			...{ account, contract, assets },
-			...{ transactions, transactionPages, receipts },
+			...{ transactions, transactionPages },
 			...{ transfers, transferPages },
 		};
 	} catch (unknownError: unknown) {
 		props = { hasError: true, error: toServerError(unknownError) };
 	}
-	return { revalidate: 1, props };
+	return { revalidate: 5, props };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({

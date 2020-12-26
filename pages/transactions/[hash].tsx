@@ -4,25 +4,23 @@ import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { ReceiptEvent } from "@/components/receipt/event/event";
 import { ReceiptOverview } from "@/components/receipt/overview/overview";
-import { Receipt } from "@/components/receipt/receipt";
 import { toServerError } from "@/components/server/error";
 import { getTransaction } from "@/components/transaction/fetch/fetch";
 import { TransactionHeader } from "@/components/transaction/header/header";
 import { TransactionOverview } from "@/components/transaction/overview/overview";
 import { TransactionPayload } from "@/components/transaction/payload/payload";
-import { Transaction } from "@/components/transaction/transaction";
+import { CompletedTransaction } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Fragment } from "react";
 
 interface Props {
-	transaction: Transaction;
-	receipt: Receipt;
+	transaction: CompletedTransaction;
 }
 
 type PageProps = PageErrorProps<Props>;
 
-const TransactionBody = ({ transaction, receipt }: Props) => (
+const TransactionBody = ({ transaction }: Props) => (
 	<div className={container.max960}>
 		<TransactionHeader transaction={transaction} />
 		<TransactionOverview transaction={transaction} />
@@ -31,10 +29,10 @@ const TransactionBody = ({ transaction, receipt }: Props) => (
 		<TransactionPayload payload={transaction.payload} />
 		<DivPx size={16} />
 		<Heading>Transaction Receipt</Heading>
-		<ReceiptOverview receipt={receipt} />
+		<ReceiptOverview receipt={transaction.receipt} />
 		<DivPx size={16} />
 		<Heading>Receipt events</Heading>
-		{receipt.events.map((event, index) => (
+		{transaction.receipt.events.map((event, index) => (
 			<Fragment key={index}>
 				{index > 0 && <DivPx size={32} />}
 				<ReceiptEvent event={event} />
@@ -58,11 +56,11 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 	try {
 		const { hash } = context.params ?? {};
 		if (typeof hash !== "string") throw Error("Hash is not defined");
-		const { transaction, receipt } = await getTransaction(hash);
+		const transaction = await getTransaction(hash);
 		return {
 			// If the transaction exists then it won't change
 			revalidate: undefined,
-			props: { hasError: false, transaction, receipt },
+			props: { hasError: false, transaction },
 		};
 	} catch (error: unknown) {
 		return {

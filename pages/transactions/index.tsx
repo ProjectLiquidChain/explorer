@@ -1,17 +1,15 @@
 import { container } from "@/components/container/container";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
-import { Receipt } from "@/components/receipt/receipt";
 import { toServerError } from "@/components/server/error";
 import { getRecentTransactions } from "@/components/transaction/fetch/fetch";
 import { TransactionPagination } from "@/components/transaction/pagination/pagination";
-import { Transaction } from "@/components/transaction/transaction";
+import { CompletedTransaction } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 
 interface Props {
-	transactions: Transaction[];
-	receipts: Receipt[];
+	transactions: CompletedTransaction[];
 	page: number;
 	totalPages: number;
 }
@@ -25,7 +23,6 @@ const TransactionIndexBody = (props: Props): JSX.Element => (
 			page={props.page}
 			totalPages={props.totalPages}
 			transactions={props.transactions}
-			receipts={props.receipts}
 		/>
 	</div>
 );
@@ -50,8 +47,8 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 
 	try {
 		const result = await getRecentTransactions({ page });
-		const { transactions, receipts, totalPages } = result;
-		const props: Props = { transactions, receipts, totalPages, page };
+		const { transactions, totalPages } = result;
+		const props: Props = { transactions, totalPages, page };
 		return { props: { hasError: false, ...props } };
 	} catch (unknown: unknown) {
 		const error = toServerError(unknown);
