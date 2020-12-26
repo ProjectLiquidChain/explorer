@@ -30,7 +30,7 @@ export interface TransactionBundle {
 	receipt: Receipt;
 }
 
-export const completeTransactions = (
+export const bundleTransactions = (
 	transactions: Transaction[],
 	receipts: Receipt[]
 ): TransactionBundle[] => {

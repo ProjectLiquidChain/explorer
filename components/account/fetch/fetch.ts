@@ -1,8 +1,8 @@
 import { Asset } from "@/components/asset/asset";
 import { serverCall, ServerCall } from "@/components/server/server";
 import {
-	CompletedTransaction,
-	completeTransactions,
+	TransactionBundle,
+	bundleTransactions,
 } from "@/components/transaction/transaction";
 import { Transfer } from "@/components/transfer/transfer";
 import { Account, createFakeAccount } from "../account";
@@ -19,11 +19,11 @@ export const getAccount: AccountCall<Account> = async (address) => {
 };
 
 export const getAccountTransactions: AccountCall<{
-	transactions: CompletedTransaction[];
+	transactions: TransactionBundle[];
 	transactionPages: number;
 }> = async (address) => {
 	const r = await serverCall("surf.GetAccountTxs", { address });
-	const transactions = completeTransactions(r.transactions, r.receipts);
+	const transactions = bundleTransactions(r.transactions, r.receipts);
 	return { transactions, transactionPages: r.totalPages };
 };
 

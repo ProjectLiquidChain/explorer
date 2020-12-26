@@ -4,11 +4,11 @@ import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
 import { DivPx, Pane } from "@moai/core";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
-import { CompletedTransaction } from "../transaction";
+import { TransactionBundle } from "../transaction";
 import s from "./pagination.module.css";
 
 interface Props {
-	transactions: CompletedTransaction[];
+	transactions: TransactionBundle[];
 	page: number;
 	totalPages: number;
 }

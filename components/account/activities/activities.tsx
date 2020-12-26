@@ -1,5 +1,4 @@
 import { formatNumber } from "@/components/numeric/numeric";
-import { Receipt } from "@/components/receipt/receipt";
 import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
 import * as Transaction from "@/components/transaction/transaction";
 import { TransferTable } from "@/components/transfer/table/table";
@@ -29,7 +28,7 @@ const Pane = ({ count, pluralize, children }: PaneProps): JSX.Element => (
 
 export interface AccountActivitiesProps {
 	transactionPages: number;
-	transactions: Transaction.CompletedTransaction[];
+	transactions: Transaction.TransactionBundle[];
 	transferPages: number;
 	transfers: Transfer.Transfer[];
 }

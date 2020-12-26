@@ -1,6 +1,6 @@
 import { serverCall, ServerCall } from "@/components/server/server";
 import {
-	completeTransactions,
+	bundleTransactions,
 	Transaction,
 	TransactionBundle,
 } from "../transaction";
@@ -20,6 +20,6 @@ export const getRecentTransactions: ServerCall<
 > = async ({ page }) => {
 	const options = { limit: 100, page: page };
 	const r = await serverCall("surf.GetTxs", options);
-	const transactions = completeTransactions(r.transactions, r.receipts);
+	const transactions = bundleTransactions(r.transactions, r.receipts);
 	return { transactions, totalPages: r.totalPages };
 };
