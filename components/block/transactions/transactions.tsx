@@ -1,12 +1,11 @@
 import { Block } from "@/components/block/block";
 import { Divider } from "@/components/divider/divider";
 import { Info } from "@/components/info/info";
-import { Pane } from "@moai/core";
 import { TransactionsHeading } from "@/components/transaction/heading/heading";
 import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
-import { Border, DivPx } from "@moai/core";
-import s from "./transactions.module.css";
 import { completeTransactions } from "@/components/transaction/transaction";
+import { Border, DivPx, Pane } from "@moai/core";
+import s from "./transactions.module.css";
 
 interface Props {
 	block: Block;
@@ -30,19 +29,16 @@ const Overview = ({ block }: Props): JSX.Element => (
 	</div>
 );
 
-const Table = ({ block }: Props): JSX.Element => {
-	console.log(block);
-	return (
-		<div className={s.table}>
-			<DivPx size={32} />
-			<Border color="weak" />
-			<TransactionTableWide
-				transactions={completeTransactions(block.transactions, block.receipts)}
-			/>
-			<Border color="weak" />
-		</div>
-	);
-};
+const Table = ({ block }: Props): JSX.Element => (
+	<div className={s.table}>
+		<DivPx size={32} />
+		<Border color="weak" />
+		<TransactionTableWide
+			transactions={completeTransactions(block.transactions, block.receipts)}
+		/>
+		<Border color="weak" />
+	</div>
+);
 
 export const BlockTransactions = ({ block }: Props): JSX.Element => (
 	<div>

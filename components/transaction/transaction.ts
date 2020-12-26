@@ -25,15 +25,16 @@ export interface Transaction {
 export const pluralizeTransaction = (count: number): string =>
 	count > 1 ? "transactions" : "transaction";
 
-export interface CompletedTransaction extends Transaction {
+export interface TransactionBundle {
+	transaction: Transaction;
 	receipt: Receipt;
 }
 
 export const completeTransactions = (
 	transactions: Transaction[],
 	receipts: Receipt[]
-): CompletedTransaction[] => {
+): TransactionBundle[] => {
 	return transactions.map((transaction, index) => {
-		return { ...transaction, receipt: receipts[index] };
+		return { transaction, receipt: receipts[index] };
 	});
 };

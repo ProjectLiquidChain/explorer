@@ -1,21 +1,22 @@
 import { serverCall, ServerCall } from "@/components/server/server";
 import {
-	CompletedTransaction,
 	completeTransactions,
 	Transaction,
+	TransactionBundle,
 } from "../transaction";
 
 export const getTransaction: ServerCall<
 	Transaction["hash"],
-	CompletedTransaction
+	TransactionBundle
 > = async (hash) => {
 	const result = await serverCall("chain.GetTransaction", { hash });
-	return { ...result.transaction, receipt: result.receipt };
+	const { transaction, receipt } = result;
+	return { transaction, receipt };
 };
 
 export const getRecentTransactions: ServerCall<
 	{ page: number },
-	{ transactions: CompletedTransaction[]; totalPages: number }
+	{ transactions: TransactionBundle[]; totalPages: number }
 > = async ({ page }) => {
 	const options = { limit: 100, page: page };
 	const r = await serverCall("surf.GetTxs", options);

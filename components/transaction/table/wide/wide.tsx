@@ -5,42 +5,42 @@ import { Numeric } from "@/components/numeric/numeric";
 import { ReceiptCode } from "@/components/receipt/code/code";
 import { Icon, Table, TableColumn, Tag, text } from "@moai/core";
 import { ArrowRight } from "@moai/icon/hrs";
-import { CompletedTransaction } from "../../transaction";
+import { TransactionBundle } from "../../transaction";
 import s from "./wide.module.css";
 
 interface Props {
-	transactions: CompletedTransaction[];
+	transactions: TransactionBundle[];
 }
 
 interface RowProps {
-	transaction: CompletedTransaction;
+	bundle: TransactionBundle;
 }
 
-const Hash = ({ transaction }: RowProps): JSX.Element => (
+const Hash = ({ bundle }: RowProps): JSX.Element => (
 	<Link
-		href={`/transactions/${transaction.hash}`}
-		children={transaction.hash}
+		href={`/transactions/${bundle.transaction.hash}`}
+		children={bundle.transaction.hash}
 	/>
 );
 
-const Type = ({ transaction }: RowProps): JSX.Element => (
-	<Tag children={transaction.type} />
+const Type = ({ bundle }: RowProps): JSX.Element => (
+	<Tag children={bundle.transaction.type} />
 );
 
-const Block = ({ transaction }: RowProps): JSX.Element => (
-	<BlockHeight value={transaction.height} />
+const Block = ({ bundle }: RowProps): JSX.Element => (
+	<BlockHeight value={bundle.transaction.height} />
 );
 
-const Nonce = ({ transaction }: RowProps): JSX.Element => (
-	<Numeric value={transaction.nonce} type="integer" />
+const Nonce = ({ bundle }: RowProps): JSX.Element => (
+	<Numeric value={bundle.transaction.nonce} type="integer" />
 );
 
-const Sender = ({ transaction }: RowProps): JSX.Element => (
-	<AccountAddress wrap={false} value={transaction.sender} />
+const Sender = ({ bundle }: RowProps): JSX.Element => (
+	<AccountAddress wrap={false} value={bundle.transaction.sender} />
 );
 
-const Receiver = ({ transaction }: RowProps): JSX.Element => (
-	<AccountAddress wrap={false} value={transaction.receiver} />
+const Receiver = ({ bundle }: RowProps): JSX.Element => (
+	<AccountAddress wrap={false} value={bundle.transaction.receiver} />
 );
 
 const Arrow = (): JSX.Element => (
@@ -49,30 +49,30 @@ const Arrow = (): JSX.Element => (
 	</div>
 );
 
-const Code = ({ transaction }: RowProps): JSX.Element => (
-	<ReceiptCode code={transaction.receipt.code} format="short" />
+const Code = ({ bundle }: RowProps): JSX.Element => (
+	<ReceiptCode code={bundle.receipt.code} format="short" />
 );
 
 export const getTableColumns = ({ transactions }: Props): TableColumn[] => [
 	{
 		title: "Hash",
 		className: s.hash,
-		render: (i) => <Hash transaction={transactions[i]} />,
+		render: (i) => <Hash bundle={transactions[i]} />,
 	},
 	{
 		title: "Type",
 		className: s.type,
-		render: (i) => <Type transaction={transactions[i]} />,
+		render: (i) => <Type bundle={transactions[i]} />,
 	},
 	{
 		title: "Code",
 		className: s.code,
-		render: (i: number) => <Code transaction={transactions[i]} />,
+		render: (i: number) => <Code bundle={transactions[i]} />,
 	},
 	{
 		title: "Sender",
 		className: s.sender,
-		render: (i) => <Sender transaction={transactions[i]} />,
+		render: (i) => <Sender bundle={transactions[i]} />,
 	},
 	{
 		title: "",
@@ -82,17 +82,17 @@ export const getTableColumns = ({ transactions }: Props): TableColumn[] => [
 	{
 		title: "Receiver",
 		className: s.receiver,
-		render: (i) => <Receiver transaction={transactions[i]} />,
+		render: (i) => <Receiver bundle={transactions[i]} />,
 	},
 	{
 		title: "Block",
 		className: s.block,
-		render: (i) => <Block transaction={transactions[i]} />,
+		render: (i) => <Block bundle={transactions[i]} />,
 	},
 	{
 		title: "Nonce",
 		className: s.nonce,
-		render: (i) => <Nonce transaction={transactions[i]} />,
+		render: (i) => <Nonce bundle={transactions[i]} />,
 	},
 ];
 
@@ -100,7 +100,7 @@ export const TransactionTableWide = (props: Props) => (
 	<div className={s.container}>
 		<Table
 			columns={getTableColumns(props)}
-			rowKey={(index) => props.transactions[index].hash}
+			rowKey={(index) => props.transactions[index].transaction.hash}
 			rowsLength={props.transactions.length}
 		/>
 	</div>

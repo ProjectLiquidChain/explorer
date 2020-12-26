@@ -4,12 +4,12 @@ import { Page } from "@/components/page/page";
 import { toServerError } from "@/components/server/error";
 import { getRecentTransactions } from "@/components/transaction/fetch/fetch";
 import { TransactionPagination } from "@/components/transaction/pagination/pagination";
-import { CompletedTransaction } from "@/components/transaction/transaction";
+import { TransactionBundle } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
 import { GetServerSideProps } from "next";
 
 interface Props {
-	transactions: CompletedTransaction[];
+	transactions: TransactionBundle[];
 	page: number;
 	totalPages: number;
 }

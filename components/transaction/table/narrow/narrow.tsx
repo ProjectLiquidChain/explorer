@@ -1,11 +1,11 @@
 import { Table } from "@moai/core";
 import { ReactNode } from "react";
-import { CompletedTransaction } from "../../transaction";
+import { TransactionBundle } from "../../transaction";
 import { getTableColumns } from "../wide/wide";
 import s from "./narrow.module.css";
 
 interface Props {
-	transactions: CompletedTransaction[];
+	transactions: TransactionBundle[];
 }
 
 const NARROW_COLUMNS: ReactNode[] = ["Hash", "Type", "Receiver", "Block"];
@@ -21,7 +21,7 @@ export const TransactionTableNarrow = (props: Props) => (
 	<div className={s.container}>
 		<Table
 			columns={getColumns(props)}
-			rowKey={(index) => props.transactions[index].hash}
+			rowKey={(index) => props.transactions[index].transaction.hash}
 			rowsLength={props.transactions.length}
 		/>
 	</div>
