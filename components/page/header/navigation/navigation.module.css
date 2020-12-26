@@ -1,0 +1,20 @@
+.ver {
+    display: block;
+}
+
+.ver .link {
+    padding: 8px 0;
+}
+
+.hor {
+    display: flex;
+}
+
+.hor .link {
+    padding: 0 16px;
+}
+
+.link {
+    display: block;
+	text-decoration: none;
+}
