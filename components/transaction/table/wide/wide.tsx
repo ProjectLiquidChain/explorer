@@ -3,50 +3,43 @@ import { BlockHeight } from "@/components/block/height/height";
 import { Link } from "@/components/link/link";
 import { Numeric } from "@/components/numeric/numeric";
 import { ReceiptCode } from "@/components/receipt/code/code";
-import { Receipt } from "@/components/receipt/receipt";
-import { Table, TableColumn } from "@/components/table/table";
-import { Transaction } from "@/components/transaction/transaction";
-import { Icon, Tag, text } from "@moai/core";
+import { Icon, Table, TableColumn, Tag, text } from "@moai/core";
 import { ArrowRight } from "@moai/icon/hrs";
+import { CompletedTransaction } from "../../transaction";
 import s from "./wide.module.css";
 
 interface Props {
-	transactions: Transaction[];
-	receipts: Receipt[];
+	transactions: CompletedTransaction[];
 }
 
-interface TransactionProps {
-	transaction: Transaction;
+interface RowProps {
+	transaction: CompletedTransaction;
 }
 
-interface ReceiptProps {
-	receipt: Receipt;
-}
-
-const Hash = ({ transaction }: TransactionProps): JSX.Element => (
+const Hash = ({ transaction }: RowProps): JSX.Element => (
 	<Link
 		href={`/transactions/${transaction.hash}`}
 		children={transaction.hash}
 	/>
 );
 
-const Type = ({ transaction }: TransactionProps): JSX.Element => (
+const Type = ({ transaction }: RowProps): JSX.Element => (
 	<Tag children={transaction.type} />
 );
 
-const Block = ({ transaction }: TransactionProps): JSX.Element => (
+const Block = ({ transaction }: RowProps): JSX.Element => (
 	<BlockHeight value={transaction.height} />
 );
 
-const Nonce = ({ transaction }: TransactionProps): JSX.Element => (
+const Nonce = ({ transaction }: RowProps): JSX.Element => (
 	<Numeric value={transaction.nonce} type="integer" />
 );
 
-const Sender = ({ transaction }: TransactionProps): JSX.Element => (
+const Sender = ({ transaction }: RowProps): JSX.Element => (
 	<AccountAddress wrap={false} value={transaction.sender} />
 );
 
-const Receiver = ({ transaction }: TransactionProps): JSX.Element => (
+const Receiver = ({ transaction }: RowProps): JSX.Element => (
 	<AccountAddress wrap={false} value={transaction.receiver} />
 );
 
@@ -56,14 +49,11 @@ const Arrow = (): JSX.Element => (
 	</div>
 );
 
-const Code = ({ receipt }: ReceiptProps): JSX.Element => (
-	<ReceiptCode code={receipt.code} format="short" />
+const Code = ({ transaction }: RowProps): JSX.Element => (
+	<ReceiptCode code={transaction.receipt.code} format="short" />
 );
 
-export const getTableColumns = ({
-	transactions,
-	receipts,
-}: Props): TableColumn[] => [
+export const getTableColumns = ({ transactions }: Props): TableColumn[] => [
 	{
 		title: "Hash",
 		className: s.hash,
@@ -77,7 +67,7 @@ export const getTableColumns = ({
 	{
 		title: "Code",
 		className: s.code,
-		render: (i: number) => <Code receipt={receipts[i]} />,
+		render: (i: number) => <Code transaction={transactions[i]} />,
 	},
 	{
 		title: "Sender",

@@ -2,6 +2,12 @@
 	min-width: 480px;
 }
 
+.container {
+	max-height: 80vh;
+	overflow: auto;
+	position: relative;
+}
+
 .name {
 	text-align: left;
 	width: 160px;

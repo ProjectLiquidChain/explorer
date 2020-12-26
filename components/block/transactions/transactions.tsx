@@ -6,6 +6,7 @@ import { TransactionsHeading } from "@/components/transaction/heading/heading";
 import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
 import { Border, DivPx } from "@moai/core";
 import s from "./transactions.module.css";
+import { completeTransactions } from "@/components/transaction/transaction";
 
 interface Props {
 	block: Block;
@@ -34,8 +35,7 @@ const Table = ({ block }: Props): JSX.Element => (
 		<DivPx size={32} />
 		<Border color="weak" />
 		<TransactionTableWide
-			transactions={block.transactions}
-			receipts={block.receipts}
+			transactions={completeTransactions(block.transactions, block.receipts)}
 		/>
 		<Border color="weak" />
 	</div>

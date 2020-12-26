@@ -1,18 +1,14 @@
-import { BlockHeight } from "@/components/block/height/height";
-import { Link } from "@/components/link/link";
-import { Receipt } from "@/components/receipt/receipt";
-import { Table, TableColumn } from "@/components/table/table";
-import { Transaction } from "@/components/transaction/transaction";
-import { Tag } from "@moai/core";
+import { Table } from "@moai/core";
+import { ReactNode } from "react";
+import { CompletedTransaction } from "../../transaction";
 import { getTableColumns } from "../wide/wide";
 import s from "./narrow.module.css";
 
 interface Props {
-	transactions: Transaction[];
-	receipts: Receipt[];
+	transactions: CompletedTransaction[];
 }
 
-const NARROW_COLUMNS = ["Hash", "Type", "Receiver", "Block"];
+const NARROW_COLUMNS: ReactNode[] = ["Hash", "Type", "Receiver", "Block"];
 
 const getColumns = (props: Props) => {
 	const all = getTableColumns(props);

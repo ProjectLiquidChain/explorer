@@ -1,6 +1,7 @@
 import { ContractAccount, UserAccount } from "../account/account";
 import { Argument } from "../argument/argument";
 import { Block } from "../block/block";
+import { Receipt } from "../receipt/receipt";
 
 interface Payload {
 	name: string;
@@ -23,3 +24,16 @@ export interface Transaction {
 
 export const pluralizeTransaction = (count: number): string =>
 	count > 1 ? "transactions" : "transaction";
+
+export interface CompletedTransaction extends Transaction {
+	receipt: Receipt;
+}
+
+export const completeTransactions = (
+	transactions: Transaction[],
+	receipts: Receipt[]
+): CompletedTransaction[] => {
+	return transactions.map((transaction, index) => {
+		return { ...transaction, receipt: receipts[index] };
+	});
+};

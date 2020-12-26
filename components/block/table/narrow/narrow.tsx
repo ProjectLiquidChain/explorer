@@ -1,6 +1,6 @@
 import { Block } from "@/components/block/block";
 import { Numeric } from "@/components/numeric/numeric";
-import { Table, TableColumn } from "@/components/table/table";
+import { Table, TableColumn } from "@moai/core";
 import { Time } from "@/components/time/time";
 import { pluralizeTransaction } from "@/components/transaction/transaction";
 import { BlockTableHeight } from "../height/height";

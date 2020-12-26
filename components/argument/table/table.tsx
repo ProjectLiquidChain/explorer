@@ -1,6 +1,6 @@
 import { AccountAddress } from "@/components/account/address/address";
 import { Numeric } from "@/components/numeric/numeric";
-import { Table } from "@/components/table/table";
+import { Table } from "@moai/core";
 import { Argument } from "../argument";
 import s from "./table.module.css";
 

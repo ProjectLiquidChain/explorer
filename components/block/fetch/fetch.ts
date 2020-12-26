@@ -45,7 +45,11 @@ export const getBlocksByRange = async (
 /**
  * Return 10 recent blocks
  */
-export const getRecentBlocks: ServerCall<undefined, Block[]> = async () => {
+export const getRecentBlocks: ServerCall<
+	{ page: number },
+	{ blocks: Block[]; totalPages: number }
+> = async () => {
 	const latest = await getLatestBlock(undefined);
-	return await getBlocksByRange(latest.height, latest.height - 9);
+	const blocks = await getBlocksByRange(latest.height, latest.height - 9);
+	return { blocks, totalPages: 1 };
 };

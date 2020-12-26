@@ -1,6 +1,6 @@
 import { AccountAddress } from "@/components/account/address/address";
 import { Numeric } from "@/components/numeric/numeric";
-import { Table, TableColumn } from "@/components/table/table";
+import { Table, TableColumn } from "@moai/core";
 import { TokenCurrency } from "@/components/token/currency/currency";
 import { Asset } from "../asset";
 import s from "./table.module.css";

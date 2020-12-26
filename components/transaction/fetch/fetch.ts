@@ -1,19 +1,24 @@
-import { Receipt } from "@/components/receipt/receipt";
 import { serverCall, ServerCall } from "@/components/server/server";
-import { Transaction } from "../transaction";
+import {
+	CompletedTransaction,
+	completeTransactions,
+	Transaction,
+} from "../transaction";
 
 export const getTransaction: ServerCall<
 	Transaction["hash"],
-	{ transaction: Transaction; receipt: Receipt }
-> = (hash) => {
-	return serverCall("chain.GetTransaction", { hash });
+	CompletedTransaction
+> = async (hash) => {
+	const result = await serverCall("chain.GetTransaction", { hash });
+	return { ...result.transaction, receipt: result.receipt };
 };
 
 export const getRecentTransactions: ServerCall<
 	{ page: number },
-	{ transactions: Transaction[]; receipts: Receipt[], totalPages: number }
+	{ transactions: CompletedTransaction[]; totalPages: number }
 > = async ({ page }) => {
-	const result = await serverCall("surf.GetTxs", { limit: 100, page: page });
-	const { transactions, receipts, totalPages } = result;
-	return { transactions, receipts, totalPages };
+	const options = { limit: 100, page: page };
+	const r = await serverCall("surf.GetTxs", options);
+	const transactions = completeTransactions(r.transactions, r.receipts);
+	return { transactions, totalPages: r.totalPages };
 };

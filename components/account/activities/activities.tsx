@@ -29,8 +29,7 @@ const Pane = ({ count, pluralize, children }: PaneProps): JSX.Element => (
 
 export interface AccountActivitiesProps {
 	transactionPages: number;
-	transactions: Transaction.Transaction[];
-	receipts: Receipt[];
+	transactions: Transaction.CompletedTransaction[];
 	transferPages: number;
 	transfers: Transfer.Transfer[];
 }
@@ -50,10 +49,7 @@ const getTransactionTab = (props: AccountActivitiesProps): Tab => {
 		title: `Transactions (${getEstimated(props.transactionPages, count)})`,
 		pane: () => (
 			<Pane count={count} pluralize={Transaction.pluralizeTransaction}>
-				<TransactionTableWide
-					transactions={props.transactions}
-					receipts={props.receipts}
-				/>
+				<TransactionTableWide transactions={props.transactions} />
 			</Pane>
 		),
 	};
@@ -77,6 +73,7 @@ export const AccountActivities = (
 ): JSX.Element => (
 	<Tabs
 		children={[getTransactionTab(props), getTransferTab(props)]}
+		initialTab={props.transactions.length !== 0 ? "transactions" : "transfers"}
 		noPadding
 	/>
 );
