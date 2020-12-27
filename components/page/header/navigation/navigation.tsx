@@ -26,5 +26,6 @@ export const Navigation = (): JSX.Element => (
 		<Link href="/">Home</Link>
 		<Link href="/blocks">Blocks</Link>
 		<Link href="/transactions">Transactions</Link>
+		<Link href="/tokens">Tokens</Link>
 	</div>
 );

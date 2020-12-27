@@ -56,7 +56,7 @@ export const PageHeader = () => {
 					</div>
 				</div>
 			</div>
-			{router.pathname !== "/" && <Border color="strong" />}
+			<Border color="strong" />
 		</div>
 	);
 };
