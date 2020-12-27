@@ -28,22 +28,21 @@ export const useTheme = () => {
 };
 
 interface Props {
-	fill: boolean;
 	theme: Theme;
 	setTheme: (theme: Theme) => void;
 }
 
-export const Theme = ({ fill, theme, setTheme }: Props): JSX.Element => (
-	<ButtonGroup fill={fill}>
+export const Theme = ({ theme, setTheme }: Props): JSX.Element => (
+	<ButtonGroup fill>
 		<Tooltip content="Use light theme">
 			<Button.Forwarded
 				style={Button.style.outset}
 				icon={Sun}
 				iconLabel="Use light theme"
-				children={fill ? "Light" : undefined}
+				children="Light"
 				onClick={() => setTheme("light")}
 				selected={theme === "light"}
-				fill={fill}
+				fill
 			/>
 		</Tooltip>
 		<Tooltip content="Use dark theme">
@@ -51,10 +50,10 @@ export const Theme = ({ fill, theme, setTheme }: Props): JSX.Element => (
 				style={Button.style.outset}
 				icon={Moon}
 				iconLabel="Use dark theme"
-				children={fill ? "Dark" : undefined}
+				children="Dark"
 				onClick={() => setTheme("dark")}
 				selected={theme === "dark"}
-				fill={fill}
+				fill
 			/>
 		</Tooltip>
 	</ButtonGroup>

@@ -15,40 +15,45 @@ export const PageHeader = () => {
 	const { theme, setTheme } = useTheme();
 	return (
 		<div
-			className={[s.container, boxShadow.strong, background.primary].join(" ")}
+			className={[s.wrapper, boxShadow.strong, background.primary].join(" ")}
 		>
-			<div className={[s.toolbar, container.max960].join(" ")}>
-				<div className={s.left}>
-					<div className={s.logo}>
-						<Logo />
-					</div>
-					<div className={s.navigation}>
-						<Navigation fill={true} />
-					</div>
-					<div className={s.toggle}>
-						<Button
-							onClick={() => setShowMenu((b) => !b)}
-							selected={showMenu}
-							icon={Menu}
-							iconLabel="Menu"
-						/>
-					</div>
+			<div className={[s.container, container.max960].join(" ")}>
+				<div className={s.logo}>
+					<Logo />
 				</div>
-				{showMenu && (
-					<div className={s.menu}>
-						<div className={s.navigation}>
-							<Navigation fill={false} />
-						</div>
-						<div className={s.theme}>
-							<Theme theme={theme} setTheme={setTheme} fill={true} />
-						</div>
-					</div>
-				)}
+				<div className={s.navigation}>
+					<Navigation />
+				</div>
+				<div className={s.toggle}>
+					<Button
+						onClick={() => setShowMenu((b) => !b)}
+						selected={showMenu}
+						icon={Menu}
+						iconLabel="Menu"
+					/>
+				</div>
 				<div className={s.search}>
 					<Search />
 				</div>
 				<div className={s.theme}>
-					<Theme theme={theme} setTheme={setTheme} fill={true} />
+					<Theme theme={theme} setTheme={setTheme} />
+				</div>
+				<div className={s.menu}>
+					{showMenu && (
+						<>
+							<div className={s.navigation}>
+								<Navigation />
+							</div>
+							<DivPx size={16} />
+							<div className={s.theme}>
+								<Theme theme={theme} setTheme={setTheme} />
+							</div>
+							<DivPx size={16} />
+						</>
+					)}
+					<div className={s.search}>
+						<Search />
+					</div>
 				</div>
 			</div>
 			{router.pathname !== "/" && <Border color="strong" />}

@@ -21,12 +21,8 @@ const Link = (props: LinkProps): JSX.Element => {
 	);
 };
 
-interface Props {
-	fill: boolean;
-}
-
-export const Navigation = ({ fill }: Props): JSX.Element => (
-	<div className={[s.container, fill ? s.hor : s.ver].join(" ")}>
+export const Navigation = (): JSX.Element => (
+	<div className={s.container}>
 		<Link href="/">Home</Link>
 		<Link href="/blocks">Blocks</Link>
 		<Link href="/transactions">Transactions</Link>

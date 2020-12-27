@@ -1,20 +1,22 @@
-.ver {
-    display: block;
-}
-
-.ver .link {
-    padding: 8px 0;
-}
-
-.hor {
-    display: flex;
-}
-
-.hor .link {
-    padding: 0 16px;
-}
-
 .link {
-    display: block;
+	display: block;
 	text-decoration: none;
+}
+
+@media (min-width: 641px) {
+	.container {
+		display: flex;
+	}
+	.link {
+		padding: 0 16px;
+	}
+}
+
+@media (max-width: 640px) {
+	.container {
+		display: block;
+	}
+	.link {
+		padding: 8px 0px;
+	}
 }
