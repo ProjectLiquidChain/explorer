@@ -2,6 +2,10 @@
 	min-height: 100vh;
 }
 
+.body {
+	min-height: 400px;
+}
+
 .loading {
 	padding: 16px;
 }

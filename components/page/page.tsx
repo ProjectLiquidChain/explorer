@@ -1,6 +1,7 @@
 import { background, DivPx } from "@moai/core";
 import NextHead from "next/head";
 import { PageError, PageErrorProps } from "./error/error";
+import { PageFooter } from "./footer/footer";
 import { PageHeader } from "./header/header";
 import s from "./page.module.css";
 
@@ -35,8 +36,11 @@ export const Page = <T,>(props: Props<T>) => {
 		<div className={[s.container, background.secondary].join(" ")}>
 			<Head {...props} />
 			<PageHeader />
-			{page.hasError ? <PageError error={page.error} /> : <Body {...page} />}
+			<div className={s.body}>
+				{page.hasError ? <PageError error={page.error} /> : <Body {...page} />}
+			</div>
 			<DivPx size={32} />
+			<PageFooter />
 		</div>
 	);
 };
