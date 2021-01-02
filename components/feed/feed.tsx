@@ -1,4 +1,5 @@
 import { DivPx, Pane } from "@moai/core";
+import { BLOCK_INTERVAL } from "constants/constants";
 import { useEffect, useState } from "react";
 import { Block } from "../block/block";
 import { getRecentBlocks } from "../block/fetch/fetch";
@@ -22,7 +23,7 @@ export const Feed = (props: Props): JSX.Element => {
 		const timer = window.setInterval(async () => {
 			const { blocks } = await getRecentBlocks({ page: 0 });
 			setBlocks(blocks);
-		}, 5000);
+		}, BLOCK_INTERVAL);
 		return () => window.clearInterval(timer);
 	}, []);
 
@@ -30,7 +31,7 @@ export const Feed = (props: Props): JSX.Element => {
 		const timer = window.setInterval(async () => {
 			const result = await getRecentTransactions({ page: 0 });
 			setTransactions(result.transactions.slice(0, 10));
-		}, 5000);
+		}, BLOCK_INTERVAL);
 		return () => window.clearInterval(timer);
 	}, []);
 
