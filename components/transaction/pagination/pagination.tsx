@@ -33,9 +33,9 @@ export const TransactionPagination = (props: Props): JSX.Element => {
 				<h1 className={s.title}>Recent Transactions</h1>
 				<DivPx size={16} />
 				<Pagination
+					total={props.totalPages - 1}
 					current={page}
 					onPageChange={onPageChange}
-					total={props.totalPages}
 				/>
 			</div>
 			<Pane noPadding>

@@ -18,20 +18,21 @@ export const getAccount: AccountCall<Account> = async (address) => {
 	return account;
 };
 
-export const getAccountTransactions: AccountCall<{
-	transactions: TransactionBundle[];
-	transactionPages: number;
-}> = async (address) => {
-	const r = await serverCall("surf.GetAccountTxs", { address });
+export const getAccountTransactions: ServerCall<
+	{ address: Account["address"]; page: number },
+	{ transactions: TransactionBundle[]; transactionPages: number }
+> = async ({ address, page }) => {
+	const r = await serverCall("surf.GetAccountTxs", { address, page });
 	const transactions = bundleTransactions(r.transactions, r.receipts);
 	return { transactions, transactionPages: r.totalPages };
 };
 
-export const getAccountTransfers: AccountCall<{
-	transfers: Transfer[];
-	transferPages: number;
-}> = async (address) => {
-	const result = await serverCall("surf.GetAccountTransfers", { address });
+export const getAccountTransfers: ServerCall<
+	{ address: Account["address"]; page: number },
+	{ transfers: Transfer[]; transferPages: number }
+> = async ({ address, page }) => {
+	const opts = { address, page };
+	const result = await serverCall("surf.GetAccountTransfers", opts);
 	const { transfers, totalPages } = result;
 	return { transfers, transferPages: totalPages };
 };
