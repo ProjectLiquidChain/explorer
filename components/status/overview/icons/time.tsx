@@ -1,4 +1,4 @@
-export const OverviewBlockTimeIcon = (props: any): JSX.Element => (
+export const OverviewTimeIcon = (props: any): JSX.Element => (
 	<svg
 		width="24"
 		height="24"

@@ -39,7 +39,7 @@ export const Page = <T,>(props: Props<T>) => {
 			<div className={s.body}>
 				{page.hasError ? <PageError error={page.error} /> : <Body {...page} />}
 			</div>
-			<DivPx size={32} />
+			<DivPx size={64 as any} />
 			<PageFooter />
 		</div>
 	);

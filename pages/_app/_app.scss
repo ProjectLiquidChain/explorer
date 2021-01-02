@@ -5,14 +5,13 @@
 
 body:not(.override) {
 	--font-mono: "Source Code Pro", monospace;
-	// ss02: disambiguation without zero
+	// ss04: disambiguation without zero
 	font-feature-settings: "tnum", "ss04";
 
 	// Future Moai
 	line-height: 20px;
 
 	// Liquid color scheme
-
 	--blue-0: #eff6ff;
 	--blue-1: #dbeafe;
 	--blue-2: #bfdbfe;
@@ -23,4 +22,7 @@ body:not(.override) {
 	--blue-7: #1d4ed8;
 	--blue-8: #1e40af;
 	--blue-9: #1e3a8a;
+
+	// // Light border mode
+	// --gray-3: var(--gray-2);
 }
