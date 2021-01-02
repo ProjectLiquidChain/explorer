@@ -1,6 +1,6 @@
 import { container } from "@/components/container/container";
 import { Numeric } from "@/components/numeric/numeric";
-import { BLOCK_INTERVAL } from "constants/constants";
+import { BLOCK_INTERVAL_SECONDS } from "constants/constants";
 import { useEffect, useState } from "react";
 import { getStatus } from "../fetch/fetch";
 import { Status } from "../status";
@@ -23,7 +23,7 @@ const Body = (props: Props): JSX.Element => {
 		const timer = window.setInterval(async () => {
 			const status = await getStatus(undefined);
 			setStatus(status);
-		}, BLOCK_INTERVAL);
+		}, BLOCK_INTERVAL_SECONDS * 1000);
 		return () => window.clearInterval(timer);
 	}, []);
 

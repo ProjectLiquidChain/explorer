@@ -13,7 +13,7 @@ import { DivPx } from "@moai/core";
 import { GetStaticProps } from "next";
 import * as React from "react";
 import { Status } from "@/components/status/status";
-import { BLOCK_INTERVAL } from "constants/constants";
+import { BLOCK_INTERVAL_SECONDS } from "constants/constants";
 
 interface Props {
 	blocks: Block[];
@@ -43,7 +43,7 @@ const HomePage = (page: PageProps) => (
 );
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-	const revalidate = BLOCK_INTERVAL;
+	const revalidate = BLOCK_INTERVAL_SECONDS;
 	try {
 		const results = await Promise.all([
 			// Feed

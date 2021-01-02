@@ -1,4 +1,4 @@
-export const BLOCK_INTERVAL: number = (() => {
+export const BLOCK_INTERVAL_SECONDS: number = (() => {
 	const interval = process.env.NEXT_PUBLIC_BLOCK_INTERVAL;
 	if (typeof interval === "string") return parseInt(interval);
 	throw Error("BLOCK_INTERVAL is undefined");
