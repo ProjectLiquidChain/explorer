@@ -1,6 +1,6 @@
-import { Block } from "../block/block";
-import { container } from "../container/container";
-import { Numeric } from "../numeric/numeric";
+import { container } from "@/components/container/container";
+import { Numeric } from "@/components/numeric/numeric";
+import { Status } from "../status";
 import { OverviewChart } from "./chart/chart";
 import { OverviewBlockIcon } from "./icons/block";
 import { OverviewBlockTimeIcon } from "./icons/block-time";
@@ -10,43 +10,35 @@ import { OverviewInfo } from "./info/info";
 import s from "./overview.module.css";
 
 interface Props {
-	block: Block;
+	status: Status;
 }
 
 const Infos = (props: Props): JSX.Element => (
 	<div className={s.infos}>
 		<div className={s.info}>
-			<OverviewInfo
-				icon={OverviewBlockIcon}
-				label="Block Height"
-				children={<Numeric type="integer" value={props.block.height} />}
-			/>
+			<OverviewInfo icon={OverviewBlockIcon} label="Block Height">
+				<Numeric type="integer" value={props.status.blockHeight} />
+			</OverviewInfo>
 		</div>
 		<div className={s.info}>
-			<OverviewInfo
-				icon={OverviewBlockTimeIcon}
-				label="Avg. Block Time (24h)"
-				children="24.2 seconds"
-			/>
+			<OverviewInfo icon={OverviewBlockTimeIcon} label="Avg. Block Time (24h)">
+				{props.status.blockAverageTime} seconds
+			</OverviewInfo>
 		</div>
 		<div className={s.info}>
-			<OverviewInfo
-				icon={OverviewTransactionIcon}
-				label="Total Transactions"
-				children={<Numeric type="integer" value={82712821} />}
-			/>
+			<OverviewInfo icon={OverviewBlockTransactionIcon} label="Latest price">
+				<Numeric type="float" fraction={8} value={props.status.price} />
+			</OverviewInfo>
 		</div>
 		<div className={s.info}>
-			<OverviewInfo
-				icon={OverviewBlockTransactionIcon}
-				label="Avg. Tx per Block (24h)"
-				children={<Numeric type="integer" value={123} />}
-			/>
+			<OverviewInfo icon={OverviewTransactionIcon} label="Total Transactions">
+				<Numeric type="integer" value={props.status.transactionCount} />
+			</OverviewInfo>
 		</div>
 	</div>
 );
 
-export const Overview = (props: Props): JSX.Element => (
+export const StatusOverview = (props: Props): JSX.Element => (
 	<div className={s.wrapper}>
 		<div className={[s.container, container.max960].join(" ")}>
 			<div className={s.title}>Liquid Chain Explorer</div>

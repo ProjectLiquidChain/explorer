@@ -15,12 +15,20 @@ interface BigDecimalProps {
 	decimal: number;
 }
 
-type Props = IntegerProps | BigDecimalProps;
+interface FloatProps {
+	type: "float";
+	value: number;
+	fraction: number;
+}
+
+type Props = IntegerProps | BigDecimalProps | FloatProps;
 
 export const formatNumber = (props: Props): string => {
 	switch (props.type) {
 		case "integer":
 			return formatNumberRaw(0, props.value);
+		case "float":
+			return formatNumberRaw(props.fraction, props.value);
 		case "big-decimal":
 			const raw = new Big(props.value);
 			const decimal = new Big(`1e${props.decimal.toString()}`);
@@ -52,6 +60,6 @@ export const Numeric = (props: Props): JSX.Element => {
 			</span>
 		);
 	} else {
-		return <span>{value}</span>
+		return <span>{value}</span>;
 	}
 };
