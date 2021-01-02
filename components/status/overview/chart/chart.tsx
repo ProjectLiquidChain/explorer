@@ -43,10 +43,10 @@ export const OverviewChart = (): JSX.Element => {
 		return () => void chart.destroy();
 	}, [canvas]);
 	return (
-		<div>
+		<div className={s.container}>
 			<div className={s.label}>Transactions history in 14 days</div>
 			<DivPx size={8} />
-			<div style={{ height: 100 }}>
+			<div className={s.chart}>
 				<canvas ref={canvas} width="100" height="100" />
 			</div>
 		</div>

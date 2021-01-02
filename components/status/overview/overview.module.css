@@ -15,42 +15,44 @@
 	margin-bottom: 36px;
 }
 
-@media (max-width: 640px) {
-	.body {
-		display: block;
-	}
+.body {
+	display: grid;
+	row-gap: 24px;
 }
 
 @media (min-width: 641px) {
 	.body {
-		display: flex;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-rows: max-content max-content;
+		grid-template-areas: "info-1 info-2 chart" "info-3 info-4 chart";
 	}
-}
-
-.infos {
-	flex: 2 1 0px;
-	position: relative;
 }
 
 @media (max-width: 640px) {
-	.infos {
-		display: block;
+	.body {
+		grid-template-columns: auto;
+		grid-template-rows: repeat(4, max-content) 150px;
+		grid-template-areas: "info-1" "info-2" "info-3" "info-4" "chart";
 	}
 }
 
-@media (min-width: 641px) {
-	.infos {
-		display: flex;
-		flex-wrap: wrap;
-	}
+.info1 {
+	grid-area: info-1;
+}
+
+.info2 {
+	grid-area: info-2;
+}
+
+.info3 {
+	grid-area: info-3;
+}
+
+.info4 {
+	grid-area: info-4;
 }
 
 .chart {
-	flex: 1 1 0px;
-	padding: 8px;
-}
-
-.info {
-	flex: 0 0 50%;
-	padding: 8px;
+	grid-area: chart;
+	overflow: hidden;
 }
