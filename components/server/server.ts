@@ -1,6 +1,5 @@
+import { API_SERVER } from "constants/constants";
 import { ServerError } from "./error";
-
-const host = process.env.NEXT_PUBLIC_SERVER_HOST;
 
 // @TODO: Should define these as nominal types
 // https://github.com/microsoft/TypeScript/issues/202
@@ -8,8 +7,6 @@ const host = process.env.NEXT_PUBLIC_SERVER_HOST;
 export type Hash = string;
 
 export type Address = string;
-
-if (typeof host !== "string") throw Error("SERVER_HOST is not defined");
 
 export const serverCall = async (
 	method: `${"surf" | "chain"}.${string}`,
@@ -24,7 +21,7 @@ export const serverCall = async (
 	const headers: HeadersInit = {
 		"Content-Type": "application/json",
 	};
-	const url = method.startsWith("surf") ? `${host}/surf` : host;
+	const url = method.startsWith("surf") ? `${API_SERVER}/surf` : API_SERVER;
 
 	const response = await fetch(url, {
 		method: "POST",
