@@ -22,7 +22,7 @@ export const Feed = (props: Props): JSX.Element => {
 	useEffect(() => {
 		const timer = window.setInterval(async () => {
 			const { blocks } = await getRecentBlocks({ page: 0 });
-			setBlocks(blocks);
+			setBlocks(blocks.slice(0, 10));
 		}, BLOCK_INTERVAL_SECONDS * 1000);
 		return () => window.clearInterval(timer);
 	}, []);

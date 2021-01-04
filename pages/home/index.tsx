@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 			getStatus(undefined),
 		]);
 		const props: Props = {
-			blocks: results[0].blocks,
+			blocks: results[0].blocks.slice(0, 10),
 			transactions: results[1].transactions.slice(0, 10),
 			status: results[2],
 		};
