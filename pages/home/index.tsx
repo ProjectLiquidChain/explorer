@@ -2,18 +2,18 @@ import { Block } from "@/components/block/block";
 import { getRecentBlocks } from "@/components/block/fetch/fetch";
 import { container } from "@/components/container/container";
 import { Feed } from "@/components/feed/feed";
-import { StatusOverview } from "@/components/status/overview/overview";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page, PageDefaultHead } from "@/components/page/page";
 import { toServerError } from "@/components/server/error";
 import { getStatus } from "@/components/status/fetch/fetch";
+import { StatusOverview } from "@/components/status/overview/overview";
+import { Status } from "@/components/status/status";
 import { getRecentTransactions } from "@/components/transaction/fetch/fetch";
 import { TransactionBundle } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
+import { BLOCK_INTERVAL_SECONDS } from "constants/constants";
 import { GetStaticProps } from "next";
 import * as React from "react";
-import { Status } from "@/components/status/status";
-import { BLOCK_INTERVAL_SECONDS } from "constants/constants";
 
 interface Props {
 	blocks: Block[];

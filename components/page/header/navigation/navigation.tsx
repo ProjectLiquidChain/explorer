@@ -24,8 +24,8 @@ const Link = (props: LinkProps): JSX.Element => {
 export const Navigation = (): JSX.Element => (
 	<div className={s.container}>
 		<Link href="/">Home</Link>
-		<Link href="/blocks">Blocks</Link>
-		<Link href="/transactions">Transactions</Link>
-		<Link href="/tokens">Tokens</Link>
+		<Link href="/blocks/1">Blocks</Link>
+		<Link href="/transactions/1">Transactions</Link>
+		<Link href="/tokens/1">Tokens</Link>
 	</div>
 );

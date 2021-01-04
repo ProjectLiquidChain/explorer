@@ -36,5 +36,5 @@ export const AccountAddress = (props: Props): JSX.Element => {
 
 	const router = useRouter();
 	if (router.query.address === value) return children;
-	return <Link href={`/accounts/${value}`} children={children} />;
+	return <Link href={`/account/${value}`} children={children} />;
 };

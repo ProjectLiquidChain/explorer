@@ -18,7 +18,7 @@ interface RowProps {
 
 const Hash = ({ bundle }: RowProps): JSX.Element => (
 	<Link
-		href={`/transactions/${bundle.transaction.hash}`}
+		href={`/transaction/${bundle.transaction.hash}`}
 		children={bundle.transaction.hash}
 	/>
 );
