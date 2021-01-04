@@ -7,6 +7,7 @@ import s from "./height.module.css";
 
 interface Props {
 	block: Block;
+	showDot: boolean;
 }
 
 const Dot = ({ recent }: { recent: boolean }): JSX.Element => (
@@ -15,7 +16,7 @@ const Dot = ({ recent }: { recent: boolean }): JSX.Element => (
 	</span>
 );
 
-export const BlockTableHeight = ({ block }: Props): JSX.Element => {
+export const BlockTableHeight = ({ block, showDot }: Props): JSX.Element => {
 	const [recent, setRecent] = useState(true);
 	useEffect(() => {
 		window.setTimeout(() => setRecent(false), 1000);
@@ -23,7 +24,7 @@ export const BlockTableHeight = ({ block }: Props): JSX.Element => {
 	return (
 		<div>
 			<BlockHeight value={block.height} />
-			<Dot recent={recent} />
+			{showDot && <Dot recent={recent} />}
 		</div>
 	);
 };

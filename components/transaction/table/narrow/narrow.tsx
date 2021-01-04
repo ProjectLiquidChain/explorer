@@ -1,7 +1,7 @@
 import { Table } from "@moai/core";
 import { ReactNode } from "react";
 import { TransactionBundle } from "../../transaction";
-import { getTableColumns } from "../wide/wide";
+import { getTransactionColumns } from "../wide/wide";
 import s from "./narrow.module.css";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 const NARROW_COLUMNS: ReactNode[] = ["Hash", "Type", "Receiver", "Block"];
 
 const getColumns = (props: Props) => {
-	const all = getTableColumns(props);
+	const all = getTransactionColumns(props);
 	return all.filter((column) => {
 		return NARROW_COLUMNS.includes(column.title);
 	});

@@ -1,0 +1,29 @@
+.container {
+	max-height: 80vh;
+	overflow: auto;
+	position: relative;
+}
+
+.container table {
+	min-width: calc(140px + 160px + 160px + 200px);
+}
+
+.height {
+	text-align: left;
+	width: 140px;
+}
+
+.hash {
+	text-align: left;
+}
+
+.transactions {
+	text-align: right;
+	width: 160px;
+}
+
+.time {
+	text-align: right;
+	/* Enough to not break line */
+	width: 200px;
+}

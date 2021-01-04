@@ -53,7 +53,9 @@ const Code = ({ bundle }: RowProps): JSX.Element => (
 	<ReceiptCode code={bundle.receipt.code} format="short" />
 );
 
-export const getTableColumns = ({ transactions }: Props): TableColumn[] => [
+export const getTransactionColumns = ({
+	transactions,
+}: Props): TableColumn[] => [
 	{
 		title: "Hash",
 		className: s.hash,
@@ -99,7 +101,7 @@ export const getTableColumns = ({ transactions }: Props): TableColumn[] => [
 export const TransactionTableWide = (props: Props) => (
 	<div className={s.container}>
 		<Table
-			columns={getTableColumns(props)}
+			columns={getTransactionColumns(props)}
 			rowKey={(index) => props.transactions[index].transaction.hash}
 			rowsLength={props.transactions.length}
 		/>

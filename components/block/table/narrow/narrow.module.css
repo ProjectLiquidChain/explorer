@@ -5,19 +5,3 @@
 .container {
 	overflow: auto;
 }
-
-.height {
-	text-align: left;
-	width: 140px;
-}
-
-.transactions {
-	text-align: right;
-	min-width: 160px;
-}
-
-.time {
-	text-align: right;
-	/* Enough to not break line */
-	width: 200px;
-}
