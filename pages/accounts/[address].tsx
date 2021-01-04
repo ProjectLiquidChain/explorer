@@ -19,6 +19,11 @@ import { toServerError } from "@/components/server/error";
 import { DivPx, Pane } from "@moai/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 
+type ActivitiesProps = Pick<
+	AccountActivitiesProps,
+	"transactionPages" | "transactions" | "transferPages" | "transfers"
+>;
+
 interface Props extends AccountActivitiesProps {
 	account: Account;
 	contract: Contract | null;
@@ -49,6 +54,7 @@ const AccountBody = (props: Props): JSX.Element => (
 		<DivPx size={16} />
 		<Heading children="Recent Activities" />
 		<AccountActivities
+			address={props.account.address}
 			transactions={props.transactions}
 			transactionPages={props.transactionPages}
 			transfers={props.transfers}
@@ -85,8 +91,8 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 			fetchAccount.getAccount(address),
 			getContract(address),
 			fetchAccount.getAccountAssets(address),
-			fetchAccount.getAccountTransactions(address),
-			fetchAccount.getAccountTransfers(address),
+			fetchAccount.getAccountTransactions({ address, page: 0 }),
+			fetchAccount.getAccountTransfers({ address, page: 0 }),
 		]);
 
 		const account = getValue(result[0]);
