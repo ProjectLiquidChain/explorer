@@ -7,7 +7,7 @@ import { TransactionPagination } from "@/components/transaction/pagination/pagin
 import { TransactionBundle } from "@/components/transaction/transaction";
 import { DivPx } from "@moai/core";
 import { BLOCK_INTERVAL_SECONDS } from "constants/constants";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 interface Props {
 	transactions: TransactionBundle[];

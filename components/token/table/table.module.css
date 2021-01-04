@@ -1,0 +1,19 @@
+.container table {
+	min-width: calc(160px + 200px);
+}
+
+.container {
+	max-height: 80vh;
+	overflow: auto;
+	position: relative;
+}
+
+.name {
+	text-align: left;
+	width: 160px;
+}
+
+.address {
+	text-align: left;
+	min-width: 200px;
+}
