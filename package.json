@@ -8,14 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
-    "@moai/core": "^0.141.0",
+    "@moai/core": "0.151.0",
     "@moai/icon": "0.35.0",
     "@tippyjs/react": "4.2.0",
     "big.js": "6.0.3",
     "chart.js": "^3.0.0-beta.7",
     "next": "10.0.4",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "sharp": "^0.26.2"
   },
   "devDependencies": {
     "@types/big.js": "6.0.1",

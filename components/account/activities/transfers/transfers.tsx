@@ -1,12 +1,9 @@
-import { Pagination } from "@/components/pagination/pagination";
-import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
-import { TransactionBundle } from "@/components/transaction/transaction";
 import { TransferTable } from "@/components/transfer/table/table";
 import { Transfer } from "@/components/transfer/transfer";
-import { Border, Paragraph } from "@moai/core";
+import { Border, Pagination, Paragraph } from "@moai/core";
 import { useCallback, useState } from "react";
 import { Account } from "../../account";
-import { getAccountTransactions, getAccountTransfers } from "../../fetch/fetch";
+import { getAccountTransfers } from "../../fetch/fetch";
 import s from "./transfers.module.css";
 
 interface Props {
@@ -21,7 +18,8 @@ export const AccountActivitiesTransfers = (props: Props): JSX.Element => {
 
 	const { address } = props;
 	const onPageChange = useCallback(
-		async (page): Promise<void> => {
+		async (page1): Promise<void> => {
+			const page = page1 - 1;
 			const result = await getAccountTransfers({ address, page });
 			setTransfers(result.transfers);
 			setPage(page);
@@ -31,17 +29,20 @@ export const AccountActivitiesTransfers = (props: Props): JSX.Element => {
 
 	// NOTE: use initial value, not the paginated value in state
 	return props.transfers.length === 0 ? (
-		<Paragraph>No recent transfers</Paragraph>
+		<div className={s.header}>
+			<Paragraph>No recent transfers</Paragraph>
+		</div>
 	) : (
 		<div>
-			<div className={s.pagination}>
+			<div className={s.header}>
 				<Pagination
-					total={props.totalPages - 1}
-					current={page}
-					onPageChange={onPageChange}
+					max={props.totalPages}
+					min={1}
+					value={page + 1}
+					setValue={onPageChange}
 				/>
 			</div>
-            <Border color="weak" />
+			<Border color="weak" />
 			<TransferTable transfers={transfers} />
 		</div>
 	);

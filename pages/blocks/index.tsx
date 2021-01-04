@@ -40,9 +40,9 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
 	context
 ) => {
 	const page: number = (() => {
-		const query = context.query.page ?? "0";
+		const query = context.query.page ?? "1";
 		const page = Array.isArray(query) ? query[0] : query;
-		return parseInt(page);
+		return parseInt(page) - 1;
 	})();
 
 	try {

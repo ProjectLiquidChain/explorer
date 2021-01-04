@@ -1,5 +1,4 @@
-import { Pagination } from "@/components/pagination/pagination";
-import { DivPx, Pane } from "@moai/core";
+import { DivPx, Pane, Pagination } from "@moai/core";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { Block } from "../block";
@@ -19,11 +18,13 @@ export const BlockPagination = (props: Props): JSX.Element => {
 	const [blocks, setBlocks] = useState(props.blocks);
 	const [page, setPage] = useState(props.page);
 
-	const onPageChange = useCallback(async (page: number): Promise<void> => {
+	const onPageChange = useCallback(async (page1: number): Promise<void> => {
+		// page1 is 1-based indexed
+		const page = page1 - 1;
 		const { blocks } = await getRecentBlocks({ page });
 		setBlocks(blocks);
 		setPage(page);
-		const url = `/blocks?page=${page}`;
+		const url = `/blocks?page=${page1}`;
 		await router.push(url, undefined, { shallow: true });
 	}, []);
 
@@ -33,9 +34,10 @@ export const BlockPagination = (props: Props): JSX.Element => {
 				<h1 className={s.title}>Recent Blocks</h1>
 				<DivPx size={16} />
 				<Pagination
-					total={props.totalPages - 1}
-					current={page}
-					onPageChange={onPageChange}
+					min={1}
+					max={props.totalPages}
+					value={page + 1}
+					setValue={onPageChange}
 				/>
 			</div>
 			<Pane noPadding>

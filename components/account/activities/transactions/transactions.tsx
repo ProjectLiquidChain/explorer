@@ -1,7 +1,6 @@
-import { Pagination } from "@/components/pagination/pagination";
 import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
 import { TransactionBundle } from "@/components/transaction/transaction";
-import { Border, Paragraph } from "@moai/core";
+import { Border, Paragraph, Pagination } from "@moai/core";
 import { useCallback, useState } from "react";
 import { Account } from "../../account";
 import { getAccountTransactions } from "../../fetch/fetch";
@@ -19,7 +18,8 @@ export const AccountActivitiesTransactions = (props: Props): JSX.Element => {
 
 	const { address } = props;
 	const onPageChange = useCallback(
-		async (page): Promise<void> => {
+		async (page1): Promise<void> => {
+			const page = page1 - 1;
 			const result = await getAccountTransactions({ address, page });
 			setTransactions(result.transactions);
 			setPage(page);
@@ -29,17 +29,20 @@ export const AccountActivitiesTransactions = (props: Props): JSX.Element => {
 
 	// NOTE: use initialTransactions, not the paginated transactions
 	return props.transactions.length === 0 ? (
-		<Paragraph>No recent transactions</Paragraph>
+		<div className={s.header}>
+			<Paragraph>No recent transactions</Paragraph>
+		</div>
 	) : (
 		<div>
-			<div className={s.pagination}>
+			<div className={s.header}>
 				<Pagination
-					total={props.totalPages - 1}
-					current={page}
-					onPageChange={onPageChange}
+					min={1}
+					max={props.totalPages}
+					value={page + 1}
+					setValue={onPageChange}
 				/>
 			</div>
-            <Border color="weak" />
+			<Border color="weak" />
 			<TransactionTableWide transactions={transactions} />
 		</div>
 	);

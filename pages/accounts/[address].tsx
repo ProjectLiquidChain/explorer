@@ -24,7 +24,7 @@ type ActivitiesProps = Pick<
 	"transactionPages" | "transactions" | "transferPages" | "transfers"
 >;
 
-interface Props extends AccountActivitiesProps {
+interface Props extends ActivitiesProps {
 	account: Account;
 	contract: Contract | null;
 	assets: Asset[];
