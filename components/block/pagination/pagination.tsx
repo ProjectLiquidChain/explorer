@@ -15,7 +15,7 @@ export const BlockPagination = (props: Props): JSX.Element => {
 	const router = useRouter();
 
 	const onPageChange = useCallback(async (page: number): Promise<void> => {
-		await router.push(`/blocks/${page}`, undefined);
+		await router.push(`/blocks/${page}`);
 	}, []);
 
 	return (

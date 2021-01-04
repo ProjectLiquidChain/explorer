@@ -14,5 +14,10 @@ module.exports = {
 			destination: "/transactions/1",
 			permanent: true,
 		},
+		{
+			source: "/transfers",
+			destination: "/transfers/1",
+			permanent: true,
+		},
 	],
 };

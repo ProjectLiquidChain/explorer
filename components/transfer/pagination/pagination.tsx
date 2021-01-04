@@ -1,27 +1,27 @@
-import { TransactionTableWide } from "@/components/transaction/table/wide/wide";
 import { DivPx, Pagination, Pane } from "@moai/core";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
-import { TransactionBundle } from "../transaction";
+import { Transfer } from "../transfer";
+import { TransferTable } from "../table/table";
 import s from "./pagination.module.css";
 
 interface Props {
-	transactions: TransactionBundle[];
+	transfers: Transfer[];
 	page: number;
 	totalPages: number;
 }
 
-export const TransactionPagination = (props: Props): JSX.Element => {
+export const TransferPagination = (props: Props): JSX.Element => {
 	const router = useRouter();
 
 	const onPageChange = useCallback(async (page: number): Promise<void> => {
-		await router.push(`/transactions/${page}`);
+		await router.push(`/transfers/${page}`);
 	}, []);
 
 	return (
 		<div>
 			<div className={s.header}>
-				<h1 className={s.title}>Recent Transactions</h1>
+				<h1 className={s.title}>Recent Transfers</h1>
 				<DivPx size={16} />
 				<Pagination
 					min={1}
@@ -31,7 +31,7 @@ export const TransactionPagination = (props: Props): JSX.Element => {
 				/>
 			</div>
 			<Pane noPadding>
-				<TransactionTableWide transactions={props.transactions} />
+				<TransferTable transfers={props.transfers} />
 			</Pane>
 		</div>
 	);
