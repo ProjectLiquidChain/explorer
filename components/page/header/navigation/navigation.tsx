@@ -8,12 +8,19 @@ interface LinkProps {
 	children: string;
 }
 
+const isSame = (route: string, me: string): boolean => {
+	if (route === "/") {
+		return me === "/";
+	} else {
+		return me.startsWith(route);
+	}
+};
+
 const Link = (props: LinkProps): JSX.Element => {
 	const router = useRouter();
-	const activeCls =
-		router.pathname === props.href
-			? [text.strong, text.blueStrong].join(" ")
-			: text.muted;
+	const activeCls = isSame(props.href, router.pathname)
+		? [text.strong, text.blueStrong].join(" ")
+		: text.muted;
 	return (
 		<NextLink href={props.href}>
 			<a className={[s.link, activeCls].join(" ")} children={props.children} />
@@ -24,8 +31,8 @@ const Link = (props: LinkProps): JSX.Element => {
 export const Navigation = (): JSX.Element => (
 	<div className={s.container}>
 		<Link href="/">Home</Link>
-		<Link href="/blocks/1">Blocks</Link>
-		<Link href="/transactions/1">Transactions</Link>
-		<Link href="/tokens/1">Tokens</Link>
+		<Link href="/blocks">Blocks</Link>
+		<Link href="/transactions">Transactions</Link>
+		<Link href="/tokens">Tokens</Link>
 	</div>
 );

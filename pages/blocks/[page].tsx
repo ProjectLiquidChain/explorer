@@ -6,7 +6,8 @@ import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import { toServerError } from "@/components/server/error";
 import { DivPx } from "@moai/core";
-import { GetServerSideProps } from "next";
+import { BLOCK_INTERVAL_SECONDS } from "constants/constants";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 
 interface Props {
 	blocks: Block[];
@@ -36,23 +37,27 @@ const BlockIndexPage = (page: PageProps) => (
 	/>
 );
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async (
-	context
-) => {
-	const page: number = (() => {
-		const query = context.query.page ?? "1";
-		const page = Array.isArray(query) ? query[0] : query;
-		return parseInt(page) - 1;
-	})();
+export const getStaticPaths: GetStaticPaths = async () => ({
+	fallback: "blocking",
+	paths: [],
+});
+
+export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
+	const revalidate = BLOCK_INTERVAL_SECONDS;
 
 	try {
+		const { page: pageStr } = context.params ?? {};
+		if (typeof pageStr !== "string") throw Error("page is not defined");
+		const page: number = parseInt(pageStr) - 1;
+		if (isNaN(page)) throw Error(`Page "${page}" is not a number`);
+
 		const result = await getRecentBlocks({ page });
 		const { blocks, totalPages } = result;
 		const props: Props = { blocks, totalPages, page };
-		return { props: { hasError: false, ...props } };
+		return { revalidate, props: { hasError: false, ...props } };
 	} catch (unknown: unknown) {
 		const error = toServerError(unknown);
-		return { props: { hasError: true, error } };
+		return { revalidate, props: { hasError: true, error } };
 	}
 };
 
