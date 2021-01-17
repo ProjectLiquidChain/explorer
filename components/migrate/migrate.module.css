@@ -1,0 +1,14 @@
+.container {
+	border-style: solid none solid none;
+    border-width: 1px;
+    padding: 48px 0;
+}
+
+.form {
+    max-width: 480px;
+    margin: auto;
+}
+
+.submit {
+    width: 160px;
+}

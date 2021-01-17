@@ -1,3 +1,6 @@
+import { container } from "@/components/container/container";
+import { Heading } from "@/components/heading/heading";
+import { Migrate } from "@/components/migrate/migrate";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
 import * as React from "react";
@@ -6,7 +9,14 @@ interface Props {}
 
 type PageProps = PageErrorProps<Props>;
 
-const MigrateBody = () => <div>Migrate</div>;
+const MigrateBody = () => (
+	<div>
+		<div className={container.max960}>
+			<Heading>Migrate QASH</Heading>
+		</div>
+		<Migrate />
+	</div>
+);
 
 const MigratePage = (page: PageProps) => (
 	<Page
