@@ -8,6 +8,6 @@ interface Props {
 
 export const TokenCurrency = ({ token }: Props): JSX.Element => (
 	<Link href={`/account/${token.address}`}>
-		<Tag>{token.currency}</Tag>
+		<Tag type={Tag.types.neutral}>{token.currency}</Tag>
 	</Link>
 );

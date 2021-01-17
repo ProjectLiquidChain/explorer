@@ -16,7 +16,7 @@ interface Props {
 const Verified = ({ token }: { token: Token }): JSX.Element => (
 	<Tooltip content="Verified contract account">
 		<span>
-			<Tag children={token.currency} />
+			<Tag type={Tag.types.neutral} children={token.currency} />
 			<span> – </span>
 		</span>
 	</Tooltip>

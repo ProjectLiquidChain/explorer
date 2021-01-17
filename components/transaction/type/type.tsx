@@ -8,6 +8,6 @@ interface Props {
 
 export const TransactionType = ({ value }: Props) => (
 	<div className={s.container}>
-		<Tag children={value} />
+		<Tag type={Tag.types.neutral} children={value} />
 	</div>
 );
