@@ -35,5 +35,6 @@ export const Navigation = (): JSX.Element => (
 		<Link href="/transactions">Transactions</Link>
 		<Link href="/transfers">Transfers</Link>
 		<Link href="/tokens">Tokens</Link>
+		<Link href="/migrate">Migrate</Link>
 	</div>
 );
