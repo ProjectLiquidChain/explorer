@@ -27,7 +27,7 @@ const Parameters = ({ parameters }: { parameters: ContractParameter[] }) => (
 );
 
 const renderFunction = (func: ContractFunction, index: number): JSX.Element => (
-	<li key={func.name} className={index % 2 === 0 ? background.secondary : ""}>
+	<li key={func.name} className={index % 2 === 0 ? background.weak : ""}>
 		<span>{func.name}</span>
 		<Parameters parameters={func.parameters} />
 	</li>

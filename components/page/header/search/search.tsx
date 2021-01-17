@@ -1,10 +1,4 @@
-import {
-	background,
-	borderColor,
-	Button,
-	ButtonGroup,
-	Input,
-} from "@moai/core";
+import { Button, ButtonGroup, Input } from "@moai/core";
 import { Search as SearchIcon } from "@moai/icon/hrs";
 import { useRouter } from "next/router";
 import { useState } from "react";

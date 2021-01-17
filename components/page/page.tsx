@@ -40,7 +40,7 @@ export const Page = <T,>(props: Props<T>): JSX.Element => {
 	);
 	return (
 		<VerifiedTokensProvider>
-			<div className={[s.container, background.secondary].join(" ")}>
+			<div className={[s.container, background.weak].join(" ")}>
 				<Head {...props} />
 				<PageHeader />
 				{body}
