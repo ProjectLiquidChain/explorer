@@ -31,10 +31,10 @@
 	text-decoration: none;
 }
 :global(.light) .link:hover {
-	color: var(--blue-7);
+	color: var(--highlight-7);
 }
 :global(.dark) .link:hover {
-	color: var(--blue-5);
+	color: var(--highlight-5);
 }
 .row + .row {
 	margin-top: 16px;

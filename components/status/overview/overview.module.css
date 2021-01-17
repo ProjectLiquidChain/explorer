@@ -1,6 +1,6 @@
 .wrapper {
 	color: var(--gray-1);
-	background: linear-gradient(0deg, var(--blue-5), var(--blue-6));
+	background: linear-gradient(0deg, var(--highlight-5), var(--highlight-6));
 }
 
 .container {

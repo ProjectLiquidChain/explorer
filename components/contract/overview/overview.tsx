@@ -17,7 +17,7 @@ const Parameters = ({ parameters }: { parameters: ContractParameter[] }) => (
 		{parameters.map((parameter, index) => (
 			<Fragment key={parameter.name}>
 				{index !== 0 && <span className={text.muted}>, </span>}
-				<span className={text.blueStrong}>{parameter.type}</span>
+				<span className={text.highlightStrong}>{parameter.type}</span>
 				<span> </span>
 				<span>{parameter.name}</span>
 			</Fragment>

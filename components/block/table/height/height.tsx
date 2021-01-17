@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Dot = ({ recent }: { recent: boolean }): JSX.Element => (
-	<span className={[text.blueStrong, recent ? s.show : s.hide].join(" ")}>
+	<span className={[text.highlightStrong, recent ? s.show : s.hide].join(" ")}>
 		<Icon display="inline" size={16} path={ChevronRight} />
 	</span>
 );

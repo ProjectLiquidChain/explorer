@@ -19,7 +19,7 @@ const isSame = (route: string, me: string): boolean => {
 const Link = (props: LinkProps): JSX.Element => {
 	const router = useRouter();
 	const activeCls = isSame(props.href, router.pathname)
-		? [text.strong, text.blueStrong].join(" ")
+		? [text.strong, text.highlightStrong].join(" ")
 		: text.muted;
 	return (
 		<NextLink href={props.href}>

@@ -9,6 +9,6 @@ interface Props {
 
 export const Link = ({ children, href }: Props): JSX.Element => (
 	<NextLink href={href}>
-		<a className={[text.blueStrong, s.link].join(" ")}>{children}</a>
+		<a className={[text.highlightStrong, s.link].join(" ")}>{children}</a>
 	</NextLink>
 );
