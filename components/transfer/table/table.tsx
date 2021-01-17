@@ -3,7 +3,7 @@ import { BlockHeight } from "@/components/block/height/height";
 import { Link } from "@/components/link/link";
 import { Numeric } from "@/components/numeric/numeric";
 import { TokenCurrency } from "@/components/token/currency/currency";
-import { Table, TableColumn, Icon, text } from "@moai/core";
+import { Icon, Table, TableColumn, text } from "@moai/core";
 import { ArrowRight } from "@moai/icon/hrs";
 import { Transfer } from "../transfer";
 import s from "./table.module.css";
@@ -61,26 +61,26 @@ const Memo = ({ transfer }: RowProps): JSX.Element => (
 	</span>
 );
 
-const getColumns = ({ transfers }: Props): TableColumn[] => [
+const getColumns = (): TableColumn<Transfer>[] => [
 	{
 		title: "Transaction",
 		className: s.transaction,
-		render: (i) => <Transaction transfer={transfers[i]} />,
+		render: (transfer) => <Transaction transfer={transfer} />,
 	},
 	{
 		title: "Amount",
 		className: s.balance,
-		render: (i) => <Balance transfer={transfers[i]} />,
+		render: (transfer) => <Balance transfer={transfer} />,
 	},
 	{
 		title: "Token",
 		className: s.token,
-		render: (i) => <Token transfer={transfers[i]} />,
+		render: (transfer) => <Token transfer={transfer} />,
 	},
 	{
 		title: "Sender",
 		className: s.sender,
-		render: (i) => <Sender transfer={transfers[i]} />,
+		render: (transfer) => <Sender transfer={transfer} />,
 	},
 	{
 		title: "",
@@ -90,29 +90,28 @@ const getColumns = ({ transfers }: Props): TableColumn[] => [
 	{
 		title: "Receiver",
 		className: s.receiver,
-		render: (i) => <Receiver transfer={transfers[i]} />,
+		render: (transfer) => <Receiver transfer={transfer} />,
 	},
 	{
 		title: "Block",
 		className: s.block,
-		render: (i) => <Block transfer={transfers[i]} />,
+		render: (transfer) => <Block transfer={transfer} />,
 	},
 	{
 		title: "Memo",
 		className: s.memo,
-		render: (i) => <Memo transfer={transfers[i]} />,
+		render: (transfer) => <Memo transfer={transfer} />,
 	},
 ];
 
 export const TransferTable = (props: Props): JSX.Element => (
 	<div className={s.container}>
 		<Table
-			columns={getColumns(props)}
-			rowKey={(index) => {
-				const transfer = props.transfers[index];
+			rows={props.transfers}
+			columns={getColumns()}
+			rowKey={(transfer) => {
 				return `${transfer.index}@${transfer.transaction.hash}`;
 			}}
-			rowsLength={props.transfers.length}
 		/>
 	</div>
 );

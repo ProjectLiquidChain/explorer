@@ -1,7 +1,6 @@
 import { container } from "@/components/container/container";
-import { background, Border, boxShadow, Button, DivPx } from "@moai/core";
+import { background, Border, Button, DivPx, shadow } from "@moai/core";
 import { Menu } from "@moai/icon/hrs";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import s from "./header.module.css";
 import { Logo } from "./logo/logo";
@@ -10,13 +9,10 @@ import { Search } from "./search/search";
 import { Theme, useTheme } from "./theme/theme";
 
 export const PageHeader = () => {
-	const router = useRouter();
 	const [showMenu, setShowMenu] = useState(false);
 	const { theme, setTheme } = useTheme();
 	return (
-		<div
-			className={[s.wrapper, boxShadow.strong, background.primary].join(" ")}
-		>
+		<div className={[s.wrapper, shadow.boxStrong, background.strong].join(" ")}>
 			<div className={[s.container, container.max960].join(" ")}>
 				<div className={s.logo}>
 					<Logo />

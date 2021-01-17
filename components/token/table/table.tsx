@@ -19,25 +19,25 @@ const Currency = ({ token }: RowProps): JSX.Element => (
 	<span>{token.currency}</span>
 );
 
-const getColumns = ({ tokens }: Props): TableColumn[] => [
+const getColumns = (): TableColumn<Token>[] => [
 	{
 		title: "Name",
 		className: s.name,
-		render: (i) => <Currency token={tokens[i]} />,
+		render: (token) => <Currency token={token} />,
 	},
 	{
 		title: "Address",
 		className: s.address,
-		render: (i) => <Address token={tokens[i]} />,
+		render: (token) => <Address token={token} />,
 	},
 ];
 
 export const TokenTable = (props: Props): JSX.Element => (
 	<div className={s.container}>
 		<Table
-			columns={getColumns(props)}
-			rowKey={(i) => props.tokens[i].currency}
-			rowsLength={props.tokens.length}
+			rows={props.tokens}
+			columns={getColumns()}
+			rowKey={(token) => token.currency}
 		/>
 	</div>
 );

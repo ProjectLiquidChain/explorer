@@ -1,7 +1,7 @@
 import { AccountAddress } from "@/components/account/address/address";
 import { Numeric } from "@/components/numeric/numeric";
-import { Table, TableColumn } from "@moai/core";
 import { TokenCurrency } from "@/components/token/currency/currency";
+import { Table, TableColumn } from "@moai/core";
 import { Asset } from "../asset";
 import s from "./table.module.css";
 
@@ -29,30 +29,30 @@ const Address = ({ asset }: RowProps): JSX.Element => (
 	<AccountAddress value={asset.token.address} wrap={false} hideVerified />
 );
 
-const getColumns = ({ assets }: Props): TableColumn[] => [
+const getColumns = (): TableColumn<Asset>[] => [
 	{
 		title: "Token",
 		className: s.token,
-		render: (i) => <Token asset={assets[i]} />,
+		render: (row) => <Token asset={row} />,
 	},
 	{
 		title: "Balance",
 		className: s.balance,
-		render: (i) => <Balance asset={assets[i]} />,
+		render: (row) => <Balance asset={row} />,
 	},
 	{
 		title: "Address",
 		className: s.address,
-		render: (i) => <Address asset={assets[i]} />,
+		render: (row) => <Address asset={row} />,
 	},
 ];
 
 export const AssetTable = (props: Props): JSX.Element => (
 	<div className={s.container}>
-		<Table
-			columns={getColumns(props)}
-			rowKey={(index) => props.assets[index].token.currency}
-			rowsLength={props.assets.length}
+		<Table<Asset>
+			rows={props.assets}
+			columns={getColumns()}
+			rowKey={(row) => row.token.currency}
 		/>
 	</div>
 );

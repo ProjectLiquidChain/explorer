@@ -29,25 +29,25 @@ const Value = ({ arg }: RowProps): JSX.Element => {
 export const ArgumentTable = ({ args }: Props) => (
 	<div className={s.container}>
 		<Table
+			rows={args}
+			rowKey={(row) => row.name}
 			columns={[
 				{
 					title: "Parameter",
 					className: s.name,
-					render: (i) => args[i].name,
+					render: (row) => row.name,
 				},
 				{
 					title: "Type",
 					className: s.type,
-					render: (i) => args[i].type,
+					render: (row) => row.type,
 				},
 				{
 					title: "Value",
 					className: s.value,
-					render: (i) => <Value arg={args[i]} />,
+					render: (row) => <Value arg={row} />,
 				},
 			]}
-			rowKey={(i) => args[i].name}
-			rowsLength={args.length}
 		/>
 	</div>
 );

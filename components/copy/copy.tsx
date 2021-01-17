@@ -14,7 +14,7 @@ export const CopyButton = (props: Props): JSX.Element => {
 				<Button
 					icon={copied ? Check : Duplicate}
 					iconLabel="Copy to clipboard"
-					style={Button.style.flat}
+					style={Button.styles.flat}
 					onClick={async () => {
 						await navigator.clipboard.writeText(props.text);
 						setCopied(true);

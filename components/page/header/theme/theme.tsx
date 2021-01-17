@@ -36,7 +36,7 @@ export const Theme = ({ theme, setTheme }: Props): JSX.Element => (
 	<ButtonGroup fill>
 		<Tooltip content="Use light theme">
 			<Button.Forwarded
-				style={Button.style.outset}
+				style={Button.styles.outset}
 				icon={Sun}
 				iconLabel="Use light theme"
 				children="Light"
@@ -47,7 +47,7 @@ export const Theme = ({ theme, setTheme }: Props): JSX.Element => (
 		</Tooltip>
 		<Tooltip content="Use dark theme">
 			<Button.Forwarded
-				style={Button.style.outset}
+				style={Button.styles.outset}
 				icon={Moon}
 				iconLabel="Use dark theme"
 				children="Dark"

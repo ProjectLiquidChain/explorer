@@ -1,8 +1,8 @@
 import { Block } from "@/components/block/block";
 import { Numeric } from "@/components/numeric/numeric";
-import { Table, TableColumn } from "@moai/core";
 import { Time } from "@/components/time/time";
 import { pluralizeTransaction } from "@/components/transaction/transaction";
+import { Table, TableColumn } from "@moai/core";
 import { BlockTableHeight } from "../height/height";
 import s from "./wide.module.css";
 
@@ -33,35 +33,35 @@ const Transactions = ({ block }: RowProps): JSX.Element => {
 	);
 };
 
-export const getBlockColumns = ({ blocks }: Props): TableColumn[] => [
+export const getBlockColumns = (): TableColumn<Block>[] => [
 	{
 		title: "Height",
 		className: s.height,
-		render: (i) => <BlockTableHeight block={blocks[i]} showDot={false} />,
+		render: (block) => <BlockTableHeight block={block} showDot={false} />,
 	},
 	{
 		title: "Hash",
 		className: s.hash,
-		render: (i) => <span>{blocks[i].hash}</span>
+		render: (block) => <span>{block.hash}</span>,
 	},
 	{
 		title: "Transactions",
 		className: s.transactions,
-		render: (i) => <Transactions block={blocks[i]} />,
+		render: (block) => <Transactions block={block} />,
 	},
 	{
 		title: "Time",
 		className: s.time,
-		render: (i) => <BlockTime block={blocks[i]} />,
+		render: (block) => <BlockTime block={block} />,
 	},
 ];
 
 export const BlockTableWide = (props: Props): JSX.Element => (
 	<div className={s.container}>
 		<Table
-			columns={getBlockColumns(props)}
-			rowKey={(index) => props.blocks[index].height.toString()}
-			rowsLength={props.blocks.length}
+			rows={props.blocks}
+			columns={getBlockColumns()}
+			rowKey={(block) => block.height.toString()}
 		/>
 	</div>
 );

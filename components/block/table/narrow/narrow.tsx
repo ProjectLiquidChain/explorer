@@ -10,8 +10,8 @@ interface Props {
 
 const NARROW_COLUMNS: ReactNode[] = ["Height", "Time", "Transactions"];
 
-const getColumns = (props: Props) => {
-	const all = getBlockColumns(props);
+const getColumns = () => {
+	const all = getBlockColumns();
 	return all.filter((column) => {
 		return NARROW_COLUMNS.includes(column.title);
 	});
@@ -20,9 +20,9 @@ const getColumns = (props: Props) => {
 export const BlockTableNarrow = (props: Props) => (
 	<div className={s.container}>
 		<Table
-			columns={getColumns(props)}
-			rowKey={(index) => props.blocks[index].height.toString()}
-			rowsLength={props.blocks.length}
+			rows={props.blocks}
+			columns={getColumns()}
+			rowKey={(block) => block.height.toString()}
 		/>
 	</div>
 );

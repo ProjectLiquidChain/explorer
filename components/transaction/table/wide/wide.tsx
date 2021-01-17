@@ -24,7 +24,7 @@ const Hash = ({ bundle }: RowProps): JSX.Element => (
 );
 
 const Type = ({ bundle }: RowProps): JSX.Element => (
-	<Tag children={bundle.transaction.type} />
+	<Tag type={Tag.types.neutral} children={bundle.transaction.type} />
 );
 
 const Block = ({ bundle }: RowProps): JSX.Element => (
@@ -53,28 +53,26 @@ const Code = ({ bundle }: RowProps): JSX.Element => (
 	<ReceiptCode code={bundle.receipt.code} format="short" />
 );
 
-export const getTransactionColumns = ({
-	transactions,
-}: Props): TableColumn[] => [
+export const getTransactionColumns = (): TableColumn<TransactionBundle>[] => [
 	{
 		title: "Hash",
 		className: s.hash,
-		render: (i) => <Hash bundle={transactions[i]} />,
+		render: (bundle) => <Hash bundle={bundle} />,
 	},
 	{
 		title: "Type",
 		className: s.type,
-		render: (i) => <Type bundle={transactions[i]} />,
+		render: (bundle) => <Type bundle={bundle} />,
 	},
 	{
 		title: "Code",
 		className: s.code,
-		render: (i: number) => <Code bundle={transactions[i]} />,
+		render: (bundle) => <Code bundle={bundle} />,
 	},
 	{
 		title: "Sender",
 		className: s.sender,
-		render: (i) => <Sender bundle={transactions[i]} />,
+		render: (bundle) => <Sender bundle={bundle} />,
 	},
 	{
 		title: "",
@@ -84,26 +82,26 @@ export const getTransactionColumns = ({
 	{
 		title: "Receiver",
 		className: s.receiver,
-		render: (i) => <Receiver bundle={transactions[i]} />,
+		render: (bundle) => <Receiver bundle={bundle} />,
 	},
 	{
 		title: "Block",
 		className: s.block,
-		render: (i) => <Block bundle={transactions[i]} />,
+		render: (bundle) => <Block bundle={bundle} />,
 	},
 	{
 		title: "Nonce",
 		className: s.nonce,
-		render: (i) => <Nonce bundle={transactions[i]} />,
+		render: (bundle) => <Nonce bundle={bundle} />,
 	},
 ];
 
 export const TransactionTableWide = (props: Props) => (
 	<div className={s.container}>
 		<Table
-			columns={getTransactionColumns(props)}
-			rowKey={(index) => props.transactions[index].transaction.hash}
-			rowsLength={props.transactions.length}
+			rows={props.transactions}
+			columns={getTransactionColumns()}
+			rowKey={(bundle) => bundle.transaction.hash}
 		/>
 	</div>
 );

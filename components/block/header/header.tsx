@@ -18,7 +18,7 @@ const Navigation = ({ block }: Props) => (
 					<Button.Forwarded
 						icon={ChevronLeft}
 						iconLabel="Go to parent (previous) block"
-						style={Button.style.outset}
+						style={Button.styles.outset}
 					/>
 				</Link>
 			</div>
@@ -29,7 +29,7 @@ const Navigation = ({ block }: Props) => (
 					<Button.Forwarded
 						icon={ChevronRight}
 						iconLabel="Go to child (next) block"
-						style={Button.style.outset}
+						style={Button.styles.outset}
 					/>
 				</Link>
 			</div>

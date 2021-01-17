@@ -10,8 +10,8 @@ interface Props {
 
 const NARROW_COLUMNS: ReactNode[] = ["Hash", "Type", "Receiver", "Block"];
 
-const getColumns = (props: Props) => {
-	const all = getTransactionColumns(props);
+const getColumns = () => {
+	const all = getTransactionColumns();
 	return all.filter((column) => {
 		return NARROW_COLUMNS.includes(column.title);
 	});
@@ -20,9 +20,9 @@ const getColumns = (props: Props) => {
 export const TransactionTableNarrow = (props: Props) => (
 	<div className={s.container}>
 		<Table
-			columns={getColumns(props)}
-			rowKey={(index) => props.transactions[index].transaction.hash}
-			rowsLength={props.transactions.length}
+			rows={props.transactions}
+			columns={getColumns()}
+			rowKey={(bundle) => bundle.transaction.hash}
 		/>
 	</div>
 );
