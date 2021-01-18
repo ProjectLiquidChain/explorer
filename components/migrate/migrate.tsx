@@ -11,7 +11,7 @@ export type MigrateMode =
 	| { type: "initializing" } // Don't know anything yet
 	| { type: "none" } // MetaMask is not installed
 	| { type: "installed"; web3: Web3 } // MetaMask is installed but not connected
-	| { type: "connected"; address: string }; // MetaMask is installed and connected
+	| { type: "connected"; web3: Web3; address: string }; // MetaMask is installed and connected
 
 const init = async (setMode: Dispatch<SetStateAction<MigrateMode>>) => {
 	const ethereum = await detectEthereumProvider();
@@ -23,7 +23,7 @@ const init = async (setMode: Dispatch<SetStateAction<MigrateMode>>) => {
 		if (addresses.length === 0) {
 			setMode({ type: "installed", web3 });
 		} else {
-			setMode({ type: "connected", address: addresses[0] });
+			setMode({ type: "connected", web3, address: addresses[0] });
 		}
 	}
 };
@@ -50,9 +50,9 @@ export const Migrate = (): JSX.Element => {
 			case "none":
 				return <MigrateNone />;
 			case "installed":
-				return <MigrateInstalled setMode={setMode} web3={mode.web3} />;
+				return <MigrateInstalled web3={mode.web3} setMode={setMode} />;
 			default:
-				return <MigrateConnected ethAddress={mode.address} />;
+				return <MigrateConnected web3={mode.web3} ethAddress={mode.address} />;
 		}
 	})();
 
