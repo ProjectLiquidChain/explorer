@@ -1,14 +1,10 @@
 .container {
-	border-style: solid none solid none;
-    border-width: 1px;
-    padding: 48px 0;
-}
-
-.form {
     max-width: 480px;
-    margin: auto;
+    min-height: 50vh;
+	margin: auto;
+	padding: 16px 0;
 }
 
-.submit {
-    width: 160px;
+.buttons {
+	display: flex;
 }

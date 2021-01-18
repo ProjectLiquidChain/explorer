@@ -3,6 +3,7 @@ import { Heading } from "@/components/heading/heading";
 import { Migrate } from "@/components/migrate/migrate";
 import { PageErrorProps } from "@/components/page/error/error";
 import { Page } from "@/components/page/page";
+import { Pane } from "@moai/core";
 import * as React from "react";
 
 interface Props {}
@@ -10,11 +11,9 @@ interface Props {}
 type PageProps = PageErrorProps<Props>;
 
 const MigrateBody = () => (
-	<div>
-		<div className={container.max960}>
-			<Heading>Migrate QASH</Heading>
-		</div>
-		<Migrate />
+	<div className={container.max960}>
+		<Heading>Migrate QASH</Heading>
+		<Pane noPadding children={<Migrate />} />
 	</div>
 );
 
