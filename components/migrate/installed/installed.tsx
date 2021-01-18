@@ -16,7 +16,7 @@ export const MigrateInstalled = (props: Props): JSX.Element => {
 			setBusy(true);
 			const accounts = await props.web3.eth.requestAccounts();
 			const address = accounts[0];
-			props.setMode({ type: "connected", address });
+			props.setMode({ type: "connected", web3: props.web3, address });
 			// Doesn't need to reset busy as setMode would trigger
 			// an unmount of this component
 		} catch (error) {
