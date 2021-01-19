@@ -1,66 +1,41 @@
 import { Button, dialogAlert, DivPx, Input } from "@moai/core";
-import { useState } from "react";
+import { Film } from "@moai/icon/hrs";
+import { FormEvent, useState } from "react";
 import Web3 from "web3";
 import s from "./connected.module.css";
+import { EthUtilities } from "./utilities/utilities";
 
 interface Props {
 	web3: Web3;
 	ethAddress: string;
 }
 
-interface State {
-	lqtAddress: string;
-	amount: string;
-}
-
-const QASH_DECIMAL = 6;
-const QASH_CONTRACT = "0x26a5aa91fd630a18323087e3ae88ccd2fccfd136";
-const MIGRATION_CONRTRACT = "0xf3117d7ee5c93f901413c20a350b178534fe6640";
-
-const migrate = async (props: Props, state: State): Promise<void> => {
-	// const { publicKey } = Account.fromString(state.lqtAddress);
-	// @TODO: Provide these values
-	const publicKey: any = {};
-	const qashAbi: any = {};
-	const abi: any = {};
-
-	// Approve migration contract to transfer
-	const amount = parseFloat(state.amount) * 10 ** QASH_DECIMAL;
-	const qashContract = new props.web3.eth.Contract(qashAbi);
-	await props.web3.eth.sendTransaction({
-		to: QASH_CONTRACT,
-		from: props.ethAddress,
-		value: "0x00",
-		data: qashContract.methods.approve(MIGRATION_CONRTRACT, amount).encodeABI(),
-	});
-
-	// Lock amount
-	const migrationContract = new props.web3.eth.Contract(abi);
-	await props.web3.eth.sendTransaction({
-		to: MIGRATION_CONRTRACT,
-		from: props.ethAddress,
-		value: "0x00",
-		data: migrationContract.methods
-			.lock(amount, `0x${publicKey.toString("hex")}`)
-			.encodeABI(),
-	});
-};
-
 export const MigrateConnected = (props: Props): JSX.Element => {
+	const { web3, ethAddress } = props;
+
 	const [lqtAddress, setLqtAddress] = useState("");
-	const [amount, setAmount] = useState("");
+	const [amountText, setAmountText] = useState("");
+
+	const submit = async (event: FormEvent) => {
+		event.preventDefault();
+		try {
+			const amount = parseInt(amountText);
+			await EthUtilities.approve({ web3, ethAddress, amount });
+			await EthUtilities.lock({ web3, amount, lqtAddress, ethAddress });
+		} catch (error) {
+			dialogAlert(["Cannot migrate your token", error.message]);
+		}
+	};
+
+	const fillMax = async () => {
+		const params = { web3, ethAddress };
+		const balance = await EthUtilities.getBalance(params);
+		setAmountText(balance.toString());
+	};
 
 	return (
-		<form
-			onSubmit={async (event) => {
-				event.preventDefault();
-				try {
-					await migrate(props, { amount, lqtAddress });
-				} catch (error) {
-					dialogAlert(["Cannot migrate your token", error.message]);
-				}
-			}}
-		>
+		<form onSubmit={submit}>
+			<Button onClick={async () => {}} children="Test" />
 			<label htmlFor="eth">From ETH Address</label>
 			<DivPx size={4} />
 			<Input id="eth" value={props.ethAddress} readOnly />
@@ -69,9 +44,15 @@ export const MigrateConnected = (props: Props): JSX.Element => {
 			<DivPx size={4} />
 			<Input id="lqt" value={lqtAddress} setValue={setLqtAddress} />
 			<DivPx size={16} />
-			<label htmlFor="amount">Amount</label>
+			<label htmlFor="amount">QASH Amount</label>
 			<DivPx size={4} />
-			<Input id="amount" value={amount} setValue={setAmount} />
+			<div className={s.amount}>
+				<div>
+					<Input id="amount" value={amountText} setValue={setAmountText} />
+				</div>
+				<DivPx size={16} />
+				<Button onClick={fillMax} children="Use all balance" />
+			</div>
 			<DivPx size={16} />
 			<div className={s.submit}>
 				<Button fill highlight type="submit" children="Migrate" />

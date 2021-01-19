@@ -1,5 +1,5 @@
 import detectEthereumProvider from "@metamask/detect-provider";
-import { ProgressCircle } from "@moai/core";
+import { ProgressCircle, Steps } from "@moai/core";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Web3 from "web3";
 import { MigrateConnected } from "./connected/connected";
@@ -56,5 +56,17 @@ export const Migrate = (): JSX.Element => {
 		}
 	})();
 
-	return <div className={s.container} children={children} />;
+	return (
+		<div>
+			<Steps
+				current={}
+				steps={[
+					{ title: "Connect" },
+					{ title: "Migrate" },
+					{ title: "Result" },
+				]}
+			/>
+			{children}
+		</div>
+	);
 };
