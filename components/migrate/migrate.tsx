@@ -1,23 +1,47 @@
 import detectEthereumProvider from "@metamask/detect-provider";
-import { ProgressCircle, Steps } from "@moai/core";
+import { dialogAlert, ProgressCircle, Steps } from "@moai/core";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Web3 from "web3";
 import { MigrateConnected } from "./connected/connected";
 import { MigrateInstalled } from "./installed/installed";
+import s from "./migrate.module.css";
 import { MigrateNone } from "./none/none";
 import { MigrateProcess } from "./process/process";
-import s from "./migrate.module.css";
+import { EthUtilities } from "./utilities/utilities";
 
 export type MigrateProcessStatus = "approving" | "locking" | "done";
 
-export type MigrateMode =
-	| { type: "initializing" } // Don't know anything yet
-	| { type: "none" } // MetaMask is not installed
-	| { type: "installed"; web3: Web3 } // MetaMask is installed but not connected
-	| { type: "connected"; web3: Web3; address: string } // MetaMask is installed and connected
-	| { type: "migrating"; progress: MigrateProcessStatus }; // Making migration
+// Just to be sure, because web3 may not connected (and thus having no
+// address/account)
+export interface ConnectedWeb3 {
+	value: Web3;
+	address: string;
+}
 
-const MIGRATE_STEP: Record<MigrateMode["type"], number> = {
+export interface MigrateBody {
+	web3: ConnectedWeb3;
+	amount: number;
+	lqtAddress: string;
+}
+
+export interface MigrateProcessData {
+	status: MigrateProcessStatus;
+	body: MigrateBody;
+}
+
+export type MigrateStep =
+	// Don't know anything yet
+	| { type: "initializing" }
+	// MetaMask is not installed
+	| { type: "none" }
+	// MetaMask is installed but not connected
+	| { type: "installed"; data: { web3: Web3 } }
+	// MetaMask is installed and connected
+	| { type: "connected"; data: { web3: ConnectedWeb3 } }
+	// Making migration
+	| { type: "migrating"; data: MigrateProcessData };
+
+const STEP_INDEX: Record<MigrateStep["type"], number> = {
 	initializing: 0,
 	none: 0,
 	installed: 0,
@@ -25,18 +49,34 @@ const MIGRATE_STEP: Record<MigrateMode["type"], number> = {
 	migrating: 2,
 };
 
-const init = async (setMode: Dispatch<SetStateAction<MigrateMode>>) => {
+type SetStep = Dispatch<SetStateAction<MigrateStep>>;
+
+const init = async (setStep: SetStep): Promise<void> => {
 	const ethereum = await detectEthereumProvider();
 	if (ethereum === null) {
-		setMode({ type: "none" });
+		setStep({ type: "none" });
 	} else {
 		const web3 = new Web3(ethereum as any);
 		const addresses = await web3.eth.getAccounts();
 		if (addresses.length === 0) {
-			setMode({ type: "installed", web3 });
+			setStep({ type: "installed", data: { web3 } });
 		} else {
-			setMode({ type: "connected", web3, address: addresses[0] });
+			const connected: ConnectedWeb3 = { value: web3, address: addresses[0] };
+			setStep({ type: "connected", data: { web3: connected } });
 		}
+	}
+};
+
+const submit = async (setStep: SetStep, body: MigrateBody): Promise<void> => {
+	try {
+		const { web3, amount, lqtAddress } = body;
+		setStep({ type: "migrating", data: { body, status: "approving" } });
+		await EthUtilities.approve(web3, amount);
+		setStep({ type: "migrating", data: { body, status: "locking" } });
+		await EthUtilities.lock(web3, amount, lqtAddress);
+		setStep({ type: "migrating", data: { body, status: "done" } });
+	} catch (error) {
+		dialogAlert(["Cannot migrate your token", error.message]);
 	}
 };
 
@@ -49,31 +89,37 @@ const Initializing = (): JSX.Element => (
 );
 
 export const Migrate = (): JSX.Element => {
-	const [mode, setMode] = useState<MigrateMode>({ type: "initializing" });
+	const [step, setStep] = useState<MigrateStep>({ type: "initializing" });
 
 	useEffect(() => {
-		init(setMode);
+		init(setStep);
 	}, []);
 
 	const children = ((): JSX.Element => {
-		switch (mode.type) {
+		switch (step.type) {
 			case "initializing":
 				return <Initializing />;
 			case "none":
 				return <MigrateNone />;
 			case "installed":
-				return <MigrateInstalled web3={mode.web3} setMode={setMode} />;
+				return <MigrateInstalled web3={step.data.web3} setStep={setStep} />;
 			case "connected":
-				return <MigrateConnected web3={mode.web3} ethAddress={mode.address} />;
+				return (
+					<MigrateConnected
+						web3={step.data.web3}
+						submit={submit.bind(null, setStep)}
+						setStep={setStep}
+					/>
+				);
 			case "migrating":
-				return <MigrateProcess />;
+				return <MigrateProcess data={step.data} />;
 		}
 	})();
 
 	return (
 		<div className={s.container}>
 			<Steps
-				current={MIGRATE_STEP[mode.type]}
+				current={STEP_INDEX[step.type]}
 				steps={[
 					{ title: "Connect" },
 					{ title: "Migrate" },

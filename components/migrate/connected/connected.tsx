@@ -1,34 +1,21 @@
 import { Button, dialogAlert, DivPx, Input } from "@moai/core";
-import { FormEvent, useState } from "react";
-import Web3 from "web3";
+import { Dispatch, FormEventHandler, SetStateAction, useState } from "react";
+import { ConnectedWeb3, MigrateBody, MigrateStep } from "../migrate";
+import { EthUtilities } from "../utilities/utilities";
 import s from "./connected.module.css";
-import { EthUtilities } from "./utilities/utilities";
 
 interface Props {
-	web3: Web3;
-	ethAddress: string;
+	web3: ConnectedWeb3;
+	setStep: Dispatch<SetStateAction<MigrateStep>>;
+	submit: (body: MigrateBody) => void;
 }
 
 export const MigrateConnected = (props: Props): JSX.Element => {
-	const { web3, ethAddress } = props;
-
-	const [lqtAddress, setLqtAddress] = useState("");
 	const [amountText, setAmountText] = useState("");
-
-	const submit = async (event: FormEvent) => {
-		event.preventDefault();
-		try {
-			const amount = parseInt(amountText);
-			await EthUtilities.approve({ web3, ethAddress, amount });
-			await EthUtilities.lock({ web3, amount, lqtAddress, ethAddress });
-		} catch (error) {
-			dialogAlert(["Cannot migrate your token", error.message]);
-		}
-	};
+	const [lqtAddress, setLqtAddress] = useState("");
 
 	const fillMax = async () => {
-		const params = { web3, ethAddress };
-		const balance = await EthUtilities.getBalance(params);
+		const balance = await EthUtilities.getBalance(props.web3);
 		setAmountText(balance.toString());
 	};
 
@@ -41,11 +28,17 @@ export const MigrateConnected = (props: Props): JSX.Element => {
 		}
 	};
 
+	const onSubmit: FormEventHandler = (event) => {
+		event.preventDefault();
+		const amount = parseFloat(amountText);
+		props.submit({ web3: props.web3, amount, lqtAddress });
+	};
+
 	return (
-		<form onSubmit={submit}>
+		<form onSubmit={onSubmit}>
 			<label htmlFor="eth">From ETH Address</label>
 			<DivPx size={4} />
-			<Input id="eth" value={props.ethAddress} readOnly />
+			<Input id="eth" value={props.web3.address} readOnly />
 			<DivPx size={16} />
 			<label htmlFor="lqt">To LQT Address</label>
 			<DivPx size={4} />

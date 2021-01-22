@@ -1,5 +1,6 @@
 import { Account as LQCAccount } from "liquid-chain";
 import Web3 from "web3";
+import { ConnectedWeb3 } from "../migrate";
 import migrateAbi from "./abi-migrate.json";
 import qashAbi from "./abi-qash.json";
 
@@ -32,41 +33,36 @@ const buildEthObject = (
 /**
  * Returns account balance
  */
-const getBalance = async (params: {
-	web3: Web3;
-	ethAddress: string;
-}): Promise<number> => {
-	const data = buildEthObject(params.web3, "balanceOf(address)", [
-		params.ethAddress.substr(2),
+const getBalance = async (web3: ConnectedWeb3): Promise<number> => {
+	const data = buildEthObject(web3.value, "balanceOf(address)", [
+		web3.address.substr(2),
 	]);
-	const response = await params.web3.eth.call({ to: QASH_CONTRACT, data });
-	return params.web3.utils.toDecimal(response);
+	const response = await web3.value.eth.call({ to: QASH_CONTRACT, data });
+	const satoshi = web3.value.utils.toDecimal(response);
+	return satoshi / 10 ** QASH_DECIMAL;
 };
 
-const getAllowance = async (params: {
-	web3: Web3;
-	address: string;
-}): Promise<number> => {
-	const data = buildEthObject(params.web3, "allowance(address,address)", [
-		params.address.substr(2),
+const getAllowance = async (web3: ConnectedWeb3): Promise<number> => {
+	const data = buildEthObject(web3.value, "allowance(address,address)", [
+		web3.address.substr(2),
 		MIGRATION_CONTRACT.substr(2),
 	]);
-	const response = await params.web3.eth.call({ to: QASH_CONTRACT, data });
-	return params.web3.utils.toDecimal(response);
+	const response = await web3.value.eth.call({ to: QASH_CONTRACT, data });
+	const satoshi = web3.value.utils.toDecimal(response);
+	return satoshi / 10 ** QASH_DECIMAL;
 };
 
 /**
  * Approve migration contract to transfer
  */
-const approve = async (params: {
-	web3: Web3;
-	ethAddress: string;
-	amount: number;
-}): Promise<void> => {
-	const amount = params.amount * 10 ** QASH_DECIMAL;
-	const qashContract = new params.web3.eth.Contract(qashAbi as any);
-	await params.web3.eth.sendTransaction({
-		from: params.ethAddress,
+const approve = async (
+	web3: ConnectedWeb3,
+	rawAmount: number
+): Promise<void> => {
+	const amount = rawAmount * 10 ** QASH_DECIMAL;
+	const qashContract = new web3.value.eth.Contract(qashAbi as any);
+	await web3.value.eth.sendTransaction({
+		from: web3.address,
 		to: EthUtilities.QASH_CONTRACT,
 		value: "0x00",
 		data: qashContract.methods.approve(MIGRATION_CONTRACT, amount).encodeABI(),
@@ -76,20 +72,20 @@ const approve = async (params: {
 /**
  * Lock amount to transfer
  */
-const lock = async (params: {
-	web3: Web3;
-	amount: number;
-	ethAddress: string;
-	lqtAddress: string;
-}): Promise<void> => {
-	const migrationContract = new params.web3.eth.Contract(migrateAbi as any);
-	const { publicKey } = LQCAccount.fromString(params.lqtAddress);
-	await params.web3.eth.sendTransaction({
+const lock = async (
+	web3: ConnectedWeb3,
+	rawAmount: number,
+	lqtAddress: string
+): Promise<void> => {
+	const amount = rawAmount * 10 ** QASH_DECIMAL;
+	const migrationContract = new web3.value.eth.Contract(migrateAbi as any);
+	const { publicKey } = LQCAccount.fromString(lqtAddress);
+	await web3.value.eth.sendTransaction({
 		to: MIGRATION_CONTRACT,
-		from: params.ethAddress,
+		from: web3.address,
 		value: "0x00",
 		data: migrationContract.methods
-			.lock(params.amount, `0x${publicKey.toString("hex")}`)
+			.lock(amount, `0x${publicKey.toString("hex")}`)
 			.encodeABI(),
 	});
 };
