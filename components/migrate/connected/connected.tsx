@@ -1,5 +1,4 @@
 import { Button, dialogAlert, DivPx, Input } from "@moai/core";
-import { Film } from "@moai/icon/hrs";
 import { FormEvent, useState } from "react";
 import Web3 from "web3";
 import s from "./connected.module.css";
@@ -33,25 +32,43 @@ export const MigrateConnected = (props: Props): JSX.Element => {
 		setAmountText(balance.toString());
 	};
 
+	const fillClipboard = async () => {
+		try {
+			const text = await navigator.clipboard.readText();
+			setLqtAddress(text);
+		} catch (error) {
+			dialogAlert("Cannot read from clipboard");
+		}
+	};
+
 	return (
 		<form onSubmit={submit}>
-			<Button onClick={async () => {}} children="Test" />
 			<label htmlFor="eth">From ETH Address</label>
 			<DivPx size={4} />
 			<Input id="eth" value={props.ethAddress} readOnly />
 			<DivPx size={16} />
 			<label htmlFor="lqt">To LQT Address</label>
 			<DivPx size={4} />
-			<Input id="lqt" value={lqtAddress} setValue={setLqtAddress} />
+			<div className={s.flex}>
+				<div className={s.input}>
+					<Input id="lqt" value={lqtAddress} setValue={setLqtAddress} />
+				</div>
+				<DivPx size={8} />
+				<div className={s.button}>
+					<Button fill onClick={fillClipboard} children="Paste clipboard" />
+				</div>
+			</div>
 			<DivPx size={16} />
 			<label htmlFor="amount">QASH Amount</label>
 			<DivPx size={4} />
-			<div className={s.amount}>
-				<div>
+			<div className={s.flex}>
+				<div className={s.input}>
 					<Input id="amount" value={amountText} setValue={setAmountText} />
 				</div>
-				<DivPx size={16} />
-				<Button onClick={fillMax} children="Use all balance" />
+				<DivPx size={8} />
+				<div className={s.button}>
+					<Button fill onClick={fillMax} children="Use all balance" />
+				</div>
 			</div>
 			<DivPx size={16} />
 			<div className={s.submit}>

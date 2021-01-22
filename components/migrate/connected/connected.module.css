@@ -2,6 +2,15 @@
     width: 160px;
 }
 
-.amount {
+.flex {
     display: flex;
+}
+
+.input {
+    flex: 1 1 0px;
+}
+
+.button {
+    flex: 0 0 auto;
+    width: 160px;
 }

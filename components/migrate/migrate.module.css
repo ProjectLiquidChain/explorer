@@ -2,9 +2,13 @@
     max-width: 480px;
     min-height: 400px;
     margin: auto;
-    padding: 32px 16px 0;
+    padding-top: 16px;
 }
 
 .buttons {
 	display: flex;
+}
+
+.body {
+    padding: 16px;
 }
