@@ -76,7 +76,8 @@ const submit = async (setStep: SetStep, body: MigrateBody): Promise<void> => {
 		await EthUtilities.lock(web3, amount, lqtAddress);
 		setStep({ type: "migrating", data: { body, status: "done" } });
 	} catch (error) {
-		dialogAlert(["Cannot migrate your token", error.message]);
+		await dialogAlert(["Cannot migrate your token", error.message]);
+		setStep({ type: "connected", data: { web3: body.web3 } });
 	}
 };
 
@@ -112,7 +113,7 @@ export const Migrate = (): JSX.Element => {
 					/>
 				);
 			case "migrating":
-				return <MigrateProcess data={step.data} />;
+				return <MigrateProcess data={step.data} setStep={setStep} />;
 		}
 	})();
 
