@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "@metamask/detect-provider": "1.2.0",
@@ -16,7 +17,7 @@
     "@tippyjs/react": "4.2.0",
     "big.js": "6.0.3",
     "chart.js": "3.0.0-beta.7",
-    "liquid-chain": "^1.0.28",
+    "liquid-chain": "1.0.28",
     "next": "10.0.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",

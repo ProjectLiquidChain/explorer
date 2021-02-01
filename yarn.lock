@@ -2467,7 +2467,7 @@ line-column@^1.0.2:
     isarray "^1.0.0"
     isobject "^2.0.0"
 
-liquid-chain@^1.0.28:
+liquid-chain@1.0.28:
   version "1.0.28"
   resolved "https://registry.yarnpkg.com/liquid-chain/-/liquid-chain-1.0.28.tgz#1a8632bee5be1b4f6f76e831daff41623a4615d9"
   integrity sha512-wnHCpTiqMLiz0Rnr3jpmOmfX1eBA+NOgvm95UIEUnw3lMGH0hDcEZanGjxMVPYKSRZ11cw3oXRT2Y2cQeunPIA==
