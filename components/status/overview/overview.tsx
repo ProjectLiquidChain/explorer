@@ -20,11 +20,13 @@ const Body = (props: Props): JSX.Element => {
 	const [status, setStatus] = useState(props.status);
 
 	useEffect(() => {
-		const timer = window.setInterval(async () => {
-			const status = await getStatus(undefined);
-			setStatus(status);
-		}, BLOCK_INTERVAL_SECONDS * 1000);
-		return () => window.clearInterval(timer);
+		let timer: number | undefined = undefined;
+		const load = async () => {
+			setStatus(await getStatus(undefined));
+			timer = window.setTimeout(load, BLOCK_INTERVAL_SECONDS * 1000);
+		};
+		load();
+		return () => window.clearTimeout(timer);
 	}, []);
 
 	return (

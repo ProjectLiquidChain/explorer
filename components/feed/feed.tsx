@@ -32,7 +32,7 @@ export const Feed = (props: Props): JSX.Element => {
 	const [recent, setRecent] = useState<Recent>(props);
 
 	useEffect(() => {
-		let timer = 0;
+		let timer: undefined | number = undefined;
 		const load = async () => {
 			setRecent(await getRecent());
 			timer = window.setTimeout(load, BLOCK_INTERVAL_SECONDS * 1000);
