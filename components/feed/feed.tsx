@@ -15,24 +15,30 @@ interface Props {
 	transactions: TransactionBundle[];
 }
 
+interface Recent {
+	blocks: Block[];
+	transactions: TransactionBundle[];
+}
+
+const getRecent = async (): Promise<Recent> => {
+	const [{ blocks }, { transactions }] = await Promise.all([
+		getRecentBlocks({ page: 0, limit: 10 }),
+		getRecentTransactions({ page: 0, limit: 10 }),
+	]);
+	return { blocks, transactions };
+};
+
 export const Feed = (props: Props): JSX.Element => {
-	const [blocks, setBlocks] = useState(props.blocks);
-	const [transactions, setTransactions] = useState(props.transactions);
+	const [recent, setRecent] = useState<Recent>(props);
 
 	useEffect(() => {
-		const timer = window.setInterval(async () => {
-			const { blocks } = await getRecentBlocks({ page: 0 });
-			setBlocks(blocks.slice(0, 10));
-		}, BLOCK_INTERVAL_SECONDS * 1000);
-		return () => window.clearInterval(timer);
-	}, []);
-
-	useEffect(() => {
-		const timer = window.setInterval(async () => {
-			const result = await getRecentTransactions({ page: 0 });
-			setTransactions(result.transactions.slice(0, 10));
-		}, BLOCK_INTERVAL_SECONDS * 1000);
-		return () => window.clearInterval(timer);
+		let timer = 0;
+		const load = async () => {
+			setRecent(await getRecent());
+			timer = window.setTimeout(load, BLOCK_INTERVAL_SECONDS * 1000);
+		};
+		load();
+		return () => window.clearTimeout(timer);
 	}, []);
 
 	return (
@@ -40,14 +46,14 @@ export const Feed = (props: Props): JSX.Element => {
 			<div className={s.column}>
 				<Heading>Latest blocks</Heading>
 				<Pane noPadding>
-					<BlockTableNarrow blocks={blocks} />
+					<BlockTableNarrow blocks={recent.blocks} />
 				</Pane>
 			</div>
 			<DivPx size={32} />
 			<div className={s.column}>
 				<Heading>Latest transactions</Heading>
 				<Pane noPadding>
-					<TransactionTableNarrow transactions={transactions} />
+					<TransactionTableNarrow transactions={recent.transactions} />
 				</Pane>
 			</div>
 		</div>

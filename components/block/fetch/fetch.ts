@@ -14,10 +14,11 @@ export const getBlockByHeight: ServerCall<Block["height"], Block> = async (
 };
 
 export const getRecentBlocks: ServerCall<
-	{ page: number },
+	{ page: number, limit?: number },
 	{ blocks: Block[]; totalPages: number }
-> = async ({ page }) => {
-	const result = await serverCall("surf.GetBlocks", { page });
+> = async ({ page, limit }) => {
+	const options = { page, limit: limit ?? 100 }
+	const result = await serverCall("surf.GetBlocks", options);
 	const { blocks, totalPages } = result;
 	return { blocks, totalPages };
 };

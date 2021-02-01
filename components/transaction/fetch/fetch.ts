@@ -15,10 +15,10 @@ export const getTransaction: ServerCall<
 };
 
 export const getRecentTransactions: ServerCall<
-	{ page: number },
+	{ page: number; limit?: number },
 	{ transactions: TransactionBundle[]; totalPages: number }
-> = async ({ page }) => {
-	const options = { limit: 100, page: page };
+> = async ({ page, limit }) => {
+	const options = { limit: limit ?? 100, page: page };
 	const r = await serverCall("surf.GetTxs", options);
 	const transactions = bundleTransactions(r.transactions, r.receipts);
 	return { transactions, totalPages: r.totalPages };
