@@ -5,7 +5,7 @@
 }
 
 .container table {
-	min-width: calc(140px + 160px + 160px + 200px);
+	min-width: calc(140px + 160px + 160px + 260px);
 }
 
 .height {
@@ -25,5 +25,5 @@
 .time {
 	text-align: right;
 	/* Enough to not break line */
-	width: 200px;
+	width: 260px;
 }

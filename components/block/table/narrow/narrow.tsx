@@ -11,7 +11,7 @@ interface Props {
 const NARROW_COLUMNS: ReactNode[] = ["Height", "Time", "Transactions"];
 
 const getColumns = () => {
-	const all = getBlockColumns();
+	const all = getBlockColumns({ showDot: true });
 	return all.filter((column) => {
 		return NARROW_COLUMNS.includes(column.title);
 	});

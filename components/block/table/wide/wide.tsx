@@ -33,11 +33,15 @@ const Transactions = ({ block }: RowProps): JSX.Element => {
 	);
 };
 
-export const getBlockColumns = (): TableColumn<Block>[] => [
+export const getBlockColumns = ({
+	showDot,
+}: {
+	showDot: boolean;
+}): TableColumn<Block>[] => [
 	{
 		title: "Height",
 		className: s.height,
-		render: (block) => <BlockTableHeight block={block} showDot={false} />,
+		render: (block) => <BlockTableHeight {...{ showDot, block }} />,
 	},
 	{
 		title: "Hash",
@@ -60,7 +64,7 @@ export const BlockTableWide = (props: Props): JSX.Element => (
 	<div className={s.container}>
 		<Table
 			rows={props.blocks}
-			columns={getBlockColumns()}
+			columns={getBlockColumns({ showDot: false })}
 			rowKey={(block) => block.height.toString()}
 		/>
 	</div>
