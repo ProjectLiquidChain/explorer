@@ -1,4 +1,4 @@
-import { API_SERVER } from "constants/constants";
+import { API_SERVER, API_SURF_SERVER } from "constants/constants";
 import { ServerError } from "./error";
 
 // @TODO: Should define these as nominal types
@@ -21,7 +21,7 @@ export const serverCall = async (
 	const headers: HeadersInit = {
 		"Content-Type": "application/json",
 	};
-	const url = method.startsWith("surf") ? `${API_SERVER}/surf` : API_SERVER;
+	const url = method.startsWith("surf") ? API_SURF_SERVER : API_SERVER;
 
 	const response = await fetch(url, {
 		method: "POST",
@@ -40,6 +40,7 @@ export const serverCall = async (
 
 	const json = await response.json();
 	if (json.error) {
+		console.log(body, json);
 		const error: ServerError = {
 			type: "jrpc",
 			title: "Invalid Request",
